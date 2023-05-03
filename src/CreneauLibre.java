@@ -1,3 +1,3 @@
 public class CreneauLibre extends Creneau{
-    private 
+    private boolean somthing;
 }
