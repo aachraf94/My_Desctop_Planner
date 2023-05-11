@@ -1,7 +1,7 @@
 public class TacheSimple extends Tache {
 
     private int periodicite;
-    private Eta
+    private Etat etat;
 
 
 
