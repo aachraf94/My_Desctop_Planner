@@ -1,7 +1,7 @@
 public class Projet {
     private String nom;
     private String description;
-    private Tache[] taches;
+    private Tache[] taches; //ou linkedlist
 
 
 

@@ -7,7 +7,14 @@ abstract public class Tache {
     private String dateFin; // a revoir
     private String categorie;
     private String coleur;
-    private boolean uschecduded;
+    private boolean unscheduled;
+    private Etat etat;
+
+
+    //plannifier manuelle ou auto
+
+    //re-planifier (string dureeSupp, String nvDeadline)          les deux
+
 
 
 }

@@ -5,4 +5,7 @@ public class Creneau {
     private String hFin;
 
 
+
+    //    la durée minimale d’un créneau
+
 }
