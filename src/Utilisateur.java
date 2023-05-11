@@ -1,8 +1,12 @@
 public class Utilisateur {
     private String pseudo;
+
     void seConnecter(String pseudo, String mdp){
 
     }
+    //calendrier
+    //planning
+
 
 
 
