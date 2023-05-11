@@ -1,9 +1,16 @@
-public class Utilisateur {
+import java.io.*;
+import java.util.*;
+public class Utilisateur implements Serializable {
     private String pseudo;
 
     void seConnecter(String pseudo, String mdp){
 
     }
+    /*
+
+
+
+    */
     //calendrier
     //planning
 
