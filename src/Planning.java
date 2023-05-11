@@ -1,6 +1,21 @@
+import java.util.Calendar;
+import java.util.List;
+
 public class Planning {
+    Calendar calendirer;
+    Creneau creneau;// c mieux de faire un crenau simple instead of creneau libre et creneau occupe , et on verifie si un creneau est libre dans le planing , si ya pas d'intersection
+    List<Tache> taches;
+    List<Creneau> creneauxLibres;// creneau libre = creneau - creneau occupe
 
-
+void plannier(Tache t, Creneau c){
+    //if (c.estLibre()){
+        //t.setCreneau(c);
+        //taches.add(t);
+    //}
+}
+    //void replanifier (Planning p) {
+    //   if (p.valideDecomp()){
+    //    taches.add(p.taches);}
 
 
 
@@ -11,6 +26,7 @@ public class Planning {
 
 
     //plannifier      -->  décomposer le créneau libre selon la durée de la tache
+    // replanifier  -->  décomposer le créneau libre selon la durée de la tache
 
 
 }
