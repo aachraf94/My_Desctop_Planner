@@ -8,7 +8,7 @@ public class MyDesktopPlanner {
         this.utilisateurs = new HashMap<Utilisateur,String>();
         //parcourir le fichier
             //entregistrer les info de utilisateur + mdp
-    }//https://github.com/aachraf94/My_Desctop_Planner
+    }
 
 
     //on va faire Method registre
