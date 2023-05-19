@@ -8,29 +8,15 @@ public class Utilisateur implements Serializable {
     private String mdp;
     private Planning planning;
     private List<Tache> taches;// non planifier
+    private static final long serialVersionUID = 1L;
 
-    public Utilisateur(String pseudo) {
+    public Utilisateur(String pseudo,String mdp) {
         this.pseudo = pseudo;
+        this.mdp = mdp;
     }
 
-    public void sauvgarder(String filePath) {
-        try (FileOutputStream fileOut = new FileOutputStream(filePath);
-             ObjectOutputStream objOut = new ObjectOutputStream(fileOut)) {
-            objOut.writeObject(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public static Utilisateur loadFromFile(String filePath) {
-        Utilisateur utilisateur = null;
-        try (FileInputStream fileIn = new FileInputStream(filePath);
-             ObjectInputStream objIn = new ObjectInputStream(fileIn)) {
-            utilisateur = (Utilisateur) objIn.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return utilisateur;
-    }
+    
+
     public boolean seConnecter(String pseudo, String mdp){
 
         if (this.pseudo.equals(pseudo) && this.mdp.equals(mdp)) {
@@ -41,6 +27,7 @@ public class Utilisateur implements Serializable {
             return false;
         }
     }
+
     public Boolean seDeconnecter(){
         return true;
     }
@@ -94,5 +81,12 @@ public class Utilisateur implements Serializable {
     @Override
     public boolean equals(Object obj) {
         return this.pseudo.equals(((Utilisateur)obj).getPseudo());
+    }
+    public void afficher ()
+{
+        System.out.println("pseudo : "+pseudo);
+        System.out.println("mdp : "+mdp);
+        //System.out.println("planning : "+planning);
+        //System.out.println("taches : "+taches);
     }
 }
