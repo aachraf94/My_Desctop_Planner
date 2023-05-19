@@ -14,9 +14,8 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SeConnecter.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("My Desktop Planner");
-        //Image icon = new Image("Group42.png");
+        stage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));
         stage.setScene(scene);
-        //stage.getIcons().add(icon);
         stage.show();
     }
 
