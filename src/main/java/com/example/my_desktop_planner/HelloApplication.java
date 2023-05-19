@@ -23,32 +23,8 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        MyDesktopPlanner myDesktopPlanner= MyDesktopPlanner.getInstance();// declarer une fois pour assurer qu'il ya une seul instance de cette class
-        //launch();
-        Utilisateur utilisateur = new Utilisateur("user1","1234");
-        Utilisateur utilisateur2 = new Utilisateur("user2","12454");
-        Utilisateur utilisateur3 = new Utilisateur("user3","154352");
-
-        /*try {
-            myDesktopPlanner.addUser(utilisateur,"1234");
-            myDesktopPlanner.addUser(utilisateur2,"12454");
-            myDesktopPlanner.addUser(utilisateur3,"154352");
-            myDesktopPlanner.saveUsersToFile();
-            myDesktopPlanner.loadUsersFromFile();
-        } catch (Exception e) {
-            e.printStackTrace();
-    }*/ try {
-        myDesktopPlanner.loadUsersFromFile();
-        myDesktopPlanner.removeUser(utilisateur2);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        for (Map.Entry<Utilisateur,String> entry : myDesktopPlanner.utilisateurs.entrySet()) {
-            Utilisateur key = entry.getKey();
-            String value = entry.getValue();
-            System.out.println(key + ": " + value);
-        }
+        MyDesktopPlanner myDesktopPlanner= MyDesktopPlanner.getInstance();
+        launch();
 
     }
 }
