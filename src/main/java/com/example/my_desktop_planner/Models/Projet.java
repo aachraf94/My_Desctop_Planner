@@ -1,3 +1,5 @@
+package com.example.my_desktop_planner.Models;
+
 import java.util.List;
 
 public class Projet {

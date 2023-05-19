@@ -1,3 +1,5 @@
+package com.example.my_desktop_planner.Models;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

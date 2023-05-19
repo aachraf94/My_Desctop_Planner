@@ -1,3 +1,5 @@
+package com.example.my_desktop_planner.Models;
+
 abstract public class Tache {
     private String nom;
     private String dure; //peut etre type date, donc a revoir

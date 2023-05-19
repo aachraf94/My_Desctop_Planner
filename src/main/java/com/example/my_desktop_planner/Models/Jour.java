@@ -1,3 +1,5 @@
+package com.example.my_desktop_planner.Models;
+
 public class Jour {
     // class a revoir
 

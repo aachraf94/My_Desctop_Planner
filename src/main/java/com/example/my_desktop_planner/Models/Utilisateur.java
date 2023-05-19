@@ -1,3 +1,5 @@
+package com.example.my_desktop_planner.Models;
+
 import java.io.*;
 import java.util.*;
 public class Utilisateur implements Serializable {

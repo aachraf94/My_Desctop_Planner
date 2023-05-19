@@ -1,3 +1,5 @@
+package com.example.my_desktop_planner.Models;
+
 public class TacheSimple extends Tache {
 
     private int periodicite;
