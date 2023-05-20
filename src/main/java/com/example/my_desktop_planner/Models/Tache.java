@@ -1,13 +1,18 @@
 package com.example.my_desktop_planner.Models;
+import javafx.scene.paint.Color;
+
 import java.text.DateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 abstract public class Tache {
     private String nom;
-    private DateFormat dure;
+    private Duration dure;
     private Priorite priorite;
-    private String dateLim ; // a revoir
-    private String dateDebut; // a revoir
-    private String dateFin; // a revoir
+    private LocalDate dateLim ; // a revoir
+    private LocalDateTime dateDebut; // a revoir
+    private LocalDateTime dateFin; // a revoir
     private String categorie;
     private Color color;
     private boolean unscheduled;
@@ -30,11 +35,11 @@ abstract public class Tache {
         this.nom = nom;
     }
 
-    public DateFormat getDure() {
+    public Duration getDure() {
         return dure;
     }
 
-    public void setDure(DateFormat dure) {
+    public void setDure(Duration dure) {
         this.dure = dure;
     }
 
@@ -46,27 +51,27 @@ abstract public class Tache {
         this.priorite = priorite;
     }
 
-    public String getDateLim() {
+    public LocalDate getDateLim() {
         return dateLim;
     }
 
-    public void setDateLim(String dateLim) {
+    public void setDateLim(LocalDate dateLim) {
         this.dateLim = dateLim;
     }
 
-    public String getDateDebut() {
+    public LocalDateTime getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(String dateDebut) {
+    public void setDateDebut(LocalDateTime dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public String getDateFin() {
+    public LocalDateTime getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(String dateFin) {
+    public void setDateFin(LocalDateTime dateFin) {
         this.dateFin = dateFin;
     }
 

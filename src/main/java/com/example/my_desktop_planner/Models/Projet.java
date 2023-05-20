@@ -57,4 +57,36 @@ public class Projet {
             return Etat.NOT_REALIZED;
         }
     }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LinkedList<Tache> getTaches() {
+        return taches;
+    }
+
+    public void setTaches(LinkedList<Tache> taches) {
+        this.taches = taches;
+    }
+
+    public Etat getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Etat etat) {
+        this.etat = etat;
+    }
 }

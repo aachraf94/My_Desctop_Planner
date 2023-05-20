@@ -1,13 +1,16 @@
 package com.example.my_desktop_planner.Models;
 
 import java.io.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 public class Utilisateur implements Serializable {
     private String pseudo;
-//    Aspect sécurite on doit relver mdp from utilisateur claa
+//    Aspect sécurite on doit relver mdp from utilisateur class
     private String mdp;
     private Planning planning;
-    private List<Tache> taches;// non planifier
+    private ArrayList<Tache> taches;// non planifier
     private static final long serialVersionUID = 1L;
 
     public Utilisateur(String pseudo,String mdp) {
@@ -31,14 +34,15 @@ public class Utilisateur implements Serializable {
     public Boolean seDeconnecter(){
         return true;
     }
-    public void ajouterCreneauLibre(String heureDebut, String heureFin , int duree) {
-        Creneau c = new Creneau(heureDebut, heureFin, duree);
+    public void ajouterCreneauLibre(LocalDateTime heureDebut, LocalDateTime heureFin , Duration duree) {
+        Creneau c = new Creneau(heureDebut, heureFin);
         planning.ajouterCreneauLibre(c);
     }
 
-    public void supprimerCreneauLibre(String heureDebut, String heureFin , int duree){
-        Creneau c = new Creneau(heureDebut, heureFin, duree);
-        planning.supprimerCreneauLibre(c);
+    public void supprimerCreneauLibre(Creneau creneau){
+
+        this.planning.supprimerCreneauLibre(creneau);
+
     }
 
     public String getPseudo() {
@@ -69,9 +73,6 @@ public class Utilisateur implements Serializable {
         return taches;
     }
 
-    public void setTaches(List<Tache> taches) {
-        this.taches = taches;
-    }
 
     @Override
     public int hashCode() {

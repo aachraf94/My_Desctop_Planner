@@ -1,16 +1,14 @@
 package com.example.my_desktop_planner.Models;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Planning {
     Calendar calendirer;
-    // c mieux de faire un crenau simple instead of creneau libre et creneau occupe , et on verifie si un creneau est libre dans le planing , si ya pas d'intersection
-    List<Tache> taches;
-    Date dateDebut;
-    Date dateFin;
-    List<Creneau> creneaus;// creneau libre = creneau - creneau occupe
+    ArrayList<Tache> taches;
+    LocalDate dateDebut;
+    LocalDate dateFin;
+    ArrayList<Creneau> creneaus;
 
     void plannier(Tache t, Creneau c) {
         //if (c.estLibre()){
@@ -39,4 +37,3 @@ public class Planning {
     }
     //definir les crzeneau libre d'une facons globale
 }
-// date debut , date fin de planning
