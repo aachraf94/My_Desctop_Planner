@@ -9,14 +9,14 @@ import java.util.concurrent.Delayed;
 public class Projet {
     private String nom;
     private String description;
-    private LinkedList<Tache> taches ;//ou linkedlist
+    private ArrayList<Tache> taches ;//ou linkedlist
 
     private Etat etat;
 
     public Projet(String nom, String description, List<Tache> taches) {
         this.nom = nom;
         this.description = description;
-        this.taches = new LinkedList<Tache>(taches);
+        this.taches = new ArrayList<Tache>(taches);
     }
 
     public Etat updateEtat() {
@@ -74,11 +74,11 @@ public class Projet {
         this.description = description;
     }
 
-    public LinkedList<Tache> getTaches() {
+    public ArrayList<Tache> getTaches() {
         return taches;
     }
 
-    public void setTaches(LinkedList<Tache> taches) {
+    public void setTaches(ArrayList<Tache> taches) {
         this.taches = taches;
     }
 

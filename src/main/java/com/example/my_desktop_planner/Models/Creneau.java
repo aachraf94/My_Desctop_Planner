@@ -9,7 +9,7 @@ public class Creneau implements Decomposable<Creneau>{
     //a revoir
     private LocalDateTime hDebut;
     private LocalDateTime hFin;
-    public static Duration duree;
+    public Duration duree;
     public static Duration durationMin ;
 
    // private Duration dureeMin = Duration.ofMinutes(30);
@@ -19,9 +19,9 @@ public class Creneau implements Decomposable<Creneau>{
     public Creneau(LocalDateTime hDebut, LocalDateTime hFin) {
         this.hDebut = hDebut;
         this.hFin = hFin;
+        this.duree = Duration.between(hDebut,hFin);
     }
 
-    public Creneau() {}
 
     public static Duration getDurationMin() {
         return durationMin;

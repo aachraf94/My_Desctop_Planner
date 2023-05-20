@@ -1,9 +1,18 @@
-package com.example.my_desktop_planner.Models;
+/** package com.example.my_desktop_planner.Models;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Calendrier {
 
-    CreneauOccupe [] creneauOccupes ;
-    CreneauLibre [] creneauLibres ;
+    private ArrayList<CreneauOccupe> creneauOccupes ;
+    private ArrayList<CreneauLibre> creneauLibres ;
+
+    private LocalDate dateDebut;
+    private  LocalDate dateFin;
+
+
+
     //jour
 
     //void ajouterCreneauOccupe ( CreneauLibre c , Tache t)
@@ -12,3 +21,4 @@ public class Calendrier {
 
 
 }
+**/

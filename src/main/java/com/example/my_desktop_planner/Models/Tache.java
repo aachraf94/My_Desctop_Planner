@@ -27,6 +27,21 @@ abstract public class Tache {
     //re-planifier (string dureeSupp, String nvDeadline)          les deux
 
 
+    public Tache(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDateTime dateDebut, LocalDateTime dateFin, String categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable) {
+        this.nom = nom;
+        this.dure = dure;
+        this.priorite = priorite;
+        this.dateLim = dateLim;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.categorie = categorie;
+        this.color = color;
+        this.unscheduled = unscheduled;
+        this.etat = etat;
+        this.bloque = bloque;
+        this.decomposable = decomposable;
+    }
+
     public String getNom() {
         return nom;
     }
@@ -122,4 +137,5 @@ abstract public class Tache {
     public void setDecomposable(boolean decomposable) {
         this.decomposable = decomposable;
     }
+
 }

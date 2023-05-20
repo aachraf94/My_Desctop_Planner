@@ -1,8 +1,13 @@
 package com.example.my_desktop_planner.Models;
 
-public class CreneauLibre extends Creneau{
-    private boolean somthing;
+import java.time.LocalDateTime;
 
+public class CreneauLibre extends Creneau{
+
+    public CreneauLibre(LocalDateTime hDebut, LocalDateTime hFin, boolean somthing) {
+        super(hDebut, hFin);
+
+    }
 
 
 }
