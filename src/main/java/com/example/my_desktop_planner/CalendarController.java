@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -11,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 
@@ -19,6 +21,7 @@ public class CalendarController implements Initializable {
     ZonedDateTime dateFocus;
     ZonedDateTime today;
     private StackPane selectedDayRectangle;
+    private LocalDate selected_day ;
     @FXML
     private Text year;
 
@@ -55,7 +58,7 @@ public class CalendarController implements Initializable {
 
         double calendarWidth = calendar.getPrefWidth();
         double calendarHeight = calendar.getPrefHeight();
-        double strokeWidth = 2;
+        double strokeWidth = 1;
         double spacingH = calendar.getHgap();
         double spacingV = calendar.getVgap();
 
@@ -75,7 +78,7 @@ public class CalendarController implements Initializable {
 
                 Rectangle rectangle = new Rectangle();
                 rectangle.setFill(Color.TRANSPARENT);
-                rectangle.setStroke(Color.BLACK);
+                rectangle.setStroke(Color.web("333333"));
                 rectangle.setStrokeWidth(strokeWidth);
                 double rectangleWidth =(calendarWidth/7) - strokeWidth - spacingH;
                 rectangle.setWidth(rectangleWidth);
@@ -91,7 +94,9 @@ public class CalendarController implements Initializable {
                         date.setFont(Font.font("Arial",(int) Math.round(rectangleWidth/3)));
                         stackPane.getChildren().add(date);
 
-                        stackPane.setOnMouseClicked(event -> handleDayClick(stackPane,currentDate));
+                        stackPane.setOnMouseClicked(event -> {handleDayClick(stackPane);
+                            selected_day = (ZonedDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate,0,0,0,0,dateFocus.getZone())).toLocalDate();
+                        });
 
 
                     }
@@ -107,7 +112,7 @@ public class CalendarController implements Initializable {
         }
     }
 
-    private void handleDayClick(StackPane clickedDayRectangle, int dayOfMonth) {
+    private void handleDayClick(StackPane clickedDayRectangle) {
         if (selectedDayRectangle != null) {
             Rectangle rec=(Rectangle)selectedDayRectangle.getChildren().get(0);
             rec.setFill(Color.TRANSPARENT);//
@@ -121,7 +126,6 @@ public class CalendarController implements Initializable {
             selectedDayRectangle = clickedDayRectangle;
         }
 
-        return ;
     }
 
 }
