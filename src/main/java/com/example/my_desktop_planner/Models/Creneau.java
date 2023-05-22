@@ -6,7 +6,6 @@ import java.time.LocalTime;
 
 public class Creneau implements Decomposable<Creneau>{
 
-    //a revoir
     private LocalDateTime hDebut;
     private LocalDateTime hFin;
     public Duration duree;
