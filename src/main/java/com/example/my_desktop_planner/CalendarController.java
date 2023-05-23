@@ -1,10 +1,10 @@
 package com.example.my_desktop_planner;
 
+import com.example.my_desktop_planner.Models.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -31,10 +31,16 @@ public class CalendarController implements Initializable {
     @FXML
     private FlowPane calendar;
 
+    private Utilisateur utilisateur ;
+    private String motDePasse ;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dateFocus = ZonedDateTime.now();
         today = ZonedDateTime.now();
+        year.setText(String.valueOf(dateFocus.getYear())); // Initialize the year variable
+        month.setText(String.valueOf(dateFocus.getMonth())); // Initialize the month variable
         drawCalendar();
     }
 
@@ -53,6 +59,8 @@ public class CalendarController implements Initializable {
     }
 
     private void drawCalendar(){
+       // System.out.println(dateFocus.getMonthValue() + " " + dateFocus.getYear());
+
         year.setText(String.valueOf(dateFocus.getYear()));
         month.setText(String.valueOf(dateFocus.getMonth()));
 
@@ -77,8 +85,8 @@ public class CalendarController implements Initializable {
                 StackPane stackPane = new StackPane();
 
                 Rectangle rectangle = new Rectangle();
-                rectangle.setFill(Color.TRANSPARENT);
-                rectangle.setStroke(Color.web("333333"));
+                rectangle.setFill(Color.WHITE);
+                rectangle.setStroke(Color.web("FFFFFF"));
                 rectangle.setStrokeWidth(strokeWidth);
                 double rectangleWidth =(calendarWidth/7) - strokeWidth - spacingH;
                 rectangle.setWidth(rectangleWidth);
@@ -96,14 +104,15 @@ public class CalendarController implements Initializable {
 
                         stackPane.setOnMouseClicked(event -> {handleDayClick(stackPane);
                             selected_day = (ZonedDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate,0,0,0,0,dateFocus.getZone())).toLocalDate();
+
                         });
 
 
                     }
                     if(today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == currentDate){
-                        rectangle.setFill(Color.web("005B8F"));
+                        rectangle.setFill(Color.web("333333"));
                         Text date = (Text) stackPane.getChildren().get(1);
-                        date.setFill(Color.web("000000"));
+                        date.setFill(Color.web("FFFFFF"));
                     }
                 }
 
@@ -115,17 +124,31 @@ public class CalendarController implements Initializable {
     private void handleDayClick(StackPane clickedDayRectangle) {
         if (selectedDayRectangle != null) {
             Rectangle rec=(Rectangle)selectedDayRectangle.getChildren().get(0);
-            rec.setFill(Color.TRANSPARENT);//
+            rec.setFill(Color.WHITE);//
         }
 
         if (selectedDayRectangle == clickedDayRectangle) {
             selectedDayRectangle = null;
         } else {
             Rectangle rec1=(Rectangle)clickedDayRectangle.getChildren().get(0);
-            rec1.setFill(Color.web("605B8F"));
+            rec1.setFill(Color.web("dfdfdf"));
             selectedDayRectangle = clickedDayRectangle;
         }
 
     }
 
+    public void receive_data(String data){
+        System.out.println(data);}
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+
+
 }
+

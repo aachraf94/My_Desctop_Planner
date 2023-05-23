@@ -16,6 +16,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AjouterTache.fxml"));
+
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("My Desktop Planner");
         stage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));

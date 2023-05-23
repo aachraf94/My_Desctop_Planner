@@ -5,7 +5,15 @@ import java.util.*;
 
 public class MyDesktopPlanner {
     private static MyDesktopPlanner instance;
-    public  HashMap<Utilisateur, String> utilisateurs;
+    private HashMap<Utilisateur, String> utilisateurs;
+
+    public HashMap<Utilisateur, String> getUtilisateurs() {
+        return utilisateurs;
+    }
+
+    public void setUtilisateurs(HashMap<Utilisateur, String> utilisateurs) {
+        this.utilisateurs = utilisateurs;
+    }
 
     private MyDesktopPlanner() {
         //on doit charger le fichier li fih les pseudo et les mdp et creer le hashMap
@@ -45,6 +53,7 @@ public class MyDesktopPlanner {
     public void saveUsersToFile() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Users.dat"))) {// on cree un nouveu flux de sortie pour le fichier Users.dat pour le modifier
             out.writeObject(utilisateurs);// enregistrer le hashMap dans le fichier
+            System.out.println("Saved successfully");
         } catch (IOException e) {
             throw new RuntimeException("Error saving users to file.", e);
         }
@@ -53,7 +62,8 @@ public class MyDesktopPlanner {
     @SuppressWarnings("unchecked")
     public void loadUsersFromFile() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("Users.dat"))) {//users.dat c'est le fichier qui contient les utilisateurs , il sera ecrasé tout fois qu'on ajoute ou on supprime un utilisateur
-            utilisateurs = (HashMap<Utilisateur, String>) in.readObject();//lire le fichier et le mettre dans le hashMap puisaue la class, est singleton , on peut le faire directement
+            utilisateurs = (HashMap<Utilisateur, String>) in.readObject();
+            System.out.println("Loaded successfully");//lire le fichier et le mettre dans le hashMap puisaue la class, est singleton , on peut le faire directement
         } catch (IOException | ClassNotFoundException e) {
             // If the file doesn't exist or there's an error reading it, ignore and start with an empty HashMap
         }
