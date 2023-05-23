@@ -6,6 +6,7 @@ import java.util.*;
 
 public class Planning {
 //    private Calendar calendirer;
+    private String nom;
     private LocalDate dateDebut;
     private LocalDate dateFin;
     public Duration dureeMinCreneau;
