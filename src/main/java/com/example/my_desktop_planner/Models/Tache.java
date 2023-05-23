@@ -10,9 +10,9 @@ abstract public class Tache {
     private String nom;
     private Duration dure;
     private Priorite priorite;
-    private LocalDate dateLim ; // a revoir
-    private LocalDateTime dateDebut; // a revoir
-    private LocalDateTime dateFin; // a revoir
+    private LocalDate dateLim ;
+    private LocalDateTime dateDebut;
+    private LocalDateTime dateFin;
     private String categorie;
     private Color color;
     private boolean unscheduled;
