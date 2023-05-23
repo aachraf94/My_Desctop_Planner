@@ -33,13 +33,13 @@
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="74.0" layoutY="259.0" mnemonicParsing="false" onAction="#inscriptionInvalide" prefHeight="28.0" prefWidth="150.0" style="-fx-background-color: #005B8F;" text="S'inscrire" textFill="WHITE">
+            <Button layoutX="74.0" layoutY="259.0" mnemonicParsing="false" onAction="#inscriptionButton" prefHeight="28.0" prefWidth="150.0" style="-fx-background-color: #005B8F;" text="S'inscrire" textFill="WHITE">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <PasswordField layoutX="75.0" layoutY="202.0" prefHeight="28.0" prefWidth="150.0" promptText="Mot de passe" style="-fx-background-color: transparent; -fx-border-color: #005B8F; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField layoutX="75.0" layoutY="160.0" promptText="Pseudo" style="-fx-border-color: #005B8F; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField fx:id="motDePasse" layoutX="75.0" layoutY="202.0" prefHeight="28.0" prefWidth="150.0" promptText="Mot de passe" style="-fx-background-color: transparent; -fx-border-color: #005B8F; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="pseudo" layoutX="75.0" layoutY="160.0" promptText="Pseudo" style="-fx-border-color: #005B8F; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" />
             <Text fill="#005d8f" layoutX="85.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S’inscrire">
                <font>
                   <Font name="System Bold" size="30.0" />

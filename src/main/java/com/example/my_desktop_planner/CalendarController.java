@@ -1,5 +1,6 @@
 package com.example.my_desktop_planner;
 
+import com.example.my_desktop_planner.Models.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +31,10 @@ public class CalendarController implements Initializable {
     @FXML
     private FlowPane calendar;
 
+    private Utilisateur utilisateur ;
+    private String motDePasse ;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dateFocus = ZonedDateTime.now();
@@ -54,7 +59,7 @@ public class CalendarController implements Initializable {
     }
 
     private void drawCalendar(){
-        System.out.println(dateFocus.getMonthValue() + " " + dateFocus.getYear());
+       // System.out.println(dateFocus.getMonthValue() + " " + dateFocus.getYear());
 
         year.setText(String.valueOf(dateFocus.getYear()));
         month.setText(String.valueOf(dateFocus.getMonth()));
@@ -99,6 +104,7 @@ public class CalendarController implements Initializable {
 
                         stackPane.setOnMouseClicked(event -> {handleDayClick(stackPane);
                             selected_day = (ZonedDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate,0,0,0,0,dateFocus.getZone())).toLocalDate();
+
                         });
 
 
@@ -131,4 +137,18 @@ public class CalendarController implements Initializable {
 
     }
 
+    public void receive_data(String data){
+        System.out.println(data);}
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+
+
 }
+
