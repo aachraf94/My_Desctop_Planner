@@ -1,12 +1,13 @@
 package com.example.my_desktop_planner.Models;
 import javafx.scene.paint.Color;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-abstract public class Tache {
+abstract public class Tache implements Serializable {
     private String nom;
     private Duration dure;
     private Priorite priorite;
