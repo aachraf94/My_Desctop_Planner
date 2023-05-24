@@ -36,7 +36,6 @@
                         <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Re-Planifier" />
                      </children>
                   </HBox>
-                  <Button alignment="CENTER" layoutX="108.0" layoutY="156.0" mnemonicParsing="false" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Unschedueled" />
                </children>
                <padding>
                   <Insets top="35.0" />
@@ -49,7 +48,7 @@
             </Label>
             <ScrollPane prefHeight="288.0" prefWidth="343.0">
                <content>
-                  <ListView prefHeight="302.0" prefWidth="340.0" />
+                  <ListView fx:id="listTache" prefHeight="302.0" prefWidth="340.0" />
                </content>
             </ScrollPane>
          </children>
@@ -87,8 +86,14 @@
       </HBox>
    </top>
    <center>
-      <VBox alignment="CENTER" prefHeight="700.0" prefWidth="686.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="700.0" prefWidth="686.0" spacing="34.0" BorderPane.alignment="CENTER">
          <children>
+            <HBox prefHeight="88.0" prefWidth="624.0" spacing="27.0">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" style="-fx-text-fill: #005B8F; -fx-background-color: TRANSPARENT; -fx-border-color: #005B8F;" text="Unschedueled" />
+                  <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-border-color: #005B8F; -fx-text-fill: #005B8F; -fx-background-color: TRANSPARENT;" text="Bagdes" />
+               </children>
+            </HBox>
             <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="357.0" prefWidth="433.0" spacing="10.0" style="-fx-background-color: #005B8F; -fx-border-radius: 50;">
                <children>
                   <HBox alignment="CENTER" prefHeight="44.0" prefWidth="419.0" spacing="54.0">

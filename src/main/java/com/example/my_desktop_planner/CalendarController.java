@@ -1,6 +1,7 @@
 package com.example.my_desktop_planner;
 
 import com.example.my_desktop_planner.Models.Tache;
+import com.example.my_desktop_planner.Models.TacheSimple;
 import com.example.my_desktop_planner.Models.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,7 +38,7 @@ public class CalendarController implements Initializable {
     @FXML
     private Label text;
     @FXML
-    private ListView<Tache> listTache;
+    private ListView<String> listTache;
 
     private Utilisateur utilisateur = new Utilisateur("Chamil", "123");
 
@@ -113,7 +114,7 @@ public class CalendarController implements Initializable {
                         stackPane.setOnMouseClicked(event -> {
                             handleDayClick(stackPane);
                             selected_day = (ZonedDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate, 0, 0, 0, 0, dateFocus.getZone())).toLocalDate();
-                            updateDayTasks(selected_day);
+                           updateDayTasks(selected_day);
                         });
 
 
@@ -166,18 +167,24 @@ public class CalendarController implements Initializable {
     }
 
     public void setText(String text) {
+        this.text.setText("") ;
         this.text.setText(text);
     }
 
     private void updateDayTasks(LocalDate date) {
-        ArrayList<Tache> tasks = utilisateur.getTasks(date);
+//        ArrayList<Tache> tasks = utilisateur.getTasks(date);
+//        listTache.getItems().clear();
+//        if (tasks != null) {
+//            for (Tache task : tasks) {
+//                listTache.getItems().add(task);
+//            }
+//    }else {
+//        System.out.println("Task_list_empty");}
         listTache.getItems().clear();
-        if (tasks != null) {
-            for (Tache task : tasks) {
-                listTache.getItems().add(task);
-            }
-        }else {
-            System.out.println("Task_list_empty");}
+        listTache.getItems().add(TacheSimple.generateRandomTask().getNom());
+        listTache.getItems().add(TacheSimple.generateRandomTask().getNom());
+        listTache.getItems().add(TacheSimple.generateRandomTask().getNom());
+
     }
 }
 

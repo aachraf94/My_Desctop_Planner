@@ -17,11 +17,10 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SeConnecter.fxml"));
         MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.getInstance();
-        myDesktopPlanner.loadUsersFromFile();
-        Utilisateur user=MyDesktopPlanner.findUser("Chamil", "123");
-        Tache tacheSimple = new TacheSimple("tache1", "des",)
+
+
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("My Desktop Planner");
         stage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));

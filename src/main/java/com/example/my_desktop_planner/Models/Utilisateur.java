@@ -9,7 +9,7 @@ import java.util.*;
 public class Utilisateur implements Serializable {
     private String pseudo;
     private String mdp;
-    private Planning planning;
+    public Planning planning;
     private static final long serialVersionUID = 1L;
 
     public Utilisateur(String pseudo,String mdp) {
