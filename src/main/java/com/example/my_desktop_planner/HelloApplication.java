@@ -12,6 +12,12 @@ import java.io.*;
 import java.util.Map;
 
 public class HelloApplication extends Application {
+
+    //public static MyDesktopPlanner myDesktopPlanner;
+    //public static Utilisateur utilisateur;
+    private static Stage stage;
+
+
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -32,4 +38,13 @@ public class HelloApplication extends Application {
         launch();
 
     }
+
+//    @Override
+//    public void stop()
+//    {
+//        myDesktopPlanner.sauvegarder();
+//    }
+
+    public static Stage getStage() {return stage;}
+
 }

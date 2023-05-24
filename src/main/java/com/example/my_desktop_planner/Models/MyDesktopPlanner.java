@@ -87,36 +87,3 @@ public class MyDesktopPlanner {
     }
 
 }
-//   static public Utilisateur findUser(String pseudo, String mdp) {
-//        MyDesktopPlanner planner = MyDesktopPlanner.getInstance();
-//        HashMap<Utilisateur, String> utilisateurs = planner.getUtilisateurs();
-//
-//        for (Utilisateur user : utilisateurs.keySet()) {
-//            if (user.getPseudo().equals(pseudo) && utilisateurs.get(user).equals(mdp)) {
-//                return user;
-//            }
-//        }
-//
-//        return null; // User not found
-//    }
-//
-//}
-
-
-//not completed*******************************************************************************************
-//    public Utilisateur seConnecter(String pseudo,String mdp)
-//    {
-//        if( this.utilisateurs.containsKey(new Utilisateur(pseudo)))
-//        {
-//            Utilisateur user = this.utilisateurs.get(new Utilisateur(pseudo)).get
-//            //on 2 choix
-//            //1er voix
-//
-//        }
-//        else {
-//
-//        }
-//    }
-
-
-
