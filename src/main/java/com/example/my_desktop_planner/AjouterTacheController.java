@@ -48,7 +48,10 @@ public class AjouterTacheController implements Initializable {
     private ChoiceBox<Priorite> prioriteChoiceBox;
     @FXML
     private Button annulerlButton;
-
+    @FXML
+    private CheckBox AutoPlanification;
+    @FXML
+    private TextField tempdPlanification;
     @FXML
     private Button AjouterButton;
 
@@ -66,6 +69,10 @@ public class AjouterTacheController implements Initializable {
         ajouterProjet.selectedProperty().addListener((observable, oldValue, newValue) -> {
             // Show or hide the nomProjet TextField based on the CheckBox state
             nomProjet.setVisible(newValue);
+        });
+
+        AutoPlanification.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            tempdPlanification.setVisible(!newValue);
         });
 
     }
@@ -132,77 +139,96 @@ public class AjouterTacheController implements Initializable {
 
     private boolean validateInput() {
         StringBuilder errorMessage = new StringBuilder();
+        int errorCount = 0;
 
         // Validate the 'NomTache' field
         if (NomTache.getText().isEmpty()) {
             errorMessage.append("Nom de tâche est requis.\n");
+            errorCount++;
         }
 
-        if(prioriteChoiceBox.getValue() == null)
-        {
+        // Validate the 'prioriteChoiceBox' field
+        if (prioriteChoiceBox.getValue() == null) {
             errorMessage.append("Priorité est requise.\n");
+            errorCount++;
         }
 
-        if(categorieChoiceBox.getValue() == null)
-        {
+        // Validate the 'categorieChoiceBox' field
+        if (categorieChoiceBox.getValue() == null) {
             errorMessage.append("Catégorie est requise.\n");
+            errorCount++;
         }
 
         // Validate the 'dateDebut' field
         if (dateDebut.getValue() == null) {
             errorMessage.append("Date de début est requise.\n");
+            errorCount++;
         } else if (dateDebut.getValue().isBefore(LocalDate.now())) {
             errorMessage.append("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
+            errorCount++;
         }
 
         // Validate the 'dateFin' field
         if (dateFin.getValue() == null) {
             errorMessage.append("Date de fin est requise.\n");
-        }
-        else if (dateFin.getValue().isBefore(LocalDate.now())) {
+            errorCount++;
+        } else if (dateFin.getValue().isBefore(LocalDate.now())) {
             errorMessage.append("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
+            errorCount++;
         }
 
         // Validate the 'Duree' field
         if (Duree.getText().isEmpty()) {
             errorMessage.append("Durée est requise.\n");
+            errorCount++;
         } else {
             try {
                 int dureeValue = Integer.parseInt(Duree.getText());
                 if (dureeValue <= 0) {
                     errorMessage.append("Durée doit être un entier positif.\n");
+                    errorCount++;
                 }
             } catch (NumberFormatException e) {
                 errorMessage.append("Durée doit être un entier.\n");
+                errorCount++;
             }
         }
 
         // Validate the 'dateLim' field
         if (dateLim.getValue() == null) {
             errorMessage.append("Date limite est requise.\n");
-        }
-        else if (dateDebut.getValue().isBefore(LocalDate.now())) {
+            errorCount++;
+        } else if (dateLim.getValue().isBefore(LocalDate.now())) {
             errorMessage.append("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
+            errorCount++;
         }
 
         // Validate the 'periodicite' field if 'decomposable' is selected
         if (!decomposable.isSelected() && periodicite.getText().isEmpty()) {
             errorMessage.append("Périodicité est requise si la tâche est non décomposable.\n");
+            errorCount++;
         }
 
         // Validate the 'nomProjet' field if 'ajouterProjet' is selected
         if (ajouterProjet.isSelected() && nomProjet.getText().isEmpty()) {
             errorMessage.append("Nom du projet est requis si la tâche doit être ajoutée à un projet.\n");
+            errorCount++;
         }
 
         // Display the error message if there are any validation errors
         if (errorMessage.length() > 0) {
             erreur.setText(errorMessage.toString());
+//            double minHeight = super.stage.getMinHeight();
+//            double newHeight = minHeight + (errorCount * 20);
+//            super.stage.setMinHeight(newHeight);
+
             return false; // Validation failed
         }
 
-        return true; // Validation successful
+        return true;
     }
+
+
 
 
 }
