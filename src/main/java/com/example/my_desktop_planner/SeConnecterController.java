@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Set;
 
-
-
 public class SeConnecterController {
 
     private Utilisateur utilisateur;
@@ -64,16 +62,21 @@ public class SeConnecterController {
             CalendarController calendarController =new CalendarController();
 
             HashMap<Utilisateur, String> map = desktopPlanner.getUtilisateurs();
-            Utilisateur user = desktopPlanner.findUser(pseudo.getText(), motDePasse.getText());
-            if (user != null) {
-                user.afficher();
-                calendarController.setUtilisateur(user);
-                calendarController.setText(user.getPseudo());
-            }else {
-                System.out.println("User not found");
+
+            Set<Utilisateur> utilisateurSet = map.keySet();
+            for (Utilisateur user : utilisateurSet) {
+                String pseudo1 = pseudo.getText();
+                String mdp = motDePasse.getText();                                                /// la partie hadi makhroba
+                if (user.equals(new Utilisateur(pseudo1, mdp)) && user.getMdp().equals(mdp)) {
+                    user.afficher();
+                    calendarController.setUtilisateur(user);
+                    calendarController.setText(pseudo1);
+                    break;
+                } else {
+                    connexionInvalid();
+
+                }
             }
-
-
 //            for (Map.Entry<Utilisateur, String> entry : map.entrySet()){
 //                String pseudo1 = entry.getKey().getPseudo();
 //                String mdp = entry.getValue();
@@ -98,9 +101,13 @@ public class SeConnecterController {
         erreurText.setText("Pseudo ou mot de passe invalide!");
     }
 
+    void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
 
-
-
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
 
 
 }

@@ -81,6 +81,18 @@ public class MyDesktopPlanner {
 
         return null; // User not found
     }
+   static public Utilisateur findUser(String pseudo, String mdp) {
+        MyDesktopPlanner planner = MyDesktopPlanner.getInstance();
+        HashMap<Utilisateur, String> utilisateurs = planner.getUtilisateurs();
+
+        for (Utilisateur user : utilisateurs.keySet()) {
+            if (user.getPseudo().equals(pseudo) && utilisateurs.get(user).equals(mdp)) {
+                return user;
+            }
+        }
+
+        return null; // User not found
+    }
 
 }
 
