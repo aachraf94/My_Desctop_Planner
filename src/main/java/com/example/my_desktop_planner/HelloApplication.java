@@ -1,6 +1,8 @@
 package com.example.my_desktop_planner;
 
 import com.example.my_desktop_planner.Models.MyDesktopPlanner;
+import com.example.my_desktop_planner.Models.Tache;
+import com.example.my_desktop_planner.Models.TacheSimple;
 import com.example.my_desktop_planner.Models.Utilisateur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +20,8 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
         MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.getInstance();
         myDesktopPlanner.loadUsersFromFile();
-
+        Utilisateur user=MyDesktopPlanner.findUser("Chamil", "123");
+        Tache tacheSimple = new TacheSimple("tache1", "des",)
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("My Desktop Planner");
         stage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));
