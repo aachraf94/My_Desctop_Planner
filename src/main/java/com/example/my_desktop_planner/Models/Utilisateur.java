@@ -2,6 +2,7 @@ package com.example.my_desktop_planner.Models;
 
 import java.io.*;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
@@ -85,5 +86,16 @@ public class Utilisateur implements Serializable {
         System.out.println("mdp : "+mdp);
         //System.out.println("planning : "+planning);
         //System.out.println("taches : "+taches);
+    }
+    public ArrayList<Tache> getTasks(LocalDate date)
+    {
+        for (Tache tache : planning.getTachePlannifies()) {
+            if (date.getDayOfYear() == tache.getDateDebut().getDayOfYear() && date.getYear() == tache.getDateDebut().getYear() && date.getMonth() ==tache.getDateDebut().getMonth())
+            {
+                return planning.getTachePlannifies();
+            }
+
+        }
+        return null;
     }
 }

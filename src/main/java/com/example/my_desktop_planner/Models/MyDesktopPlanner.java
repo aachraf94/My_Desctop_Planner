@@ -68,6 +68,18 @@ public class MyDesktopPlanner {
             // If the file doesn't exist or there's an error reading it, ignore and start with an empty HashMap
         }
     }
+   static public Utilisateur findUser(String pseudo, String mdp) {
+        MyDesktopPlanner planner = MyDesktopPlanner.getInstance();
+        HashMap<Utilisateur, String> utilisateurs = planner.getUtilisateurs();
+
+        for (Utilisateur user : utilisateurs.keySet()) {
+            if (user.getPseudo().equals(pseudo) && utilisateurs.get(user).equals(mdp)) {
+                return user;
+            }
+        }
+
+        return null; // User not found
+    }
 
 }
 

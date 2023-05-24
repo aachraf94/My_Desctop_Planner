@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,11 +17,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Set;
 
 public class SeConnecterController {
-    MyDesktopPlanner desktopPlanner = MyDesktopPlanner.getInstance();
-    private Utilisateur utilisateur ;
+
+    private Utilisateur utilisateur;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @FXML
     private Label erreurText;
@@ -28,53 +32,64 @@ public class SeConnecterController {
     private TextField pseudo;
     @FXML
     private PasswordField motDePasse;
+
     @FXML
     void nvCompteButton(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Inscription.fxml"));
-        Scene scene = null;
-        try
-        {
+        scene = null;
+        try {
             scene = new Scene(fxmlLoader.load());
-        }
-        catch(IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Couldn't load FXML file");
         }
 
-        Button button = (Button)event.getSource();
-        Stage stage = (Stage)button.getScene().getWindow();
+        Button button = (Button) event.getSource();
+        stage = (Stage) button.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
+
     @FXML
-    void seConnecterButton(ActionEvent event) throws UserNotFoundException {
+    void seConnecterButton(ActionEvent event) throws UserNotFoundException, IOException {
+        MyDesktopPlanner desktopPlanner = MyDesktopPlanner.getInstance();
         desktopPlanner.loadUsersFromFile();
-        if (!desktopPlanner.getUtilisateurs().containsKey(new Utilisateur(pseudo.getText(),motDePasse.getText()))){
+        //System.out.println(!desktopPlanner.getUtilisateurs().containsKey(new Utilisateur(pseudo.getText(),motDePasse.getText())));
+        if (!desktopPlanner.getUtilisateurs().containsKey(new Utilisateur(pseudo.getText(), motDePasse.getText()))) {
             connexionInvalid();
-        }
-        else {
-            CalendarController calendarController = new CalendarController();
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
+            CalendarController calendarController =new CalendarController();
+
             HashMap<Utilisateur, String> map = desktopPlanner.getUtilisateurs();
-            for (Map.Entry<Utilisateur, String> entry : map.entrySet()){
-                if ((entry.getKey().getPseudo().equals(pseudo.getText())) && (entry.getValue().equals(motDePasse.getText()))){
-                    utilisateur = entry.getKey();
-                    calendarController.setUtilisateur(utilisateur);
+
+            Set<Utilisateur> utilisateurSet = map.keySet();
+            for (Utilisateur user : utilisateurSet) {
+                String pseudo1 = pseudo.getText();
+                String mdp = motDePasse.getText();                                                /// la partie hadi makhroba
+                if (user.equals(new Utilisateur(pseudo1, mdp)) && user.getMdp().equals(mdp)) {
+                    user.afficher();
+                    calendarController.setUtilisateur(user);
+                    calendarController.setText(pseudo1);
+                    break;
+                } else {
+                    connexionInvalid();
+
                 }
             }
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = null;
-            try
-            {
-                scene = new Scene(fxmlLoader.load());
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-                System.out.println("Couldn't load FXML file");
-            }
+//            for (Map.Entry<Utilisateur, String> entry : map.entrySet()){
+//                String pseudo1 = entry.getKey().getPseudo();
+//                String mdp = entry.getValue();
+//                if ((pseudo1.equals(pseudo.getText())) && (mdp.equals(motDePasse.getText()))){
+//                    utilisateur = entry.getKey();
+//                    utilisateur.afficher();
+//                    calendarController.setUtilisateur(utilisateur);
+//                }
+//            }
 
+            root = fxmlLoader.load();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
             stage.setScene(scene);
 
 

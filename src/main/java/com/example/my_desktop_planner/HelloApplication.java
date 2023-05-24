@@ -15,7 +15,9 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AjouterTache.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
+        MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.getInstance();
+        myDesktopPlanner.loadUsersFromFile();
 
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("My Desktop Planner");
