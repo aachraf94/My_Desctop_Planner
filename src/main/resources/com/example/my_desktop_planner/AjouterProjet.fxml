@@ -20,7 +20,7 @@
    <top>
       <AnchorPane prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: #005B8F;" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="WHITE" layoutX="99.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter une tâche">
+            <Text fill="WHITE" layoutX="99.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un Projet">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

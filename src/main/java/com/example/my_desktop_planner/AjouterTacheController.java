@@ -3,6 +3,7 @@ package com.example.my_desktop_planner;
 import com.example.my_desktop_planner.Models.Categorie;
 import com.example.my_desktop_planner.Models.Etat;
 import com.example.my_desktop_planner.Models.Priorite;
+import com.example.my_desktop_planner.Models.Tache;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import com.example.my_desktop_planner.CalendarController;
 
 public class AjouterTacheController implements Initializable {
 
@@ -116,9 +118,9 @@ public class AjouterTacheController implements Initializable {
         if (validateInput()) {
             // Get the values from the UI elements
             String nomTache = NomTache.getText();
+            String duree = Duree.getText();
             LocalDate dateDebutValue = dateDebut.getValue();
             LocalDate dateFinValue = dateFin.getValue();
-            String duree = Duree.getText();
             LocalDate dateLimValue = dateLim.getValue();
             Color colorValue = color.getValue();
             boolean isDecomposable = decomposable.isSelected();
@@ -166,7 +168,7 @@ public class AjouterTacheController implements Initializable {
         } else if (dateDebut.getValue().isBefore(LocalDate.now())) {
             errorMessage.append("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
             errorCount++;
-        }
+           }
 
         // Validate the 'dateFin' field
         if (dateFin.getValue() == null) {

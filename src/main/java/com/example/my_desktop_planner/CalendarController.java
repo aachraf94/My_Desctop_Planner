@@ -1,5 +1,6 @@
 package com.example.my_desktop_planner;
 
+import com.example.my_desktop_planner.Models.Tache;
 import com.example.my_desktop_planner.Models.TacheSimple;
 import com.example.my_desktop_planner.Models.Utilisateur;
 import javafx.event.ActionEvent;
@@ -45,12 +46,12 @@ public class CalendarController implements Initializable {
     private FlowPane calendar;
 
     @FXML
-    private ListView<String> listTache;
+    private ListView<Tache> listTache;
     @FXML
     Label id = new Label();
 
 
-    private Utilisateur utilisateur ;
+    public static Utilisateur utilisateur_courant ;
     private String motDePasse ;
 
 
@@ -160,11 +161,11 @@ public class CalendarController implements Initializable {
         System.out.println(data);}
 
     public Utilisateur getUtilisateur() {
-        return utilisateur;
+        return utilisateur_courant;
     }
 
     public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+        this.utilisateur_courant = utilisateur;
     }
 
     @FXML
@@ -214,13 +215,13 @@ public class CalendarController implements Initializable {
 //    }else {
 //        System.out.println("Task_list_empty");}
         listTache.getItems().clear();
-        listTache.getItems().add(TacheSimple.generateRandomTask().getNom());
-        listTache.getItems().add(TacheSimple.generateRandomTask().getNom());
-        listTache.getItems().add(TacheSimple.generateRandomTask().getNom());
+        listTache.getItems().add(TacheSimple.generateRandomTask());
+        listTache.getItems().add(TacheSimple.generateRandomTask());
+        listTache.getItems().add(TacheSimple.generateRandomTask());
 
     }
     void displayname(){
-        System.out.println(utilisateur);
+        System.out.println(utilisateur_courant);
     }
 
     public void setId(String s) {

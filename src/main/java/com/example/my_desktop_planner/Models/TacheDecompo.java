@@ -1,5 +1,10 @@
 package com.example.my_desktop_planner.Models;
 
+import javafx.scene.paint.Color;
+
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 public class TacheDecompo implements Decomposable<TacheDecompo>{
@@ -16,7 +21,11 @@ public class TacheDecompo implements Decomposable<TacheDecompo>{
     //constructeur
     //add tache
     //
-
+    public TacheDecompo (String nom, Duration dure, Priorite priorite, LocalDate dateLim, java.time.LocalDateTime dateDebut, LocalDateTime dateFin, String categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable) {
+        //super(nom , dure , priorite , dateLim , dateDebut , dateFin , categorie , color , unscheduled , etat , bloque , decomposable);
+        this.nbSousTache = nbSousTache;
+        this.sousTache = sousTache;
+    }
     public TacheDecompo(TacheDecompo tacheDecompo)
     {
         this.nbSousTache = tacheDecompo.getNbSousTache();

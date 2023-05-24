@@ -1,8 +1,6 @@
 package com.example.my_desktop_planner;
 
-import com.example.my_desktop_planner.Models.Categorie;
-import com.example.my_desktop_planner.Models.Etat;
-import com.example.my_desktop_planner.Models.Priorite;
+import com.example.my_desktop_planner.Models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -104,17 +102,21 @@ public class AjouterEnsTache implements Initializable {
         if (validateInput()) {
             // Get the values from the UI elements
             String nomTache = NomTache.getText();
-            LocalDate dateDebutValue = dateDebut.getValue();
-            LocalDate dateFinValue = dateFin.getValue();
             String duree = Duree.getText();
             LocalDate dateLimValue = dateLim.getValue();
+            LocalDate dateDebutValue = dateDebut.getValue();
+            LocalDate dateFinValue = dateFin.getValue();
+            Categorie categorie = categorieChoiceBox.getValue();
             Color colorValue = color.getValue();
             boolean isDecomposable = decomposable.isSelected();
+            boolean isUnscheduled = AutoPlanification.isSelected();
             String periodiciteValue = periodicite.getText();
             boolean isBloquee = bloquee.isSelected();
-            Categorie categorie = categorieChoiceBox.getValue();
             Priorite priorite = prioriteChoiceBox.getValue();
-
+            if (isDecomposable) {
+                //Tache Tache = new TacheSimple(nomTache, dateDebutValue, dateFinValue, duree, dateLimValue, colorValue, isDecomposable, periodiciteValue, isBloquee, categorie, priorite);
+                periodiciteValue = "0";
+            }
             // Perform the necessary operations with the values (e.g., save to a database, update model, etc.)
 
             // Clear the fields and close the window
