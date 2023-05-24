@@ -26,8 +26,8 @@
                <children>
                   <HBox prefHeight="35.0" prefWidth="275.0" spacing="42.0">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Ajouter Tàche" />
-                        <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Ajouter ensemble de taches" />
+                        <Button mnemonicParsing="false" onAction="#ajouterTacheButton" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Ajouter Tàche" />
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#ajouterEnsTacheButton" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Ajouter ensemble de taches" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="45.0" prefHeight="35.0" prefWidth="275.0" spacing="24.0">

@@ -1,8 +1,6 @@
 package com.example.my_desktop_planner;
 
 import com.example.my_desktop_planner.Models.MyDesktopPlanner;
-import com.example.my_desktop_planner.Models.Tache;
-import com.example.my_desktop_planner.Models.TacheSimple;
 import com.example.my_desktop_planner.Models.Utilisateur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +16,6 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SeConnecter.fxml"));
-        MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.getInstance();
-
 
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("My Desktop Planner");
