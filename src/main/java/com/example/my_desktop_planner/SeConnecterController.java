@@ -70,7 +70,7 @@ public class SeConnecterController {
                 if (user.equals(new Utilisateur(pseudo1, mdp)) && user.getMdp().equals(mdp)) {
                     user.afficher();
                     calendarController.setUtilisateur(user);
-                    calendarController.setText(pseudo1);
+                    //calendarController.setText(pseudo1);
                     break;
                 } else {
                     connexionInvalid();
