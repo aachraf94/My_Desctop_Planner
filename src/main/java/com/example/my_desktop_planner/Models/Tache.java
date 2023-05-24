@@ -28,7 +28,8 @@ abstract public class Tache implements Serializable {
     //re-planifier (string dureeSupp, String nvDeadline)          les deux
 
 
-    public Tache(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDateTime dateDebut, LocalDateTime dateFin, String categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable) {
+    public Tache(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDateTime dateDebut, LocalDateTime dateFin, String categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable)
+    { // a revoir les arguments de ce constructeur
         this.nom = nom;
         this.dure = dure;
         this.priorite = priorite;

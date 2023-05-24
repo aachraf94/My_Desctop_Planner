@@ -15,6 +15,33 @@ public class Planning {
     private ArrayList<Tache> tachePlannifies;
     private ArrayList<Tache> tacheUnscheduleds;
 
+    public ArrayList<Tache> getTachePlannifies() {
+        return tachePlannifies;
+    }
+
+    public void setTachePlannifies(ArrayList<Tache> tachePlannifies) {
+        this.tachePlannifies = tachePlannifies;
+    }
+
+    public ArrayList<Tache> getTacheUnscheduleds() {
+        return tacheUnscheduleds;
+    }
+
+    public void setTacheUnscheduleds(ArrayList<Tache> tacheUnscheduleds) {
+        this.tacheUnscheduleds = tacheUnscheduleds;
+    }
+    public void addTachePlannifie(Tache tachePlannifie) {
+        this.tachePlannifies.add(tachePlannifie);
+    }
+    public void addTacheUnscheduled(Tache tacheUnscheduled) {
+        this.tacheUnscheduleds.add(tacheUnscheduled);
+    }
+    public void removeTachePlannifie(Tache tachePlannifie) {
+        this.tachePlannifies.remove(tachePlannifie);
+    }
+    public void removeTacheUnscheduled(Tache tacheUnscheduled) {
+        this.tacheUnscheduleds.remove(tacheUnscheduled);
+    }
 /*** a completer ****/
 //    public void plannifierTacheManuellemt (Creneau creneau,TacheSimple tacheSimple)
 //    {
