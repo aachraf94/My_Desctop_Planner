@@ -1,13 +1,20 @@
 package com.example.my_desktop_planner;
 
+import com.example.my_desktop_planner.Models.TacheSimple;
 import com.example.my_desktop_planner.Models.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
+
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -36,6 +43,12 @@ public class CalendarController implements Initializable {
 
     @FXML
     private FlowPane calendar;
+
+    @FXML
+    private ListView<String> listTache;
+    @FXML
+    Label id = new Label();
+
 
     private Utilisateur utilisateur ;
     private String motDePasse ;
@@ -164,7 +177,6 @@ public class CalendarController implements Initializable {
             e.printStackTrace();
             System.out.println("Couldn't load FXML file");
         }
-
         Stage newStage = new Stage();
         newStage.setTitle("Ajouter Tâche");
         newStage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));
@@ -192,6 +204,29 @@ public class CalendarController implements Initializable {
         newStage.show();
 
     }
+    private void updateDayTasks(LocalDate date) {
+//        ArrayList<Tache> tasks = utilisateur.getTasks(date);
+//        listTache.getItems().clear();
+//        if (tasks != null) {
+//            for (Tache task : tasks) {
+//                listTache.getItems().add(task);
+//            }
+//    }else {
+//        System.out.println("Task_list_empty");}
+        listTache.getItems().clear();
+        listTache.getItems().add(TacheSimple.generateRandomTask().getNom());
+        listTache.getItems().add(TacheSimple.generateRandomTask().getNom());
+        listTache.getItems().add(TacheSimple.generateRandomTask().getNom());
+
+    }
+    void displayname(){
+        System.out.println(utilisateur);
+    }
+
+    public void setId(String s) {
+        this.id.setText(s);
+    }
+
 
 
 

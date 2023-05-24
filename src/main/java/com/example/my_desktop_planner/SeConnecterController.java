@@ -59,7 +59,7 @@ public class SeConnecterController {
             connexionInvalid();
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
-            CalendarController calendarController =new CalendarController();
+            CalendarController calendarController = new CalendarController();
 
             HashMap<Utilisateur, String> map = desktopPlanner.getUtilisateurs();
 
@@ -77,15 +77,7 @@ public class SeConnecterController {
 
                 }
             }
-//            for (Map.Entry<Utilisateur, String> entry : map.entrySet()){
-//                String pseudo1 = entry.getKey().getPseudo();
-//                String mdp = entry.getValue();
-//                if ((pseudo1.equals(pseudo.getText())) && (mdp.equals(motDePasse.getText()))){
-//                    utilisateur = entry.getKey();
-//                    utilisateur.afficher();
-//                    calendarController.setUtilisateur(utilisateur);
-//                }
-//            }
+
 
             root = fxmlLoader.load();
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -96,8 +88,8 @@ public class SeConnecterController {
         }
     }
 
-    @FXML
-    protected void connexionInvalid() {
+
+    public void connexionInvalid() {
         erreurText.setText("Pseudo ou mot de passe invalide!");
     }
 

@@ -85,6 +85,7 @@ public class MyDesktopPlanner {
 
         return null; // User not found
     }
+
 }
 //   static public Utilisateur findUser(String pseudo, String mdp) {
 //        MyDesktopPlanner planner = MyDesktopPlanner.getInstance();
