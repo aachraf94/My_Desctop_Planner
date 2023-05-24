@@ -6,6 +6,7 @@ import com.example.my_desktop_planner.Models.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
@@ -36,9 +37,9 @@ public class CalendarController implements Initializable {
     @FXML
     private FlowPane calendar;
     @FXML
-    private Label text;
-    @FXML
     private ListView<String> listTache;
+    @FXML
+    Label id = new Label();
 
     private Utilisateur utilisateur = new Utilisateur("Chamil", "123");
 
@@ -48,7 +49,6 @@ public class CalendarController implements Initializable {
         today = ZonedDateTime.now();
         year.setText(String.valueOf(dateFocus.getYear())); // Initialize the year variable
         month.setText(String.valueOf(dateFocus.getMonth())); // Initialize the month variable
-        text.setText("");
         drawCalendar();
     }
 
@@ -162,14 +162,7 @@ public class CalendarController implements Initializable {
     }
 
 
-    public String getText() {
-        return text.getText();
-    }
 
-    public void setText(String text) {
-        this.text.setText("") ;
-        this.text.setText(text);
-    }
 
     private void updateDayTasks(LocalDate date) {
 //        ArrayList<Tache> tasks = utilisateur.getTasks(date);
@@ -185,6 +178,13 @@ public class CalendarController implements Initializable {
         listTache.getItems().add(TacheSimple.generateRandomTask().getNom());
         listTache.getItems().add(TacheSimple.generateRandomTask().getNom());
 
+    }
+    void displayname(){
+        System.out.println(utilisateur);
+    }
+
+    public void setId(String s) {
+        this.id.setText(s);
     }
 }
 

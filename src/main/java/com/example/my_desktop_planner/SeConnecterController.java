@@ -68,7 +68,8 @@ public class SeConnecterController {
             if (user != null) {
                 user.afficher();
                 calendarController.setUtilisateur(user);
-                calendarController.setText(user.getPseudo());
+                calendarController.setId(user.getPseudo());
+                calendarController.displayname();
             }else {
                 System.out.println("User not found");
             }
