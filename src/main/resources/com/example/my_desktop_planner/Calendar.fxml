@@ -15,11 +15,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.my_desktop_planner.CalendarController">
+<BorderPane fx:id="borderPane" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.my_desktop_planner.CalendarController">
    <left>
       <VBox alignment="CENTER" prefHeight="700.0" prefWidth="343.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="235.0" prefWidth="298.0" spacing="12.0">
+            <VBox prefHeight="151.0" prefWidth="298.0" spacing="12.0">
                <VBox.margin>
                   <Insets left="25.0" right="20.0" />
                </VBox.margin>
@@ -46,37 +46,41 @@
                   <Font size="34.0" />
                </font>
             </Label>
-            <ScrollPane prefHeight="288.0" prefWidth="343.0">
+            <ScrollPane pannable="true" prefHeight="353.0" prefWidth="343.0">
                <content>
-                  <ListView fx:id="listTache" prefHeight="302.0" prefWidth="340.0" />
+                  <ListView fx:id="listTache" fixedCellSize="50.0" prefHeight="367.0" prefWidth="340.0" />
                </content>
             </ScrollPane>
          </children>
       </VBox>
    </left>
    <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #005B8F;" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="500.0" style="-fx-background-color: #005B8F;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="50.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/Group42.png" />
-               </image>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ImageView>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="242.0" spacing="60.0">
+            <HBox prefHeight="50.0" prefWidth="419.0">
                <children>
-                  <Label text="Bonjour" textFill="WHITE">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="id" layoutX="98.0" layoutY="21.0" textFill="WHITE">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
+                  <ImageView fitHeight="50.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/Group42.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="149.0" spacing="60.0">
+                     <children>
+                        <Label text="Bonjour" textFill="WHITE">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#logout" text="Deconnexion" />
                </children>
             </HBox>
          </children>

@@ -1,5 +1,6 @@
 package com.example.my_desktop_planner;
 
+import com.example.my_desktop_planner.Models.MyDesktopPlanner;
 import com.example.my_desktop_planner.Models.Tache;
 import com.example.my_desktop_planner.Models.TacheSimple;
 import com.example.my_desktop_planner.Models.Utilisateur;
@@ -9,13 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
 
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CalendarController implements Initializable {
@@ -48,7 +49,12 @@ public class CalendarController implements Initializable {
     @FXML
     private ListView<Tache> listTache;
     @FXML
-    Label id = new Label();
+    private Label id = new Label();
+    @FXML
+    private Button LogOutButton ;
+    @FXML
+    private BorderPane borderPane ;
+    private Stage stage ;
 
 
     public static Utilisateur utilisateur_courant ;
@@ -61,6 +67,7 @@ public class CalendarController implements Initializable {
         today = ZonedDateTime.now();
         year.setText(String.valueOf(dateFocus.getYear())); // Initialize the year variable
         month.setText(String.valueOf(dateFocus.getMonth())); // Initialize the month variable
+
         drawCalendar();
     }
 
@@ -206,31 +213,47 @@ public class CalendarController implements Initializable {
 
     }
     private void updateDayTasks(LocalDate date) {
-//        ArrayList<Tache> tasks = utilisateur.getTasks(date);
-//        listTache.getItems().clear();
-//        if (tasks != null) {
-//            for (Tache task : tasks) {
-//                listTache.getItems().add(task);
-//            }
-//    }else {
-//        System.out.println("Task_list_empty");}
         listTache.getItems().clear();
-        listTache.getItems().add(TacheSimple.generateRandomTask());
-        listTache.getItems().add(TacheSimple.generateRandomTask());
-        listTache.getItems().add(TacheSimple.generateRandomTask());
+        ArrayList<Tache> tasks = utilisateur_courant.getTasks(date);
+        listTache.getItems().clear();
+        if (tasks != null) {
+            for (Tache task : tasks) {
+                listTache.getItems().add(task);
+            }
+    }else {
+        System.out.println("Task_list_empty");}
+
+//        listTache.getItems().add(TacheSimple.generateRandomTask());
+//        listTache.getItems().add(TacheSimple.generateRandomTask());
+//        listTache.getItems().add(TacheSimple.generateRandomTask());
 
     }
-    void displayname(){
+    void Afficher(){
         System.out.println(utilisateur_courant);
     }
 
-    public void setId(String s) {
-        this.id.setText(s);
-    }
 
 
 
 
+public void logout (ActionEvent event){
+        MyDesktopPlanner desktopPlanner = MyDesktopPlanner.getInstance();
+        desktopPlanner.loadUsersFromFile();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("Are you sure you want to logout?");
+        alert.setContentText("All unsaved changes will be lost");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            stage = (Stage) borderPane.getScene().getWindow();
+            System.out.println("logout successful");
+            desktopPlanner.saveUsersToFile();
+            stage.close();
+        }
+
+        
+
+}
 
 }
 
