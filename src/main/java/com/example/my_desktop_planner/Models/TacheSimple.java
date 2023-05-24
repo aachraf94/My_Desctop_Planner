@@ -49,7 +49,7 @@ public class TacheSimple extends Tache {
         LocalDateTime dateDebut = LocalDateTime.now().plusHours(random.nextInt(24)); // Random start date within the next 24 hours
         LocalDateTime dateFin = dateDebut.plusHours(random.nextInt(24)); // Random end date after the start date
         String categorie = "Category " + random.nextInt(5); // Random category
-        Color color = Color.values()[random.nextInt(Color.values().length)]; // Random color
+        Color color = TacheSimple.generateRandomColor(); // Random color
         boolean unscheduled = random.nextBoolean(); // Random unscheduled flag
         Etat etat = Etat.values()[random.nextInt(Etat.values().length)]; // Random state
         boolean bloque = random.nextBoolean(); // Random blocked flag
@@ -65,7 +65,7 @@ public class TacheSimple extends Tache {
         int green = random.nextInt(256); // Random value for green component (0-255)
         int blue = random.nextInt(256); // Random value for blue component (0-255)
 
-        return new Color(red, green, blue);
+        return Color.rgb(red, green, blue);
     }
 
 

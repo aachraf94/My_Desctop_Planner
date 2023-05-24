@@ -50,7 +50,7 @@ public class MyDesktopPlanner {
         }
     }
 
-    public void saveUsersToFile() {
+     public void saveUsersToFile() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Users.dat"))) {// on cree un nouveu flux de sortie pour le fichier Users.dat pour le modifier
             out.writeObject(utilisateurs);// enregistrer le hashMap dans le fichier
             System.out.println("Saved successfully");
@@ -60,7 +60,7 @@ public class MyDesktopPlanner {
     }
 
     @SuppressWarnings("unchecked")
-    public void loadUsersFromFile() {
+     public void loadUsersFromFile() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("Users.dat"))) {//users.dat c'est le fichier qui contient les utilisateurs , il sera ecrasé tout fois qu'on ajoute ou on supprime un utilisateur
             utilisateurs = (HashMap<Utilisateur, String>) in.readObject();
             System.out.println("Loaded successfully");//lire le fichier et le mettre dans le hashMap puisaue la class, est singleton , on peut le faire directement
@@ -68,12 +68,13 @@ public class MyDesktopPlanner {
             // If the file doesn't exist or there's an error reading it, ignore and start with an empty HashMap
         }
     }
-   static public Utilisateur findUser(String pseudo, String mdp) {
+    public Utilisateur findUser(String pseudo, String mdp) {
+        this.loadUsersFromFile();
         MyDesktopPlanner planner = MyDesktopPlanner.getInstance();
         HashMap<Utilisateur, String> utilisateurs = planner.getUtilisateurs();
 
         for (Utilisateur user : utilisateurs.keySet()) {
-            if (user.getPseudo().equals(pseudo) && utilisateurs.get(user).equals(mdp)) {
+            if (user.getPseudo().equals(pseudo) && user.getMdp().equals(mdp)) {
                 return user;
             }
         }
