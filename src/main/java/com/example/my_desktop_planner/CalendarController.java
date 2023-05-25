@@ -26,6 +26,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CalendarController implements Initializable {
@@ -39,6 +40,10 @@ public class CalendarController implements Initializable {
     private Text year;
 
     @FXML
+    private ListView<TacheSimple> tacheSimpleListView;
+    private List<Tache> taches;
+
+    @FXML
     private Text month;
 
     @FXML
@@ -46,6 +51,7 @@ public class CalendarController implements Initializable {
 
     @FXML
     private ListView<Tache> listTache;
+
     @FXML
     private Label id = new Label();
     @FXML
@@ -63,6 +69,11 @@ public class CalendarController implements Initializable {
         year.setText(String.valueOf(dateFocus.getYear())); // Initialize the year variable
         month.setText(String.valueOf(dateFocus.getMonth())); // Initialize the month variable
         drawCalendar();
+
+        taches = new ArrayList<>(utilisateur_courant.getPlanning().getTachePlannifies());
+
+        listTache.getItems().addAll(taches);
+
     }
 
     @FXML
@@ -246,24 +257,5 @@ public void logout (ActionEvent event) {
 
 }
 
-
-    @Override
-    public String toString() {
-        return "CalendarController{" +
-                "dateFocus=" + dateFocus +
-                ", today=" + today +
-                ", selectedDayRectangle=" + selectedDayRectangle +
-                ", selected_day=" + selected_day +
-                ", year=" + year +
-                ", month=" + month +
-                ", calendar=" + calendar +
-                ", listTache=" + listTache +
-                ", id=" + id +
-                ", LogOutButton=" + LogOutButton +
-                ", borderPane=" + borderPane +
-                ", stage=" + stage +
-                ", motDePasse='" + motDePasse + '\'' +
-                '}';
-    }
 }
 

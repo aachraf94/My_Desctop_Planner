@@ -97,4 +97,10 @@ public class Utilisateur implements Serializable {
         this.planning.ajouterCreneauLibre(creneauLibre);
     }
 
+
+    /********* Setters et Getters ********************/
+
+
+
+
 }

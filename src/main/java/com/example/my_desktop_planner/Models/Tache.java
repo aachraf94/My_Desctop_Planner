@@ -138,4 +138,14 @@ abstract public class Tache implements Serializable {
         this.decomposable = decomposable;
     }
 
+    @Override
+    public String toString() {
+        return "" + nom +
+                "" + priorite +
+                ", dateDebut=" + dateDebut +
+                ", dateFin=" + dateFin +
+                ", categorie=" + categorie +
+                ", etat=" + etat +
+                '}';
+    }
 }

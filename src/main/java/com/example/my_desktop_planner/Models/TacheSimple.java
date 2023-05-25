@@ -81,4 +81,9 @@ public class TacheSimple extends Tache {
         this.periodicite = periodicite;
     }
 
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

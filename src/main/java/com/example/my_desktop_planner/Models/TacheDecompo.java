@@ -50,4 +50,10 @@ public class TacheDecompo implements Decomposable<TacheDecompo> {
     public void setSousTache(LinkedList<TacheSimple> sousTache) {
         this.sousTache = sousTache;
     }
+
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

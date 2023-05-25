@@ -1,7 +1,6 @@
 package com.example.my_desktop_planner;
 
-import com.example.my_desktop_planner.Models.Categorie;
-import com.example.my_desktop_planner.Models.Priorite;
+import com.example.my_desktop_planner.Models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +9,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AjouterEnsTache implements Initializable {
@@ -47,6 +50,9 @@ public class AjouterEnsTache implements Initializable {
     private TextField tempdPlanification;
     @FXML
     private Button AjouterButton;
+    @FXML
+    private ListView<String> listViewTache;
+    private ArrayList<String> arrayListViewTache = new ArrayList<String>();
 
 
     @Override
@@ -54,14 +60,18 @@ public class AjouterEnsTache implements Initializable {
         categorieChoiceBox.getItems().addAll(Categorie.STUDIES, Categorie.WORK, Categorie.HOBBY, Categorie.SPORT, Categorie.HEALTH, Categorie.OTHER);
         prioriteChoiceBox.getItems().addAll(Priorite.LOW, Priorite.MEDIUM, Priorite.HIGHT);
 
+        listViewTache.getItems().addAll(arrayListViewTache);
+
         decomposable.selectedProperty().addListener((observable, oldValue, newValue) -> {// Hide or show the periodicite TextField based on the CheckBox state
             periodicite.setVisible(!newValue);
         });
 
-
         AutoPlanification.selectedProperty().addListener((observable, oldValue, newValue) -> {
             tempdPlanification.setVisible(!newValue);
         });
+
+
+
 
     }
 
@@ -101,10 +111,16 @@ public class AjouterEnsTache implements Initializable {
         if (validateInput()) {
             // Get the values from the UI elements
             String nomTache = NomTache.getText();
-            String duree = Duree.getText();
+            Duration duration = Duration.ofHours(1);
             LocalDate dateLimValue = dateLim.getValue();
             LocalDate dateDebutValue = dateDebut.getValue();
+
+            LocalTime timeDebut = LocalTime.parse("08:00");
+            LocalTime timeFin = LocalTime.parse("10:00");
+
+
             LocalDate dateFinValue = dateFin.getValue();
+
             Categorie categorie = categorieChoiceBox.getValue();
             Color colorValue = color.getValue();
             boolean isDecomposable = decomposable.isSelected();
@@ -113,14 +129,20 @@ public class AjouterEnsTache implements Initializable {
             boolean isBloquee = bloquee.isSelected();
             Priorite priorite = prioriteChoiceBox.getValue();
             if (isDecomposable) {
-                //Tache Tache = new TacheSimple(nomTache, dateDebutValue, dateFinValue, duree, dateLimValue, colorValue, isDecomposable, periodiciteValue, isBloquee, categorie, priorite);
-                periodiciteValue = "0";
+                TacheDecompo tacheDecompo = new TacheDecompo(nomTache, duration ,priorite,dateLimValue,LocalDateTime.of(dateDebutValue, timeDebut),LocalDateTime.of(dateDebutValue, timeFin),"Woro" ,colorValue,isUnscheduled, Etat.NOT_REALIZED,isBloquee,true);
+                arrayListViewTache.add(tacheDecompo.toString());
+                listViewTache.getItems().add(tacheDecompo.toString());
             }
-            // Perform the necessary operations with the values (e.g., save to a database, update model, etc.)
+            else
+            {
+                TacheSimple tacheSimple = new TacheSimple(nomTache, duration ,priorite,dateLimValue,LocalDateTime.of(dateDebutValue, timeDebut),LocalDateTime.of(dateDebutValue, timeFin), Categorie.WORK ,colorValue,isUnscheduled, Etat.NOT_REALIZED,isBloquee,true,1,Etat.NOT_REALIZED);
+                arrayListViewTache.add(tacheSimple.toString());
+                listViewTache.getItems().add(tacheSimple.toString());
+            }
 
-            // Clear the fields and close the window
-            clearFields();
-            closeWindow();
+
+           // clearFields();
+
         }
     }
 
@@ -208,6 +230,11 @@ public class AjouterEnsTache implements Initializable {
 
         return true;
     }
+
+
+
+
+
 
 
 }
