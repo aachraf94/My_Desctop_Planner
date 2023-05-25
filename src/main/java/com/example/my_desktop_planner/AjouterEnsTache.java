@@ -1,6 +1,7 @@
 package com.example.my_desktop_planner;
 
-import com.example.my_desktop_planner.Models.*;
+import com.example.my_desktop_planner.Models.Categorie;
+import com.example.my_desktop_planner.Models.Priorite;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,13 +51,12 @@ public class AjouterEnsTache implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        categorieChoiceBox.getItems().addAll(Categorie.STUDIES, Categorie.WORK, Categorie.HOBBY,Categorie.SPORT, Categorie.HEALTH, Categorie.OTHER);
-        prioriteChoiceBox.getItems().addAll( Priorite.LOW , Priorite.MEDIUM, Priorite.HIGHT );
+        categorieChoiceBox.getItems().addAll(Categorie.STUDIES, Categorie.WORK, Categorie.HOBBY, Categorie.SPORT, Categorie.HEALTH, Categorie.OTHER);
+        prioriteChoiceBox.getItems().addAll(Priorite.LOW, Priorite.MEDIUM, Priorite.HIGHT);
 
         decomposable.selectedProperty().addListener((observable, oldValue, newValue) -> {// Hide or show the periodicite TextField based on the CheckBox state
             periodicite.setVisible(!newValue);
         });
-
 
 
         AutoPlanification.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -94,7 +94,6 @@ public class AjouterEnsTache implements Initializable {
         Stage stage = (Stage) annulerlButton.getScene().getWindow();
         stage.close();
     }
-
 
 
     @FXML
@@ -209,8 +208,6 @@ public class AjouterEnsTache implements Initializable {
 
         return true;
     }
-
-
 
 
 }

@@ -1,9 +1,7 @@
 package com.example.my_desktop_planner;
 
 import com.example.my_desktop_planner.Models.Categorie;
-import com.example.my_desktop_planner.Models.Etat;
 import com.example.my_desktop_planner.Models.Priorite;
-import com.example.my_desktop_planner.Models.Tache;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +12,6 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import com.example.my_desktop_planner.CalendarController;
 
 public class AjouterTacheController implements Initializable {
 
@@ -60,8 +57,8 @@ public class AjouterTacheController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        categorieChoiceBox.getItems().addAll(Categorie.STUDIES, Categorie.WORK, Categorie.HOBBY,Categorie.SPORT, Categorie.HEALTH, Categorie.OTHER);
-        prioriteChoiceBox.getItems().addAll( Priorite.LOW , Priorite.MEDIUM, Priorite.HIGHT );
+        categorieChoiceBox.getItems().addAll(Categorie.STUDIES, Categorie.WORK, Categorie.HOBBY, Categorie.SPORT, Categorie.HEALTH, Categorie.OTHER);
+        prioriteChoiceBox.getItems().addAll(Priorite.LOW, Priorite.MEDIUM, Priorite.HIGHT);
 
         decomposable.selectedProperty().addListener((observable, oldValue, newValue) -> {// Hide or show the periodicite TextField based on the CheckBox state
             periodicite.setVisible(!newValue);
@@ -110,7 +107,6 @@ public class AjouterTacheController implements Initializable {
         Stage stage = (Stage) annulerlButton.getScene().getWindow();
         stage.close();
     }
-
 
 
     @FXML
@@ -168,7 +164,7 @@ public class AjouterTacheController implements Initializable {
         } else if (dateDebut.getValue().isBefore(LocalDate.now())) {
             errorMessage.append("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
             errorCount++;
-           }
+        }
 
         // Validate the 'dateFin' field
         if (dateFin.getValue() == null) {
@@ -229,8 +225,6 @@ public class AjouterTacheController implements Initializable {
 
         return true;
     }
-
-
 
 
 }

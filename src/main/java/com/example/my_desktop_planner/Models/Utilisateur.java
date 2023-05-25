@@ -1,25 +1,22 @@
 package com.example.my_desktop_planner.Models;
 
-import java.io.*;
-import java.time.Duration;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+
 public class Utilisateur implements Serializable {
+    private static final long serialVersionUID = 1L;
+    public Planning planning;
     private String pseudo;
     private String mdp;
-    public Planning planning;
-    private static final long serialVersionUID = 1L;
 
-    public Utilisateur(String pseudo,String mdp) {
+    public Utilisateur(String pseudo, String mdp) {
         this.pseudo = pseudo;
         this.mdp = mdp;
     }
 
 
-
-    public boolean seConnecter(String pseudo, String mdp){
+    public boolean seConnecter(String pseudo, String mdp) {
 
         if (this.pseudo.equals(pseudo) && this.mdp.equals(mdp)) {
             System.out.println("Connexion réussie.");
@@ -30,7 +27,7 @@ public class Utilisateur implements Serializable {
         }
     }
 
-    public Boolean seDeconnecter(){
+    public Boolean seDeconnecter() {
         return true;
     }
 //    public void ajouterCreneauLibre(LocalDateTime heureDebut, LocalDateTime heureFin , Duration duree) {
@@ -64,9 +61,9 @@ public class Utilisateur implements Serializable {
         return planning;
     }
 
-
-
-
+    public void setPlanning(Planning planning) {
+        this.planning = new Planning(planning);
+    }
 
     @Override
     public int hashCode() {
@@ -75,41 +72,29 @@ public class Utilisateur implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        return this.pseudo.equals(((Utilisateur)obj).getPseudo());
+        return this.pseudo.equals(((Utilisateur) obj).getPseudo());
     }
-    public void afficher ()
-    {
-        System.out.println("pseudo : "+pseudo);
-        System.out.println("mdp : "+mdp);
+
+    public void afficher() {
+        System.out.println("pseudo : " + pseudo);
+        System.out.println("mdp : " + mdp);
         //System.out.println("planning : "+planning);
         //System.out.println("taches : "+taches);
     }
-    public ArrayList<Tache> getTasks(LocalDate date)
-    {   ArrayList<Tache> tasks = new ArrayList<Tache>();
+
+    public ArrayList<Tache> getTasks(LocalDate date) {
+        ArrayList<Tache> tasks = new ArrayList<Tache>();
         for (Tache tache : planning.getTachePlannifies()) {
-            if (date.getDayOfYear() == tache.getDateDebut().getDayOfYear() && date.getYear() == tache.getDateDebut().getYear() && date.getMonth() ==tache.getDateDebut().getMonth())
-            {
-               tasks.add(tache);
+            if (date.getDayOfYear() == tache.getDateDebut().getDayOfYear() && date.getYear() == tache.getDateDebut().getYear() && date.getMonth() == tache.getDateDebut().getMonth()) {
+                tasks.add(tache);
             }
 
         }
-        return tasks ;
+        return tasks;
     }
 
-
-
-
-
-
-
-
-
-
-
-    public void setPlanning(Planning planning)
-    {
-        this.planning = new Planning(planning);
+    public void ajouterCreneauLibre(CreneauLibre creneauLibre) {
+        this.planning.ajouterCreneauLibre(creneauLibre);
     }
-    public void ajouterCreneauLibre(CreneauLibre creneauLibre) { this.planning.ajouterCreneauLibre(creneauLibre); }
 
 }

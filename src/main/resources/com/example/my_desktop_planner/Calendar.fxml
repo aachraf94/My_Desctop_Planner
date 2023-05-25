@@ -1,158 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<BorderPane fx:id="borderPane" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.my_desktop_planner.CalendarController">
-   <left>
-      <VBox alignment="CENTER" prefHeight="700.0" prefWidth="343.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-         <children>
-            <VBox prefHeight="151.0" prefWidth="298.0" spacing="12.0">
-               <VBox.margin>
-                  <Insets left="25.0" right="20.0" />
-               </VBox.margin>
-               <children>
-                  <HBox prefHeight="35.0" prefWidth="275.0" spacing="42.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#ajouterTacheButton" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Ajouter Tàche" />
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#ajouterEnsTacheButton" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Ajouter ensemble de taches" />
-                     </children>
-                  </HBox>
-                  <HBox layoutX="10.0" layoutY="45.0" prefHeight="35.0" prefWidth="275.0" spacing="24.0">
-                     <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Ajouter Un Projet" />
-                        <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Re-Planifier" />
-                     </children>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets top="35.0" />
-               </padding>
-            </VBox>
-            <Label style="-fx-text-fill: #005B8F;" text="Taches">
-               <font>
-                  <Font size="34.0" />
-               </font>
-            </Label>
-            <ScrollPane pannable="true" prefHeight="353.0" prefWidth="343.0">
-               <content>
-                  <ListView fx:id="listTache" fixedCellSize="50.0" prefHeight="367.0" prefWidth="340.0" />
-               </content>
-            </ScrollPane>
-         </children>
-      </VBox>
-   </left>
-   <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="500.0" style="-fx-background-color: #005B8F;" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="50.0" prefWidth="419.0">
-               <children>
-                  <ImageView fitHeight="50.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/Group42.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="149.0" spacing="60.0">
-                     <children>
-                        <Label text="Bonjour" textFill="WHITE">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#logout" text="Deconnexion" />
-               </children>
-            </HBox>
-         </children>
-         <padding>
-            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-         </padding>
-      </HBox>
-   </top>
-   <center>
-      <VBox alignment="CENTER" prefHeight="700.0" prefWidth="686.0" spacing="34.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="88.0" prefWidth="624.0" spacing="27.0">
-               <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" style="-fx-text-fill: #005B8F; -fx-background-color: TRANSPARENT; -fx-border-color: #005B8F;" text="Unschedueled" />
-                  <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-border-color: #005B8F; -fx-text-fill: #005B8F; -fx-background-color: TRANSPARENT;" text="Bagdes" />
-               </children>
-            </HBox>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="357.0" prefWidth="433.0" spacing="10.0" style="-fx-background-color: #005B8F; -fx-border-radius: 50;">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="44.0" prefWidth="419.0" spacing="54.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#backOneMonth" text="&lt;" />
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
-                           <children>
-                              <Text fx:id="month" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="year" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Text>
-                           </children>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" prefHeight="650.0" prefWidth="1000.0"
+            xmlns="http://javafx.com/javafx/19" fx:controller="com.example.my_desktop_planner.CalendarController">
+    <left>
+        <VBox alignment="CENTER" prefHeight="700.0" prefWidth="343.0" style="-fx-background-color: #FFFFFF;"
+              BorderPane.alignment="CENTER">
+            <children>
+                <VBox prefHeight="151.0" prefWidth="298.0" spacing="12.0">
+                    <VBox.margin>
+                        <Insets left="25.0" right="20.0"/>
+                    </VBox.margin>
+                    <children>
+                        <HBox prefHeight="35.0" prefWidth="275.0" spacing="42.0">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#ajouterTacheButton"
+                                        style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;"
+                                        text="Ajouter Tàche"/>
+                                <Button alignment="CENTER" mnemonicParsing="false" onAction="#ajouterEnsTacheButton"
+                                        style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;"
+                                        text="Ajouter ensemble de taches"/>
+                            </children>
                         </HBox>
-                        <Button mnemonicParsing="false" onAction="#forwardOneMonth" text="&gt;" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="25.0" prefWidth="348.0" spacing="31.75">
-                     <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Dim" textAlignment="CENTER" />
-                        <Text fill="WHITE" layoutX="213.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lun" textAlignment="CENTER" />
-                        <Text fill="WHITE" layoutX="222.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mar" textAlignment="CENTER" />
-                        <Text fill="WHITE" layoutX="232.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mer" textAlignment="CENTER" />
-                        <Text fill="WHITE" layoutX="241.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jeu" textAlignment="CENTER" />
-                        <Text fill="WHITE" layoutX="251.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ven" textAlignment="CENTER" />
-                        <Text fill="WHITE" layoutX="266.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sam" textAlignment="CENTER" />
-                     </children>
-                     <padding>
-                        <Insets right="9.0" />
-                     </padding>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <effect>
-                        <Reflection topOffset="-8.0" topOpacity="0.21" />
-                     </effect>
-                  </HBox>
-                  <FlowPane fx:id="calendar" alignment="CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="359.0" vgap="5.0" />
-               </children>
-               <VBox.margin>
-                  <Insets right="3.0" />
-               </VBox.margin>
-            </VBox>
-         </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-         <padding>
-            <Insets left="16.0" right="17.0" />
-         </padding>
-      </VBox>
-   </center>
+                        <HBox layoutX="10.0" layoutY="45.0" prefHeight="35.0" prefWidth="275.0" spacing="24.0">
+                            <children>
+                                <Button alignment="CENTER" mnemonicParsing="false"
+                                        style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;"
+                                        text="Ajouter Un Projet"/>
+                                <Button alignment="CENTER" mnemonicParsing="false"
+                                        style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;"
+                                        text="Re-Planifier"/>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets top="35.0"/>
+                    </padding>
+                </VBox>
+                <Label style="-fx-text-fill: #005B8F;" text="Taches">
+                    <font>
+                        <Font size="34.0"/>
+                    </font>
+                </Label>
+                <ScrollPane pannable="true" prefHeight="353.0" prefWidth="343.0">
+                    <content>
+                        <ListView fx:id="listTache" fixedCellSize="50.0" prefHeight="367.0" prefWidth="340.0"/>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </left>
+    <top>
+        <HBox prefHeight="100.0" prefWidth="200.0" spacing="500.0" style="-fx-background-color: #005B8F;"
+              BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="50.0" prefWidth="419.0">
+                    <children>
+                        <ImageView fitHeight="50.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/Group42.png"/>
+                            </image>
+                            <HBox.margin>
+                                <Insets/>
+                            </HBox.margin>
+                        </ImageView>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="149.0" spacing="60.0">
+                            <children>
+                                <Label text="Bonjour" textFill="WHITE">
+                                    <font>
+                                        <Font size="19.0"/>
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#logout" text="Deconnexion"/>
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+            </padding>
+        </HBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" prefHeight="700.0" prefWidth="686.0" spacing="34.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="88.0" prefWidth="624.0" spacing="27.0">
+                    <children>
+                        <Button alignment="CENTER" mnemonicParsing="false"
+                                style="-fx-text-fill: #005B8F; -fx-background-color: TRANSPARENT; -fx-border-color: #005B8F;"
+                                text="Unschedueled"/>
+                        <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
+                                style="-fx-border-color: #005B8F; -fx-text-fill: #005B8F; -fx-background-color: TRANSPARENT;"
+                                text="Bagdes"/>
+                    </children>
+                </HBox>
+                <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="357.0" prefWidth="433.0"
+                      spacing="10.0" style="-fx-background-color: #005B8F; -fx-border-radius: 50;">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="419.0" spacing="54.0">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#backOneMonth" text="&lt;"/>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                                    <children>
+                                        <Text fx:id="month" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="####">
+                                            <font>
+                                                <Font size="22.0"/>
+                                            </font>
+                                        </Text>
+                                        <Text fx:id="year" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="####">
+                                            <font>
+                                                <Font size="22.0"/>
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </HBox>
+                                <Button mnemonicParsing="false" onAction="#forwardOneMonth" text="&gt;"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="348.0" spacing="31.75">
+                            <children>
+                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Dim"
+                                      textAlignment="CENTER"/>
+                                <Text fill="WHITE" layoutX="213.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Lun" textAlignment="CENTER"/>
+                                <Text fill="WHITE" layoutX="222.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Mar" textAlignment="CENTER"/>
+                                <Text fill="WHITE" layoutX="232.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Mer" textAlignment="CENTER"/>
+                                <Text fill="WHITE" layoutX="241.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Jeu" textAlignment="CENTER"/>
+                                <Text fill="WHITE" layoutX="251.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Ven" textAlignment="CENTER"/>
+                                <Text fill="WHITE" layoutX="266.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Sam" textAlignment="CENTER"/>
+                            </children>
+                            <padding>
+                                <Insets right="9.0"/>
+                            </padding>
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <effect>
+                                <Reflection topOffset="-8.0" topOpacity="0.21"/>
+                            </effect>
+                        </HBox>
+                        <FlowPane fx:id="calendar" alignment="CENTER" hgap="10.0" maxHeight="-Infinity"
+                                  maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0"
+                                  prefWidth="359.0" vgap="5.0"/>
+                    </children>
+                    <VBox.margin>
+                        <Insets right="3.0"/>
+                    </VBox.margin>
+                </VBox>
+            </children>
+            <BorderPane.margin>
+                <Insets/>
+            </BorderPane.margin>
+            <padding>
+                <Insets left="16.0" right="17.0"/>
+            </padding>
+        </VBox>
+    </center>
 </BorderPane>

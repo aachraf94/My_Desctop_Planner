@@ -16,8 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Set;
 
 public class SeConnecterController {
 
@@ -59,7 +57,7 @@ public class SeConnecterController {
             connexionInvalid();
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
-            CalendarController calendarController =new CalendarController();
+            CalendarController calendarController = new CalendarController();
 
             //HashMap<Utilisateur, String> map = desktopPlanner.getUtilisateurs();
 
@@ -73,7 +71,7 @@ public class SeConnecterController {
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
-            }else {
+            } else {
                 System.out.println("User not found");
                 connexionInvalid();
             }
@@ -85,12 +83,12 @@ public class SeConnecterController {
         erreurText.setText("Pseudo ou mot de passe invalide!");
     }
 
-    void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
-    }
-
     public Utilisateur getUtilisateur() {
         return utilisateur;
+    }
+
+    void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 
 

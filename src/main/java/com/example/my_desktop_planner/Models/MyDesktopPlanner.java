@@ -1,19 +1,11 @@
 package com.example.my_desktop_planner.Models;
 
 import java.io.*;
-import java.util.*;
+import java.util.HashMap;
 
 public class MyDesktopPlanner {
     private static MyDesktopPlanner instance;
     private HashMap<Utilisateur, String> utilisateurs;
-
-    public HashMap<Utilisateur, String> getUtilisateurs() {
-        return utilisateurs;
-    }
-
-    public void setUtilisateurs(HashMap<Utilisateur, String> utilisateurs) {
-        this.utilisateurs = utilisateurs;
-    }
 
     private MyDesktopPlanner() {
         //on doit charger le fichier li fih les pseudo et les mdp et creer le hashMap
@@ -30,10 +22,18 @@ public class MyDesktopPlanner {
         return instance;
     }
 
+    public HashMap<Utilisateur, String> getUtilisateurs() {
+        return utilisateurs;
+    }
+
+    public void setUtilisateurs(HashMap<Utilisateur, String> utilisateurs) {
+        this.utilisateurs = utilisateurs;
+    }
+
 
     //on va faire Method registre
 
-    public void addUser(Utilisateur user, String mdp) {// verifié si l'utilisateur existe ou non
+    public boolean addUser(Utilisateur user, String mdp) {// verifié si l'utilisateur existe ou non
         if (!utilisateurs.containsKey(user)) {
             utilisateurs.put(user, mdp);// ajouter le couple utilisateur et mdp
             System.out.println("User '" + user.getPseudo() + "' added successfully.");
@@ -41,6 +41,7 @@ public class MyDesktopPlanner {
         } else {
             System.out.println("User '" + user.getPseudo() + "' already exists.");
         }
+        return !utilisateurs.containsKey(user);
     }
 
     public void removeUser(Utilisateur user) {// verifié si l'utilisateur existe ou non

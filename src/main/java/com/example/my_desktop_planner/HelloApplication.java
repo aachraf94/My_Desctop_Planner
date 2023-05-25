@@ -3,7 +3,6 @@ package com.example.my_desktop_planner;
 import com.example.my_desktop_planner.Models.MyDesktopPlanner;
 import com.example.my_desktop_planner.Models.Utilisateur;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -11,8 +10,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.*;
-import java.util.Map;
+import java.io.IOException;
 
 public class HelloApplication extends Application {
 
@@ -20,6 +18,11 @@ public class HelloApplication extends Application {
     public static Utilisateur utilisateur;
     private static Stage stage;
 
+    public static void main(String[] args) {
+        MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.getInstance();
+        launch();
+
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -55,13 +58,5 @@ public class HelloApplication extends Application {
             stage.close();
         }
     }
-
-
-
-        public static void main (String[]args){
-            MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.getInstance();
-            launch();
-
-        }
-    }
+}
 

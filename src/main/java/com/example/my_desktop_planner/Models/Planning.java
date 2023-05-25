@@ -1,19 +1,52 @@
 package com.example.my_desktop_planner.Models;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
 
-public class Planning {
+public class Planning implements Serializable {
+    public Duration dureeMinCreneau;
     //    private Calendar calendirer;
     private String nom;
     private LocalDate dateDebut;
     private LocalDate dateFin;
-    public Duration dureeMinCreneau;
     private ArrayList<CreneauLibre> creneauLibres;
     private ArrayList<CreneauOccupe> creneauOccupes;
     private ArrayList<Tache> tachePlannifies;
     private ArrayList<Tache> tacheUnscheduleds;
+
+    public Planning(String nom, LocalDate dateDebut, LocalDate dateFin, Duration dureeMinCreneau, ArrayList<CreneauLibre> creneauLibres) {
+        this.nom = nom;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.dureeMinCreneau = dureeMinCreneau;
+        if (creneauLibres != null) {
+            this.creneauLibres = new ArrayList<CreneauLibre>(creneauLibres);
+        } else {
+            this.creneauLibres = new ArrayList<CreneauLibre>();
+        }
+        this.creneauOccupes = new ArrayList<CreneauOccupe>();
+        this.tachePlannifies = new ArrayList<Tache>();
+        this.tacheUnscheduleds = new ArrayList<Tache>();
+    }
+
+    public Planning(Planning planning) {
+        this.nom = new String(planning.getNom());
+        this.dateDebut = planning.getDateDebut();
+        this.dateFin = planning.getDateFin();
+        this.dureeMinCreneau = planning.getDureeMinCreneau();
+        if (planning.getCreneauLibres() != null) {
+            this.creneauLibres = new ArrayList<CreneauLibre>(planning.getCreneauLibres());
+        } else {
+            this.creneauLibres = new ArrayList<CreneauLibre>();
+        }
+        this.creneauLibres = new ArrayList<CreneauLibre>(planning.getCreneauLibres());
+        this.creneauOccupes = new ArrayList<CreneauOccupe>();
+        this.tachePlannifies = new ArrayList<Tache>();
+        this.tacheUnscheduleds = new ArrayList<Tache>();
+
+    }
 
     public ArrayList<Tache> getTachePlannifies() {
         return tachePlannifies;
@@ -30,58 +63,24 @@ public class Planning {
     public void setTacheUnscheduleds(ArrayList<Tache> tacheUnscheduleds) {
         this.tacheUnscheduleds = tacheUnscheduleds;
     }
+
     public void addTachePlannifie(Tache tachePlannifie) {
         this.tachePlannifies.add(tachePlannifie);
     }
+
     public void addTacheUnscheduled(Tache tacheUnscheduled) {
         this.tacheUnscheduleds.add(tacheUnscheduled);
     }
+
     public void removeTachePlannifie(Tache tachePlannifie) {
         this.tachePlannifies.remove(tachePlannifie);
     }
+
     public void removeTacheUnscheduled(Tache tacheUnscheduled) {
         this.tacheUnscheduleds.remove(tacheUnscheduled);
     }
 
-    public Planning(String nom, LocalDate dateDebut, LocalDate dateFin, Duration dureeMinCreneau, ArrayList<CreneauLibre> creneauLibres) {
-        this.nom = nom;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.dureeMinCreneau = dureeMinCreneau;
-        if (creneauLibres != null)
-        {
-            this.creneauLibres = new ArrayList<CreneauLibre>(creneauLibres);
-        }
-        else {
-            this.creneauLibres = new ArrayList<CreneauLibre>();
-        }
-        this.creneauOccupes = new ArrayList<CreneauOccupe>();
-        this.tachePlannifies = new ArrayList<Tache>();
-        this.tacheUnscheduleds = new ArrayList<Tache>();
-    }
-
-    public Planning(Planning planning)
-    {
-        this.nom = new String(planning.getNom());
-        this.dateDebut = planning.getDateDebut();
-        this.dateFin = planning.getDateFin();
-        this.dureeMinCreneau = planning.getDureeMinCreneau();
-        if (planning.getCreneauLibres() != null)
-        {
-            this.creneauLibres = new ArrayList<CreneauLibre>(planning.getCreneauLibres());
-        }
-        else {
-            this.creneauLibres = new ArrayList<CreneauLibre>();
-        }
-        this.creneauLibres = new ArrayList<CreneauLibre>(planning.getCreneauLibres());
-        this.creneauOccupes = new ArrayList<CreneauOccupe>();
-        this.tachePlannifies = new ArrayList<Tache>();
-        this.tacheUnscheduleds = new ArrayList<Tache>();
-
-    }
-
-    public void ajouterCreneauLibre(CreneauLibre creneauLibre)
-    {
+    public void ajouterCreneauLibre(CreneauLibre creneauLibre) {
         this.creneauLibres.add(creneauLibre);
     }
 

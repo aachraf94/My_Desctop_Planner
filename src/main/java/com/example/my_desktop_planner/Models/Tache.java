@@ -1,8 +1,8 @@
 package com.example.my_desktop_planner.Models;
+
 import javafx.scene.paint.Color;
 
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,10 +11,10 @@ abstract public class Tache implements Serializable {
     private String nom;
     private Duration dure;
     private Priorite priorite;
-    private LocalDate dateLim ;
+    private LocalDate dateLim;
     private LocalDateTime dateDebut;
     private LocalDateTime dateFin;
-    private String categorie;
+    private Categorie categorie;
     private Color color;
     private boolean unscheduled;
     private Etat etat;
@@ -22,14 +22,12 @@ abstract public class Tache implements Serializable {
     private boolean decomposable;
 
 
-
     //plannifier manuelle ou auto
 
     //re-planifier (string dureeSupp, String nvDeadline)          les deux
 
 
-    public Tache(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDateTime dateDebut, LocalDateTime dateFin, String categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable)
-    { // a revoir les arguments de ce constructeur
+    public Tache(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDateTime dateDebut, LocalDateTime dateFin, Categorie categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable) { // a revoir les arguments de ce constructeur
         this.nom = nom;
         this.dure = dure;
         this.priorite = priorite;
@@ -92,11 +90,11 @@ abstract public class Tache implements Serializable {
         this.dateFin = dateFin;
     }
 
-    public String getCategorie() {
+    public Categorie getCategorie() {
         return categorie;
     }
 
-    public void setCategorie(String categorie) {
+    public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
 

@@ -1,6 +1,5 @@
 package com.example.my_desktop_planner;
 
-import com.example.my_desktop_planner.Models.Creneau;
 import com.example.my_desktop_planner.Models.CreneauLibre;
 import com.example.my_desktop_planner.Models.Planning;
 import javafx.event.ActionEvent;
@@ -9,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,7 +18,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.EventObject;
 import java.util.ResourceBundle;
 
 public class NvPlanningController implements Initializable {
@@ -62,21 +59,17 @@ public class NvPlanningController implements Initializable {
     @FXML
     private void ajouterCreneau() {
         CreneauLibre creneauLibre = null;
-        if (validateInputAjouterCreneau())
-        {
+        if (validateInputAjouterCreneau()) {
 
-            if (!tousLesJours.isSelected())
-            {
+            if (!tousLesJours.isSelected()) {
                 LocalDate selectedDate = creneauDatePicker.getValue();
                 LocalTime timeDebut = LocalTime.parse(creneauHeureDebut.getText());
                 LocalTime timeFin = LocalTime.parse(creneauHeureFin.getText());
 
-                creneauLibre = new CreneauLibre(LocalDateTime.of(selectedDate, timeDebut),LocalDateTime.of(selectedDate, timeFin));
+                creneauLibre = new CreneauLibre(LocalDateTime.of(selectedDate, timeDebut), LocalDateTime.of(selectedDate, timeFin));
                 creneauLibres.add(creneauLibre);
                 CalendarController.utilisateur_courant.ajouterCreneauLibre(creneauLibre);
-            }
-            else
-            {
+            } else {
                 LocalDate date1 = dateDebut.getValue();
                 LocalDate date2 = dateFin.getValue();
 
@@ -84,17 +77,14 @@ public class NvPlanningController implements Initializable {
                 LocalTime timeFin = LocalTime.parse(creneauHeureFin.getText());
 
                 for (LocalDate date = date1; !date.isAfter(date2); date = date.plusDays(1)) {
-                    creneauLibre = new CreneauLibre(LocalDateTime.of(date, timeDebut),LocalDateTime.of(date, timeFin));
+                    creneauLibre = new CreneauLibre(LocalDateTime.of(date, timeDebut), LocalDateTime.of(date, timeFin));
                     creneauLibres.add(creneauLibre);
                     CalendarController.utilisateur_courant.ajouterCreneauLibre(creneauLibre);
                 }
             }
-            try
-            {
+            try {
                 LibreTest.setText(creneauLibre.toString());
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 // Gérer l'exception
                 System.err.println("Une erreur s'est produite : " + e.getMessage());
             }
@@ -193,8 +183,6 @@ public class NvPlanningController implements Initializable {
             return true;
         }
     }
-
-
 
 
     private Duration parseDuree(String dureeString) {

@@ -7,27 +7,22 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
-public class TacheDecompo implements Decomposable<TacheDecompo>{
+public class TacheDecompo implements Decomposable<TacheDecompo> {
 
 
-    private int nbSousTache ;
+    private int nbSousTache;
     private LinkedList<TacheSimple> sousTache;
-
-    @Override
-    public TacheDecompo decompose(TacheDecompo obj) {
-        return null;// a revoir
-    }
 
     //constructeur
     //add tache
     //
-    public TacheDecompo (String nom, Duration dure, Priorite priorite, LocalDate dateLim, java.time.LocalDateTime dateDebut, LocalDateTime dateFin, String categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable) {
+    public TacheDecompo(String nom, Duration dure, Priorite priorite, LocalDate dateLim, java.time.LocalDateTime dateDebut, LocalDateTime dateFin, String categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable) {
         //super(nom , dure , priorite , dateLim , dateDebut , dateFin , categorie , color , unscheduled , etat , bloque , decomposable);
         this.nbSousTache = nbSousTache;
         this.sousTache = sousTache;
     }
-    public TacheDecompo(TacheDecompo tacheDecompo)
-    {
+
+    public TacheDecompo(TacheDecompo tacheDecompo) {
         this.nbSousTache = tacheDecompo.getNbSousTache();
         this.sousTache.addAll(tacheDecompo.getSousTache());
 
@@ -35,6 +30,10 @@ public class TacheDecompo implements Decomposable<TacheDecompo>{
 //        destinationList.addAll(sourceList);
     }
 
+    @Override
+    public TacheDecompo decompose(TacheDecompo obj) {
+        return null;// a revoir
+    }
 
     public int getNbSousTache() {
         return nbSousTache;

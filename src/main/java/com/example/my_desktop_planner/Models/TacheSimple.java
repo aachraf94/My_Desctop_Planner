@@ -1,7 +1,6 @@
 package com.example.my_desktop_planner.Models;
 
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Color;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -22,6 +21,7 @@ public class TacheSimple extends Tache {
         this.periodicite = periodicite;
 
     }
+
     public TacheSimple(TacheSimple t) {
         super(
                 t.getNom(),
@@ -40,6 +40,7 @@ public class TacheSimple extends Tache {
         this.periodicite = t.getPeriodicite();
 
     }
+
     public static TacheSimple generateRandomTask() {
         Random random = new Random();
 
@@ -60,6 +61,7 @@ public class TacheSimple extends Tache {
 
         return new TacheSimple(nom, duree, priorite, dateLimite, dateDebut, dateFin, categorie, color, unscheduled, etat, bloque, decomposable, periodicite, etat1);
     }
+
     public static Color generateRandomColor() {
         Random random = new Random();
         int red = random.nextInt(256); // Random value for red component (0-255)
@@ -68,16 +70,6 @@ public class TacheSimple extends Tache {
 
         return Color.rgb(red, green, blue);
     }
-
-
-
-
-
-
-
-
-
-
 
 
     /************* Getters & Setters ****************/

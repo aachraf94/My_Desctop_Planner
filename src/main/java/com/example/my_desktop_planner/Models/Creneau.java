@@ -2,9 +2,8 @@ package com.example.my_desktop_planner.Models;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
-public class Creneau implements Decomposable<Creneau>{
+public class Creneau implements Decomposable<Creneau> {
 
     private LocalDateTime hDebut;
     private LocalDateTime hFin;
@@ -17,7 +16,7 @@ public class Creneau implements Decomposable<Creneau>{
     public Creneau(LocalDateTime hDebut, LocalDateTime hFin) {
         this.hDebut = hDebut;
         this.hFin = hFin;
-        this.duree = Duration.between(hDebut,hFin);
+        this.duree = Duration.between(hDebut, hFin);
     }
 
 
