@@ -42,7 +42,9 @@ public class Planning {
     public void removeTacheUnscheduled(Tache tacheUnscheduled) {
         this.tacheUnscheduleds.remove(tacheUnscheduled);
     }
-/*** a completer ****/
+
+
+    /*** a completer ****/
 //    public void plannifierTacheManuellemt (Creneau creneau,TacheSimple tacheSimple)
 //    {
 //        if (this.creneauLibres.contains(creneau))
@@ -59,6 +61,13 @@ public class Planning {
 
     //plannifier      -->  décomposer le créneau libre selon la durée de la tache
     // replanifier  -->  décomposer le créneau libre selon la durée de la tache
+
+
+
+    public Planning()
+    {
+
+    }
 
 
 }

@@ -131,7 +131,7 @@ public class CalendarController implements Initializable {
 
                         stackPane.setOnMouseClicked(event -> {handleDayClick(stackPane);
                             selected_day = (ZonedDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate,0,0,0,0,dateFocus.getZone())).toLocalDate();
-
+                            updateDayTasks(selected_day);
                         });
 
 
@@ -214,7 +214,12 @@ public class CalendarController implements Initializable {
     }
     private void updateDayTasks(LocalDate date) {
         listTache.getItems().clear();
-        ArrayList<Tache> tasks = utilisateur_courant.getTasks(date);
+       // ArrayList<Tache> tasks = utilisateur_courant.getTasks(date);
+        ArrayList<Tache> tasks = new ArrayList<Tache>();
+        tasks.add(TacheSimple.generateRandomTask());
+        tasks.add(TacheSimple.generateRandomTask());
+        tasks.add(TacheSimple.generateRandomTask());
+        utilisateur_courant.planning.setTachePlannifies(tasks);
         listTache.getItems().clear();
         if (tasks != null) {
             for (Tache task : tasks) {
@@ -255,5 +260,12 @@ public void logout (ActionEvent event){
 
 }
 
+    public void displayname() {
+        System.out.println(utilisateur_courant.getPseudo());
+    }
+
+    public void setId(String pseudo) {
+        utilisateur_courant.setPseudo(pseudo);
+    }
 }
 

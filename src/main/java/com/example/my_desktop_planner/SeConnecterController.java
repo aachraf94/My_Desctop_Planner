@@ -59,36 +59,28 @@ public class SeConnecterController {
             connexionInvalid();
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
-            CalendarController calendarController = new CalendarController();
+            CalendarController calendarController =new CalendarController();
 
-            HashMap<Utilisateur, String> map = desktopPlanner.getUtilisateurs();
+            //HashMap<Utilisateur, String> map = desktopPlanner.getUtilisateurs();
 
-            Set<Utilisateur> utilisateurSet = map.keySet();
-            for (Utilisateur user : utilisateurSet) {
-                String pseudo1 = pseudo.getText();
-                String mdp = motDePasse.getText();                                                /// la partie hadi makhroba
-                if (user.equals(new Utilisateur(pseudo1, mdp)) && user.getMdp().equals(mdp)) {
-                    user.afficher();
-                    calendarController.setUtilisateur(user);
-                    //calendarController.setText(pseudo1);
-                    break;
-                } else {
-                    connexionInvalid();
-
-                }
+            Utilisateur user = desktopPlanner.findUser(pseudo.getText(), motDePasse.getText());
+            if (user != null) {
+                user.afficher();
+                calendarController.setUtilisateur(user);
+                //calendarController.setId(user.getPseudo());
+                //calendarController.displayname();
+                root = fxmlLoader.load();
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+            }else {
+                System.out.println("User not found");
+                connexionInvalid();
             }
-
-
-            root = fxmlLoader.load();
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-
-
         }
     }
 
-
+    @FXML
     public void connexionInvalid() {
         erreurText.setText("Pseudo ou mot de passe invalide!");
     }

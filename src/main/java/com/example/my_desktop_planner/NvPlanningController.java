@@ -17,16 +17,14 @@ public class NvPlanningController implements Initializable {
 
     @FXML
     private TextField nomPlanning;
-
-
     @FXML
     private ChoiceBox<String> myChoiceBox; // Add @FXML annotation here
-
     @FXML
     private DatePicker dateDebut;
 
     @FXML
     private DatePicker dateFin;
+
 
 
     private String[] choices = {"15MIN", "30MIN", "1H", "1H 30MIN", "2H"};
