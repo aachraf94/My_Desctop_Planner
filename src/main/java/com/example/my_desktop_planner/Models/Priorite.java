@@ -1,6 +1,8 @@
 package com.example.my_desktop_planner.Models;
 
-public enum Priorite {
+import java.io.Serializable;
+
+public enum Priorite implements Serializable {
     LOW,
     MEDIUM,
     HIGHT

@@ -1,9 +1,10 @@
 package com.example.my_desktop_planner.Models;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class Creneau implements Decomposable<Creneau> {
+public class Creneau implements Decomposable<Creneau>, Serializable {
 
     protected LocalDateTime hDebut;
     protected LocalDateTime hFin;

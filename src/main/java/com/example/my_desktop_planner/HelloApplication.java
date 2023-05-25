@@ -19,9 +19,7 @@ public class HelloApplication extends Application {
     private static Stage stage;
 
     public static void main(String[] args) {
-        MyDesktopPlanner myDesktopPlanner = MyDesktopPlanner.getInstance();
         launch();
-
     }
 
     @Override

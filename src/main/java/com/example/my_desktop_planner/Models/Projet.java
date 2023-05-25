@@ -1,10 +1,11 @@
 package com.example.my_desktop_planner.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Projet {
+public class Projet implements Serializable {
     private String nom;
     private String description;
     private ArrayList<Tache> taches;//ou linkedlist

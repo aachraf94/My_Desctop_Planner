@@ -96,16 +96,31 @@ public class Utilisateur implements Serializable {
     public void ajouterCreneauLibre(CreneauLibre creneauLibre) {
         if (this.planning == null) {
             this.planning = new Planning();
-        }else {
+        } else {
             this.planning.ajouterCreneauLibre(creneauLibre);
         }
 
     }
 
+    public void planifierAuto(ArrayList<Tache> tachesUnschedueled) {
+        ArrayList<Tache> tachesHigh = new ArrayList<Tache>();
+        ArrayList<Tache> tachesMedium = new ArrayList<Tache>();
+        ArrayList<Tache> tachesLow = new ArrayList<Tache>();
+
+        for (Tache tache : tachesUnschedueled) {
+            if (tache.getPriorite() == Priorite.HIGHT) {
+                tachesHigh.add(tache);
+            } else if (tache.getPriorite() == Priorite.MEDIUM) {
+                tachesMedium.add(tache);
+            } else if (tache.getPriorite() == Priorite.LOW) {
+                tachesLow.add(tache);
+            }
+        }
+//        tachesHigh.sort();
+    }
+
 
     /********* Setters et Getters ********************/
-
-
 
 
 }

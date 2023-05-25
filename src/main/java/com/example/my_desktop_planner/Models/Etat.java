@@ -1,6 +1,8 @@
 package com.example.my_desktop_planner.Models;
 
-public enum Etat {
+import java.io.Serializable;
+
+public enum Etat implements Serializable {
 
     NOT_REALIZED,
     COMPLETED,

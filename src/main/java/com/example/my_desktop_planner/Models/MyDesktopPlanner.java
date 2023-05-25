@@ -3,7 +3,7 @@ package com.example.my_desktop_planner.Models;
 import java.io.*;
 import java.util.HashMap;
 
-public class MyDesktopPlanner {
+public class MyDesktopPlanner implements Serializable {
     private static MyDesktopPlanner instance;
     private HashMap<Utilisateur, String> utilisateurs;
 

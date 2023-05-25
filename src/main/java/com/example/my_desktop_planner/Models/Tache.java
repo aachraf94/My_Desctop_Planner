@@ -7,7 +7,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-abstract public class Tache implements Serializable {
+abstract public class Tache implements Serializable, Comparable<Tache> {
     private String nom;
     private Duration dure;
     private Priorite priorite;
@@ -147,5 +147,11 @@ abstract public class Tache implements Serializable {
                 ", categorie=" + categorie +
                 ", etat=" + etat +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Tache autreTache) {
+        return this.dateDebut.compareTo(autreTache.dateDebut);
+
     }
 }

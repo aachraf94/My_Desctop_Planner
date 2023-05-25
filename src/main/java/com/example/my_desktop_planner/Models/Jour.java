@@ -1,6 +1,8 @@
 package com.example.my_desktop_planner.Models;
 
-public class Jour {
+import java.io.Serializable;
+
+public class Jour implements Serializable {
     // class a revoir
 
     private int j;

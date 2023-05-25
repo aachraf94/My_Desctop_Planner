@@ -1,8 +1,9 @@
 package com.example.my_desktop_planner.Models;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class CreneauOccupe extends Creneau {
+public class CreneauOccupe extends Creneau implements Serializable {
 
     private TacheSimple tacheSimple;
 

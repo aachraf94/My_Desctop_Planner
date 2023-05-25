@@ -2,12 +2,13 @@ package com.example.my_desktop_planner.Models;
 
 import javafx.scene.paint.Color;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
-public class TacheDecompo implements Decomposable<TacheDecompo> {
+public class TacheDecompo implements Decomposable<TacheDecompo>, Serializable {
 
 
     private int nbSousTache;
