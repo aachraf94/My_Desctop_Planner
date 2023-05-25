@@ -94,6 +94,7 @@ public class NvPlanningController implements Initializable {
 
     @FXML
     private void ajouterPlanning(ActionEvent event) {
+        System.out.println("\n\t"+CalendarController.utilisateur_courant);
         if (validateInputAjouterPlanning()) {
             String nom = nomPlanning.getText();
             LocalDate debut = dateDebut.getValue();

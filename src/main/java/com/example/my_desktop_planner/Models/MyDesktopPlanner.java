@@ -5,13 +5,30 @@ import java.util.HashMap;
 
 public class MyDesktopPlanner {
     private static MyDesktopPlanner instance;
-    private HashMap<Utilisateur, String> utilisateurs;
+    public static HashMap<Utilisateur, String> utilisateurs;
 
-    private MyDesktopPlanner() {
-        //on doit charger le fichier li fih les pseudo et les mdp et creer le hashMap
-        this.utilisateurs = new HashMap<Utilisateur, String>();
-        //parcourir le fichier
-        //entregistrer les info de utilisateur + mdp
+    public MyDesktopPlanner() {
+        String filename = "Users.dat"; // Replace with your file name
+        HashMap<Utilisateur, String> hashMap = null;
+
+        try {
+            FileInputStream fileInputStream = new FileInputStream(filename);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            // Read the object from the file and cast it to a HashMap
+            hashMap = (HashMap<Utilisateur, String>) objectInputStream.readObject();
+
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("Error loading data from file.");
+        }
+        // Use the loaded HashMap
+        if (hashMap != null) {
+            utilisateurs = new HashMap<Utilisateur, String>(hashMap);
+            System.out.println("Loaded data from file:");
+        }
     }
 
     public static MyDesktopPlanner getInstance() { // pour assurer qu'il ya une seul instance de cette class
@@ -64,13 +81,15 @@ public class MyDesktopPlanner {
     }
 
     @SuppressWarnings("unchecked")
-    public void loadUsersFromFile() {
+    public HashMap<Utilisateur, String> loadUsersFromFile() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("Users.dat"))) {//users.dat c'est le fichier qui contient les utilisateurs , il sera ecrasé tout fois qu'on ajoute ou on supprime un utilisateur
             utilisateurs = (HashMap<Utilisateur, String>) in.readObject();
             System.out.println("Loaded successfully");//lire le fichier et le mettre dans le hashMap puisaue la class, est singleton , on peut le faire directement
+            return utilisateurs;
         } catch (IOException | ClassNotFoundException e) {
             // If the file doesn't exist or there's an error reading it, ignore and start with an empty HashMap
         }
+        return null;
     }
 
     public Utilisateur findUser(String pseudo, String mdp) {

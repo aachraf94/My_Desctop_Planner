@@ -16,7 +16,7 @@ public class TacheSimple extends Tache {
 
 
     /*********************** constructor **************************/
-    public TacheSimple(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDateTime dateDebut, LocalDateTime dateFin, String categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable, int periodicite, Etat etat1) {
+    public TacheSimple(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDateTime dateDebut, LocalDateTime dateFin, Categorie categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable, int periodicite, Etat etat1) {
         super(nom, dure, priorite, dateLim, dateDebut, dateFin, categorie, color, unscheduled, etat, bloque, decomposable);
         this.periodicite = periodicite;
 
@@ -50,7 +50,7 @@ public class TacheSimple extends Tache {
         LocalDate dateLimite = LocalDate.now().plusDays(random.nextInt(30)); // Random date within the next 30 days
         LocalDateTime dateDebut = LocalDateTime.now().plusHours(random.nextInt(24)); // Random start date within the next 24 hours
         LocalDateTime dateFin = dateDebut.plusHours(random.nextInt(24)); // Random end date after the start date
-        String categorie = "Category " + random.nextInt(5); // Random category
+        Categorie categorie = Categorie.WORK; // Random category
         Color color = generateRandomColor(); // Random color
         boolean unscheduled = random.nextBoolean(); // Random unscheduled flag
         Etat etat = Etat.values()[random.nextInt(Etat.values().length)]; // Random state
