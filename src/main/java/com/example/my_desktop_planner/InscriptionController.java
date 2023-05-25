@@ -69,7 +69,8 @@ public class InscriptionController {
             utilisateur.afficher();
             desktopPlanner.addUser(utilisateur, motDePasse.toString());
             desktopPlanner.saveUsersToFile();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SeConnecter.fxml"));
+            CalendarController.utilisateur_courant = utilisateur;
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NvPlanning.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = null;
             try

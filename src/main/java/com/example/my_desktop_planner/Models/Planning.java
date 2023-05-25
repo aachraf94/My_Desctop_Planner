@@ -66,6 +66,13 @@ public class Planning {
         this.dateDebut = planning.getDateDebut();
         this.dateFin = planning.getDateFin();
         this.dureeMinCreneau = planning.getDureeMinCreneau();
+        if (planning.getCreneauLibres() != null)
+        {
+            this.creneauLibres = new ArrayList<CreneauLibre>(planning.getCreneauLibres());
+        }
+        else {
+            this.creneauLibres = new ArrayList<CreneauLibre>();
+        }
         this.creneauLibres = new ArrayList<CreneauLibre>(planning.getCreneauLibres());
         this.creneauOccupes = new ArrayList<CreneauOccupe>();
         this.tachePlannifies = new ArrayList<Tache>();

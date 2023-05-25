@@ -58,7 +58,7 @@ public class CalendarController implements Initializable {
     private Stage stage ;
 
 
-    public Utilisateur utilisateur_courant ;
+    public static Utilisateur utilisateur_courant ;
     private String motDePasse ;
 
 
