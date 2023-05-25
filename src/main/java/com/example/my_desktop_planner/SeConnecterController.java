@@ -65,6 +65,7 @@ public class SeConnecterController {
             if (user != null) {
                 user.afficher();
                 calendarController.setUtilisateur(user);
+             //   calendarController.setname(user.getPseudo());
                 //calendarController.setId(user.getPseudo());
                 //calendarController.displayname();
                 root = fxmlLoader.load();

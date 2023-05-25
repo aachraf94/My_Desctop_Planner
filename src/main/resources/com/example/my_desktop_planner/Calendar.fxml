@@ -69,13 +69,18 @@
                                 <Insets />
                             </HBox.margin>
                         </ImageView>
-                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="149.0" spacing="60.0">
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="255.0" spacing="60.0">
                             <children>
                                 <Label text="Bonjour" textFill="WHITE">
                                     <font>
                                         <Font size="19.0" />
                                     </font>
                                 </Label>
+                        <Label fx:id="name" layoutX="52.0" layoutY="21.0" text="..." textFill="WHITE">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
                             </children>
                         </HBox>
                     </children>

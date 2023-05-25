@@ -56,6 +56,8 @@ public class CalendarController implements Initializable {
     private Button LogOutButton ;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private Label name;
     private Stage stage;
     private String motDePasse;
 
@@ -213,14 +215,9 @@ public class CalendarController implements Initializable {
     private void updateDayTasks(LocalDate date) {
         listTache.getItems().clear();
         ArrayList<Tache> tasks = new ArrayList<Tache>();
-        Tache tache1 = TacheSimple.generateRandomTask();
-        Tache tache2 = TacheSimple.generateRandomTask();
-        Tache tache3 = TacheSimple.generateRandomTask();
-        utilisateur_courant.getTasks(date);
+        tasks = utilisateur_courant.getTasks(date);
         listTache.getItems().clear();
-        listTache.getItems().add(TacheSimple.generateRandomTask());
-        listTache.getItems().add(TacheSimple.generateRandomTask());
-        listTache.getItems().add(TacheSimple.generateRandomTask());
+        listTache.getItems().addAll(tasks);
 
     }
     void displayname(){
@@ -283,6 +280,9 @@ public class CalendarController implements Initializable {
                 ", stage=" + stage +
                 ", motDePasse='" + motDePasse + '\'' +
                 '}';
+    }
+    void setname (String name){
+        this.name.setText(name);
     }
 }
 
