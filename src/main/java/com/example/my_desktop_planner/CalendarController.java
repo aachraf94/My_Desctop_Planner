@@ -57,7 +57,7 @@ public class CalendarController implements Initializable {
     private Stage stage ;
 
 
-    public static Utilisateur utilisateur_courant ;
+    public Utilisateur utilisateur_courant ;
     private String motDePasse ;
 
 
@@ -137,7 +137,7 @@ public class CalendarController implements Initializable {
 
                     }
                     if(today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == currentDate){
-                        rectangle.setFill(Color.web("333333"));
+                        rectangle.setFill(Color.web("777777"));
                         Text date = (Text) stackPane.getChildren().get(1);
                         date.setFill(Color.web("FFFFFF"));
                     }
@@ -216,24 +216,17 @@ public class CalendarController implements Initializable {
         listTache.getItems().clear();
        // ArrayList<Tache> tasks = utilisateur_courant.getTasks(date);
         ArrayList<Tache> tasks = new ArrayList<Tache>();
-        tasks.add(TacheSimple.generateRandomTask());
-        tasks.add(TacheSimple.generateRandomTask());
-        tasks.add(TacheSimple.generateRandomTask());
-        utilisateur_courant.planning.setTachePlannifies(tasks);
+        Tache tache1 = TacheSimple.generateRandomTask();
+        Tache tache2 = TacheSimple.generateRandomTask();
+        Tache tache3 = TacheSimple.generateRandomTask();
+        utilisateur_courant.getTasks(date);
         listTache.getItems().clear();
-        if (tasks != null) {
-            for (Tache task : tasks) {
-                listTache.getItems().add(task);
-            }
-    }else {
-        System.out.println("Task_list_empty");}
-
-//        listTache.getItems().add(TacheSimple.generateRandomTask());
-//        listTache.getItems().add(TacheSimple.generateRandomTask());
-//        listTache.getItems().add(TacheSimple.generateRandomTask());
+        listTache.getItems().add(TacheSimple.generateRandomTask());
+        listTache.getItems().add(TacheSimple.generateRandomTask());
+        listTache.getItems().add(TacheSimple.generateRandomTask());
 
     }
-    void Afficher(){
+    void displayname(){
         System.out.println(utilisateur_courant);
     }
 
@@ -260,12 +253,5 @@ public void logout (ActionEvent event){
 
 }
 
-    public void displayname() {
-        System.out.println(utilisateur_courant.getPseudo());
-    }
-
-    public void setId(String pseudo) {
-        utilisateur_courant.setPseudo(pseudo);
-    }
 }
 

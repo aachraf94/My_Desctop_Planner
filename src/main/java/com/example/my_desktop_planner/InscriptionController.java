@@ -84,32 +84,6 @@ public class InscriptionController {
 
         }
     }
-//@FXML
-//private void sendData(MouseEvent event) {
-//    // Step 1
-//    Utilisateur u = new Utilisateur(pseudo.getText(),motDePasse.getText());
-//    Node node = (Node) event.getSource();
-//    Stage stage = (Stage) node.getScene().getWindow();
-//    stage.close();
-//    try {
-//        // Step 2
-//        FXMLLoader loader = FXMLLoader.load(getClass().getClassLoader().getResource("SeConnecter.fxml"));
-//        // Step 3
-//        SeConnecterController controller = new SeConnecterController();
-//        controller.setUtilisateur(u);
-//        // Step 4
-//        loader.setController(controller);
-//        // Step 5
-//        Parent root = loader.load();
-//        Scene scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-//    } catch (IOException e) {
-//        System.err.println(String.format("Error: %s", e.getMessage()));
-//    }
-//}
-
-
 
     @FXML
     void inscriptionInvalide()

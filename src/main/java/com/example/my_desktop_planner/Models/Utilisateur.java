@@ -60,15 +60,15 @@ public class Utilisateur implements Serializable {
         //System.out.println("taches : "+taches);
     }
     public ArrayList<Tache> getTasks(LocalDate date)
-    {
+    {   ArrayList<Tache> tasks = new ArrayList<Tache>();
         for (Tache tache : planning.getTachePlannifies()) {
             if (date.getDayOfYear() == tache.getDateDebut().getDayOfYear() && date.getYear() == tache.getDateDebut().getYear() && date.getMonth() ==tache.getDateDebut().getMonth())
             {
-                return planning.getTachePlannifies();
+               tasks.add(tache);
             }
 
         }
-        return null;
+        return tasks ;
     }
 
 }
