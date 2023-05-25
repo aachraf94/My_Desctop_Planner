@@ -2,6 +2,7 @@ package com.example.my_desktop_planner;
 
 import com.example.my_desktop_planner.Models.CreneauLibre;
 import com.example.my_desktop_planner.Models.Planning;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +46,7 @@ public class NvPlanningController implements Initializable {
     @FXML
     private Label ErreurLabel;
     @FXML
-    private ListView<CreneauLibre> creneauLibreListView;
+    private ListView<CreneauLibre> creneauLibreListView= new ListView<CreneauLibre>();
 
 
     private String[] dureeMin = {"15MIN", "30MIN", "1H", "1H 30MIN", "2H"};
@@ -83,6 +84,7 @@ public class NvPlanningController implements Initializable {
                     creneauLibre = new CreneauLibre(LocalDateTime.of(date, timeDebut), LocalDateTime.of(date, timeFin));
                     creneauLibres.add(creneauLibre);
                     CalendarController.utilisateur_courant.ajouterCreneauLibre(creneauLibre);
+                    creneauLibreListView.getItems().add(creneauLibre);
                 }
             }
 
@@ -200,5 +202,6 @@ public class NvPlanningController implements Initializable {
                 return Duration.ZERO; // or handle invalid input as needed
         }
     }
+
 
 }

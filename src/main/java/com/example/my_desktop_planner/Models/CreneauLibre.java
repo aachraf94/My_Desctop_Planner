@@ -11,6 +11,10 @@ public class CreneauLibre extends Creneau {
 
     @Override
     public String toString() {
-        return super.toString();
+        return ("Creneau{" +
+            "\nhDebut=" + hDebut +
+                    "\n, hFin=" + hFin +
+                    "\n, duree=" + duree +
+                    '}');
     }
 }
