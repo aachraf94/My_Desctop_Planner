@@ -59,32 +59,50 @@ public class InscriptionController {
     }
     @FXML
     void inscriptionButton(ActionEvent event) {
-        if (desktopPlanner.getUtilisateurs().containsValue(motDePasse.getText())) {
-            inscriptionInvalide();
-        } else {
+//        if (desktopPlanner.getUtilisateurs().containsValue(motDePasse.getText())) {
+//            inscriptionInvalide();
+//        } else {
 
             desktopPlanner.loadUsersFromFile();
             Utilisateur utilisateur = new Utilisateur(pseudo.getText(), motDePasse.getText());
             utilisateur.afficher();
-            desktopPlanner.addUser(utilisateur, motDePasse.toString());
-            desktopPlanner.saveUsersToFile();
-            CalendarController.utilisateur_courant = utilisateur;
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NvPlanning.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = null;
-            try
-            {
-                scene = new Scene(fxmlLoader.load());
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-                System.out.println("Couldn't load FXML file");
-            }
-            stage.setScene(scene);
+            if (desktopPlanner.getUtilisateurs() == null) {
+                desktopPlanner.setUtilisateurs(new HashMap<>());
+                desktopPlanner.addUser(utilisateur , utilisateur.getMdp());
+                CalendarController.utilisateur_courant = utilisateur;
+                desktopPlanner.saveUsersToFile();
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NvPlanning.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Couldn't load FXML file");
+                }
+                stage.setScene(scene);
 
+            }else {
 
-        }
+            if (!desktopPlanner.getUtilisateurs().containsKey(utilisateur)){
+                desktopPlanner.addUser(utilisateur, motDePasse.toString());
+                System.out.println("Utilisateur ajouté");
+                desktopPlanner.saveUsersToFile();
+                CalendarController.utilisateur_courant = utilisateur;
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NvPlanning.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Couldn't load FXML file");
+                }
+                stage.setScene(scene);
+            }else {
+                System.out.println("Utilisateur non ajouté");
+                inscriptionInvalide();}
+            }
     }
 
     @FXML

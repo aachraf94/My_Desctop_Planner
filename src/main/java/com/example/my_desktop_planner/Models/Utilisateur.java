@@ -94,7 +94,12 @@ public class Utilisateur implements Serializable {
     }
 
     public void ajouterCreneauLibre(CreneauLibre creneauLibre) {
-        this.planning.ajouterCreneauLibre(creneauLibre);
+        if (this.planning == null) {
+            this.planning = new Planning();
+        }else {
+            this.planning.ajouterCreneauLibre(creneauLibre);
+        }
+
     }
 
 

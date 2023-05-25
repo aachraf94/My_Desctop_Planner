@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class NvPlanningController implements Initializable {
@@ -43,6 +44,8 @@ public class NvPlanningController implements Initializable {
     private TextField creneauHeureFin;
     @FXML
     private Label ErreurLabel;
+    @FXML
+    private ListView<CreneauLibre> creneauLibreListView;
 
 
     private String[] dureeMin = {"15MIN", "30MIN", "1H", "1H 30MIN", "2H"};
@@ -82,12 +85,7 @@ public class NvPlanningController implements Initializable {
                     CalendarController.utilisateur_courant.ajouterCreneauLibre(creneauLibre);
                 }
             }
-            try {
-                LibreTest.setText(creneauLibre.toString());
-            } catch (Exception e) {
-                // Gérer l'exception
-                System.err.println("Une erreur s'est produite : " + e.getMessage());
-            }
+
         }
 
     }

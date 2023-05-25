@@ -17,7 +17,7 @@ public class TacheSimple extends Tache {
 
     /*********************** constructor **************************/
     public TacheSimple(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDateTime dateDebut, LocalDateTime dateFin, Categorie categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable, int periodicite, Etat etat1) {
-        super(nom, dure, priorite, dateLim, dateDebut, dateFin, categorie, color, unscheduled, etat, bloque, decomposable);
+        super(nom, dure, priorite, dateLim, dateDebut, dateFin, String.valueOf(categorie), color, unscheduled, etat, bloque, decomposable);
         this.periodicite = periodicite;
 
     }

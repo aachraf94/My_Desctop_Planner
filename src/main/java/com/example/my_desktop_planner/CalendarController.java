@@ -1,10 +1,14 @@
 package com.example.my_desktop_planner;
 
+
+import com.example.my_desktop_planner.Models.*;
+
 import com.example.my_desktop_planner.Models.MyDesktopPlanner;
 import com.example.my_desktop_planner.Models.Planning;
 import com.example.my_desktop_planner.Models.Tache;
 import com.example.my_desktop_planner.Models.TacheSimple;
 import com.example.my_desktop_planner.Models.Utilisateur;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -219,7 +223,6 @@ public class CalendarController implements Initializable {
     }
     private void updateDayTasks(LocalDate date) {
         listTache.getItems().clear();
-       // ArrayList<Tache> tasks = utilisateur_courant.getTasks(date);
         ArrayList<Tache> tasks = new ArrayList<Tache>();
         Tache tache1 = TacheSimple.generateRandomTask();
         Tache tache2 = TacheSimple.generateRandomTask();
@@ -236,26 +239,42 @@ public class CalendarController implements Initializable {
     }
 
 
+    public void logout(ActionEvent event) {
+        MyDesktopPlanner desktopPlanner = MyDesktopPlanner.getInstance();
+        desktopPlanner.loadUsersFromFile();
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("Are you sure you want to logout?");
+        alert.setContentText("All unsaved changes will be lost");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            stage = (Stage) borderPane.getScene().getWindow();
+            System.out.println("logout successful");
+            desktopPlanner.sauvgrader(this.utilisateur_courant);
+            stage.close();
+        }}
 
+    @FXML
+    void unschedueledButton(ActionEvent event) {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Unschedueld.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Couldn't load FXML file");
+        }
 
-public void logout (ActionEvent event) {
-    MyDesktopPlanner desktopPlanner = MyDesktopPlanner.getInstance();
-    desktopPlanner.loadUsersFromFile();
+        Stage newStage = new Stage();
+        newStage.setTitle("Ajouter ensemble de Tâches");
+        newStage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));
+        newStage.setScene(scene);
+        newStage.show();
 
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Logout");
-    alert.setHeaderText("Are you sure you want to logout?");
-    alert.setContentText("All unsaved changes will be lost");
-    if (alert.showAndWait().get() == ButtonType.OK) {
-        stage = (Stage) borderPane.getScene().getWindow();
-        System.out.println("logout successful");
-        desktopPlanner.saveUsersToFile();
-        stage.close();
     }
 
 
-}
+
 
 }
 
