@@ -2,15 +2,19 @@ package com.example.my_desktop_planner;
 
 import com.example.my_desktop_planner.Models.MyDesktopPlanner;
 import com.example.my_desktop_planner.Models.Utilisateur;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,6 +25,7 @@ public class InscriptionController {
     MyDesktopPlanner desktopPlanner = MyDesktopPlanner.getInstance();
 
 
+
     @FXML
     private Label erreurText;
     @FXML
@@ -29,23 +34,29 @@ public class InscriptionController {
     private PasswordField motDePasse;
 
 
+
+
+
+
     @FXML
     void seConnecterButton(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SeConnecter.fxml"));
         Scene scene = null;
-        try {
+        try
+        {
             scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
+        }
+        catch(IOException e)
+        {
             e.printStackTrace();
             System.out.println("Couldn't load FXML file");
         }
 
-        Button button = (Button) event.getSource();
-        Stage stage = (Stage) button.getScene().getWindow();
+        Button button = (Button)event.getSource();
+        Stage stage = (Stage)button.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
-
     @FXML
     void inscriptionButton(ActionEvent event) {
 //        if (desktopPlanner.getUtilisateurs().containsValue(motDePasse.getText())) {
@@ -55,6 +66,24 @@ public class InscriptionController {
             desktopPlanner.loadUsersFromFile();
             Utilisateur utilisateur = new Utilisateur(pseudo.getText(), motDePasse.getText());
             utilisateur.afficher();
+            if (desktopPlanner.getUtilisateurs() == null) {
+                desktopPlanner.setUtilisateurs(new HashMap<>());
+                desktopPlanner.addUser(utilisateur , utilisateur.getMdp());
+                CalendarController.utilisateur_courant = utilisateur;
+                desktopPlanner.saveUsersToFile();
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NvPlanning.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Couldn't load FXML file");
+                }
+                stage.setScene(scene);
+
+            }else {
+
             if (!desktopPlanner.getUtilisateurs().containsKey(utilisateur)){
                 desktopPlanner.addUser(utilisateur, motDePasse.toString());
                 System.out.println("Utilisateur ajouté");
@@ -72,26 +101,20 @@ public class InscriptionController {
                 stage.setScene(scene);
             }else {
                 System.out.println("Utilisateur non ajouté");
-                inscriptionInvalide();
+                inscriptionInvalide();}
             }
-
-
-
-      //  }
     }
 
     @FXML
-    void inscriptionInvalide() {
+    void inscriptionInvalide()
+    {
         erreurText.setText("Pseudo déja existe!");
     }
 
-    public void receive_data(String data) {
-        System.out.println(data);
-    }
-
-    public void send_data(String data) {
-        System.out.println(data);
-    }
+    public void receive_data(String data){
+        System.out.println(data);}
+    public void send_data(String data){
+        System.out.println(data);}
 
 }
 

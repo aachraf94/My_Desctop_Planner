@@ -19,7 +19,7 @@
     <left>
         <VBox alignment="CENTER" prefHeight="700.0" prefWidth="343.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
             <children>
-                <VBox prefHeight="151.0" prefWidth="298.0" spacing="12.0">
+                <VBox prefHeight="0.0" prefWidth="298.0" spacing="12.0">
                     <VBox.margin>
                         <Insets left="25.0" right="20.0" />
                     </VBox.margin>
@@ -46,9 +46,11 @@
                         <Font size="34.0" />
                     </font>
                 </Label>
-                <ScrollPane pannable="true" prefHeight="353.0" prefWidth="343.0">
+                <ScrollPane pannable="true" prefHeight="480.0" prefWidth="343.0">
                     <content>
+
                         <ListView fx:id="listTache" fixedCellSize="50.0" prefHeight="367.0" prefWidth="340.0" />
+
                     </content>
                 </ScrollPane>
             </children>
@@ -94,7 +96,9 @@
             <children>
                 <HBox prefHeight="88.0" prefWidth="624.0" spacing="27.0">
                     <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#unscheduled" style="-fx-text-fill: #005B8F; -fx-background-color: TRANSPARENT; -fx-border-color: #005B8F;" text="Unschedueled" />
+
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#unschedueledButton" style="-fx-text-fill: #005B8F; -fx-background-color: TRANSPARENT; -fx-border-color: #005B8F;" text="Unschedueled" />
+
                         <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-border-color: #005B8F; -fx-text-fill: #005B8F; -fx-background-color: TRANSPARENT;" text="Bagdes" />
                     </children>
                 </HBox>

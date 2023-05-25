@@ -30,6 +30,8 @@ public class Planning implements Serializable {
         this.tachePlannifies = new ArrayList<Tache>();
         this.tacheUnscheduleds = new ArrayList<Tache>();
     }
+    public Planning(){
+    }
 
     public Planning(Planning planning) {
         this.nom = new String(planning.getNom());
@@ -81,7 +83,11 @@ public class Planning implements Serializable {
     }
 
     public void ajouterCreneauLibre(CreneauLibre creneauLibre) {
-        this.creneauLibres.add(creneauLibre);
+        if (this.creneauLibres == null){
+            this.creneauLibres = new ArrayList<CreneauLibre>();
+            this.creneauLibres.add(creneauLibre);
+        }else {
+            this.creneauLibres.add(creneauLibre);}
     }
 
 
