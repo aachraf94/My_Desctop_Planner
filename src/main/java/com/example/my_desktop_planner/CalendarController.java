@@ -1,6 +1,7 @@
 package com.example.my_desktop_planner;
 
 import com.example.my_desktop_planner.Models.MyDesktopPlanner;
+import com.example.my_desktop_planner.Models.Planning;
 import com.example.my_desktop_planner.Models.Tache;
 import com.example.my_desktop_planner.Models.TacheSimple;
 import com.example.my_desktop_planner.Models.Utilisateur;
@@ -67,7 +68,6 @@ public class CalendarController implements Initializable {
         today = ZonedDateTime.now();
         year.setText(String.valueOf(dateFocus.getYear())); // Initialize the year variable
         month.setText(String.valueOf(dateFocus.getMonth())); // Initialize the month variable
-
         drawCalendar();
     }
 
@@ -234,22 +234,21 @@ public class CalendarController implements Initializable {
 
 
 
-public void logout (ActionEvent event){
-        MyDesktopPlanner desktopPlanner = MyDesktopPlanner.getInstance();
-        desktopPlanner.loadUsersFromFile();
+public void logout (ActionEvent event) {
+    MyDesktopPlanner desktopPlanner = MyDesktopPlanner.getInstance();
+    desktopPlanner.loadUsersFromFile();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Logout");
-        alert.setHeaderText("Are you sure you want to logout?");
-        alert.setContentText("All unsaved changes will be lost");
-        if (alert.showAndWait().get() == ButtonType.OK) {
-            stage = (Stage) borderPane.getScene().getWindow();
-            System.out.println("logout successful");
-            desktopPlanner.saveUsersToFile();
-            stage.close();
-        }
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Logout");
+    alert.setHeaderText("Are you sure you want to logout?");
+    alert.setContentText("All unsaved changes will be lost");
+    if (alert.showAndWait().get() == ButtonType.OK) {
+        stage = (Stage) borderPane.getScene().getWindow();
+        System.out.println("logout successful");
+        desktopPlanner.saveUsersToFile();
+        stage.close();
+    }
 
-        
 
 }
 
