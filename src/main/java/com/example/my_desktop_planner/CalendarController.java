@@ -55,7 +55,6 @@ public class CalendarController implements Initializable {
 
     @FXML
     private ListView<Tache> listTache;
-
     @FXML
     private Label id = new Label();
     @FXML
@@ -272,6 +271,7 @@ public class CalendarController implements Initializable {
         newStage.show();
 
     }
+
 
 
 

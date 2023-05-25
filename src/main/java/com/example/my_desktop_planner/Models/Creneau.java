@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 
 public class Creneau implements Decomposable<Creneau> {
 
-    private LocalDateTime hDebut;
-    private LocalDateTime hFin;
-    private Duration duree;
+    protected LocalDateTime hDebut;
+    protected LocalDateTime hFin;
+    protected Duration duree;
 
     // private Duration dureeMin = Duration.ofMinutes(30);
     //    la durée maximale d’un créneau
