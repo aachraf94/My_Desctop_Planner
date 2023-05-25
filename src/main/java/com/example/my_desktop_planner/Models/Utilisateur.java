@@ -16,6 +16,34 @@ public class Utilisateur implements Serializable {
         this.pseudo = pseudo;
         this.mdp = mdp;
     }
+
+
+
+    public boolean seConnecter(String pseudo, String mdp){
+
+        if (this.pseudo.equals(pseudo) && this.mdp.equals(mdp)) {
+            System.out.println("Connexion réussie.");
+            return true;
+        } else {
+            System.out.println("Pseudo ou mot de passe incorrect.");
+            return false;
+        }
+    }
+
+    public Boolean seDeconnecter(){
+        return true;
+    }
+//    public void ajouterCreneauLibre(LocalDateTime heureDebut, LocalDateTime heureFin , Duration duree) {
+//        Creneau c = new Creneau(heureDebut, heureFin);
+////        planning.ajouterCreneauLibre(c);
+//    }
+
+//    public void supprimerCreneauLibre(Creneau creneau){
+//
+//        this.planning.supprimerCreneauLibre(creneau);
+//
+//    }
+
     public String getPseudo() {
         return pseudo;
     }
@@ -36,9 +64,6 @@ public class Utilisateur implements Serializable {
         return planning;
     }
 
-    public void setPlanning(Planning planning) {
-        this.planning = planning;
-    }
 
 
 
@@ -53,7 +78,7 @@ public class Utilisateur implements Serializable {
         return this.pseudo.equals(((Utilisateur)obj).getPseudo());
     }
     public void afficher ()
-{
+    {
         System.out.println("pseudo : "+pseudo);
         System.out.println("mdp : "+mdp);
         //System.out.println("planning : "+planning);
@@ -70,5 +95,21 @@ public class Utilisateur implements Serializable {
         }
         return null;
     }
+
+
+
+
+
+
+
+
+
+
+
+    public void setPlanning(Planning planning)
+    {
+        this.planning = new Planning(planning);
+    }
+    public void ajouterCreneauLibre(CreneauLibre creneauLibre) { this.planning.ajouterCreneauLibre(creneauLibre); }
 
 }

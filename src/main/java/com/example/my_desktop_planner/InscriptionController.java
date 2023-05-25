@@ -35,6 +35,8 @@ public class InscriptionController {
 
 
 
+
+
     @FXML
     void seConnecterButton(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SeConnecter.fxml"));
@@ -72,7 +74,7 @@ public class InscriptionController {
             Scene scene = null;
             try
             {
-                 scene = new Scene(fxmlLoader.load());
+                scene = new Scene(fxmlLoader.load());
             }
             catch(IOException e)
             {

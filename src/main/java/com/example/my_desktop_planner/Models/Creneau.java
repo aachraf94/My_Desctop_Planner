@@ -8,10 +8,9 @@ public class Creneau implements Decomposable<Creneau>{
 
     private LocalDateTime hDebut;
     private LocalDateTime hFin;
-    public Duration duree;
-    public static Duration durationMin ;
+    private Duration duree;
 
-   // private Duration dureeMin = Duration.ofMinutes(30);
+    // private Duration dureeMin = Duration.ofMinutes(30);
     //    la durée maximale d’un créneau
 
 
@@ -22,16 +21,22 @@ public class Creneau implements Decomposable<Creneau>{
     }
 
 
-    public static Duration getDurationMin() {
-        return durationMin;
+    public Duration getDurationMin() {
+        return duree;
     }
 
-    public static void setDurationMin(int durationMin) {
-        Creneau.durationMin = Duration.ofMinutes((int)durationMin);
-    }
 
     @Override
     public Creneau decompose(Creneau obj) {
         return null;// a revoir
+    }
+
+    @Override
+    public String toString() {
+        return "\nCreneau{" +
+                "\nhDebut=" + hDebut +
+                "\n, hFin=" + hFin +
+                "\n, duree=" + duree +
+                '}';
     }
 }
