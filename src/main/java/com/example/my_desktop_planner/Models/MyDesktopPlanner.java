@@ -33,7 +33,7 @@ public class MyDesktopPlanner {
 
     //on va faire Method registre
 
-    public boolean addUser(Utilisateur user, String mdp) {// verifié si l'utilisateur existe ou non
+    public void addUser(Utilisateur user, String mdp) {// verifié si l'utilisateur existe ou non
         if (!utilisateurs.containsKey(user)) {
             utilisateurs.put(user, mdp);// ajouter le couple utilisateur et mdp
             System.out.println("User '" + user.getPseudo() + "' added successfully.");
@@ -41,7 +41,6 @@ public class MyDesktopPlanner {
         } else {
             System.out.println("User '" + user.getPseudo() + "' already exists.");
         }
-        return !utilisateurs.containsKey(user);
     }
 
     public void removeUser(Utilisateur user) {// verifié si l'utilisateur existe ou non
@@ -85,6 +84,12 @@ public class MyDesktopPlanner {
         }
 
         return null; // User not found
+    }
+    public void sauvgrader (Utilisateur user){
+        loadUsersFromFile();
+        removeUser(user);
+        addUser(user,user.getMdp());
+        saveUsersToFile();
     }
 
 }

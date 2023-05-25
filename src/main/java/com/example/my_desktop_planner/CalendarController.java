@@ -1,9 +1,6 @@
 package com.example.my_desktop_planner;
 
-import com.example.my_desktop_planner.Models.MyDesktopPlanner;
-import com.example.my_desktop_planner.Models.Tache;
-import com.example.my_desktop_planner.Models.TacheSimple;
-import com.example.my_desktop_planner.Models.Utilisateur;
+import com.example.my_desktop_planner.Models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -235,10 +232,28 @@ public class CalendarController implements Initializable {
         if (alert.showAndWait().get() == ButtonType.OK) {
             stage = (Stage) borderPane.getScene().getWindow();
             System.out.println("logout successful");
-            desktopPlanner.saveUsersToFile();
+            desktopPlanner.sauvgrader(this.utilisateur_courant);
             stage.close();
         }
 
+
+    }
+    @FXML
+    void unscheduled(ActionEvent event) {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Unschedueld.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Couldn't load FXML file");
+        }
+
+        Stage newStage = new Stage();
+        newStage.setTitle("Unschedueled");
+        newStage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));
+        newStage.setScene(scene);
+        newStage.show();
 
     }
 

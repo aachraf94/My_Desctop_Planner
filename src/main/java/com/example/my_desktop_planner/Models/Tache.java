@@ -14,7 +14,7 @@ abstract public class Tache implements Serializable {
     private LocalDate dateLim;
     private LocalDateTime dateDebut;
     private LocalDateTime dateFin;
-    private Categorie categorie;
+    private String categorie;
     private Color color;
     private boolean unscheduled;
     private Etat etat;
@@ -27,7 +27,7 @@ abstract public class Tache implements Serializable {
     //re-planifier (string dureeSupp, String nvDeadline)          les deux
 
 
-    public Tache(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDateTime dateDebut, LocalDateTime dateFin, Categorie categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable) { // a revoir les arguments de ce constructeur
+    public Tache(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDateTime dateDebut, LocalDateTime dateFin, String categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable) { // a revoir les arguments de ce constructeur
         this.nom = nom;
         this.dure = dure;
         this.priorite = priorite;
@@ -90,11 +90,11 @@ abstract public class Tache implements Serializable {
         this.dateFin = dateFin;
     }
 
-    public Categorie getCategorie() {
+    public String getCategorie() {
         return categorie;
     }
 
-    public void setCategorie(Categorie categorie) {
+    public void setCategorie(String categorie) {
         this.categorie = categorie;
     }
 

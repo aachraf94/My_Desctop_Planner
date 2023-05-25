@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 
 public class InscriptionController {
@@ -47,14 +48,15 @@ public class InscriptionController {
 
     @FXML
     void inscriptionButton(ActionEvent event) {
-        if (desktopPlanner.getUtilisateurs().containsValue(motDePasse.getText())) {
-            inscriptionInvalide();
-        } else {
+//        if (desktopPlanner.getUtilisateurs().containsValue(motDePasse.getText())) {
+//            inscriptionInvalide();
+//        } else {
 
             desktopPlanner.loadUsersFromFile();
             Utilisateur utilisateur = new Utilisateur(pseudo.getText(), motDePasse.getText());
             utilisateur.afficher();
-            if (desktopPlanner.addUser(utilisateur, motDePasse.toString())){
+            if (!desktopPlanner.getUtilisateurs().containsKey(utilisateur)){
+                desktopPlanner.addUser(utilisateur, motDePasse.toString());
                 System.out.println("Utilisateur ajouté");
                 desktopPlanner.saveUsersToFile();
                 CalendarController.utilisateur_courant = utilisateur;
@@ -75,7 +77,7 @@ public class InscriptionController {
 
 
 
-        }
+      //  }
     }
 
     @FXML

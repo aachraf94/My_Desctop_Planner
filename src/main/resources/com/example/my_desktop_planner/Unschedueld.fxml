@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.my_desktop_planner.CalendarController">
+   <right>
+      <AnchorPane prefHeight="550.0" prefWidth="708.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="AjouterButton" layoutX="620.0" layoutY="497.0" mnemonicParsing="false" onAction="#unscheduled" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #005b8f;" text="Planifier" textFill="WHITE" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="20.0" />
+            <Button fx:id="annulerlButton" layoutX="442.0" layoutY="497.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" prefHeight="30.0" prefWidth="160.0" text="Annuler" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="442.0" />
+            <Line endX="93.40730285644531" endY="1.220703125E-4" layoutX="579.0" layoutY="395.0" startX="-259.98480224609375" startY="1.52587890625E-4" style="-fx-opacity: 0.2;" AnchorPane.leftAnchor="427.09288024902344" AnchorPane.rightAnchor="15.492904663085938" AnchorPane.topAnchor="394.2929237484932" />
+            <Label fx:id="erreur" layoutX="435.0" layoutY="402.0" style="-fx-alignment: center;" textFill="RED" AnchorPane.topAnchor="402.0" />
+            <ScrollPane layoutX="450.0" layoutY="161.0" prefHeight="298.0" prefWidth="328.0">
+               <content>
+                  <ListView prefHeight="364.0" prefWidth="304.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </right>
+   <left>
+      <AnchorPane prefHeight="550.0" prefWidth="242.0" style="-fx-background-color: #005B8F;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="WHITE" layoutX="99.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unscheduled">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="32.0" fitWidth="64.0" layoutX="24.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Group42.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>
