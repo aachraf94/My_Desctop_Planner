@@ -5,67 +5,58 @@ import com.example.my_desktop_planner.Models.Utilisateur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+/*** java.nio Chikour ***/
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class HelloApplication extends Application {
 
     public static MyDesktopPlanner myDesktopPlanner;
     public static Utilisateur utilisateurCourant;
     private static Stage stage;
-
+    public static final String DIRECTORY_PATH = "src/main/resources/com/example/my_desktop_planner";
+    public static final String FILE_NAME = "myDesktopPlanner.dat";
+    public static final Path FILE_PATH = Paths.get(DIRECTORY_PATH, FILE_NAME);
 
     @Override
     public void start(Stage stage) throws IOException {
-
         HelloApplication.stage = stage;
 
-
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
-
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AjouterEnsTache.fxml"));
+        // Load the initial scene (SeConnecter.fxml)
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SeConnecter.fxml"));
         Scene scene = null;
-        try
-        {
+        try {
             scene = new Scene(fxmlLoader.load());
-        }
-        catch(IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Couldn't load FXML file");
         }
 
-        ObjectInputStream in;
-        try {
-            in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("myDesktopPlanner.dat"))));
-            try {
+        if (Files.exists(FILE_PATH)) {
+            try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(FILE_PATH))) {
                 myDesktopPlanner = (MyDesktopPlanner) in.readObject();
-                in.close();
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException | IOException e) {
                 e.printStackTrace();
             }
-        }
-        catch (FileNotFoundException e) {
+        } else {
             myDesktopPlanner = new MyDesktopPlanner();
-        } catch (IOException e) {
-            e.printStackTrace();
+            createFile();
         }
 
-
+        // Configure the stage
         stage.setTitle("My Desktop Planner");
         stage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));
         stage.setScene(scene);
         stage.show();
-
     }
 
     @Override
-    public void stop()
-    {
+    public void stop() {
         myDesktopPlanner.sauvegarder();
     }
 
@@ -73,9 +64,18 @@ public class HelloApplication extends Application {
         launch();
     }
 
-    public static Stage getStage() {return stage;}
+    public static Stage getStage() {
+        return stage;
+    }
 
-
-
+    private static void createFile() {
+        try {
+            if (!Files.exists(FILE_PATH.getParent())) {
+                Files.createDirectories(FILE_PATH.getParent());
+            }
+            Files.createFile(FILE_PATH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
-
