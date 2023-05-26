@@ -17,14 +17,14 @@
 
 <BorderPane fx:id="borderPane" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.my_desktop_planner.CalendarController">
     <left>
-        <VBox alignment="CENTER" prefHeight="700.0" prefWidth="343.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="550.0" prefWidth="422.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
             <children>
                 <VBox prefHeight="0.0" prefWidth="298.0" spacing="12.0">
                     <VBox.margin>
                         <Insets left="25.0" right="20.0" />
                     </VBox.margin>
                     <children>
-                        <HBox prefHeight="35.0" prefWidth="275.0" spacing="42.0">
+                        <HBox prefHeight="0.0" prefWidth="298.0" spacing="42.0">
                             <children>
                                 <Button mnemonicParsing="false" onAction="#ajouterTacheButton" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Ajouter Tàche" />
                                 <Button alignment="CENTER" mnemonicParsing="false" onAction="#ajouterEnsTacheButton" style="-fx-background-color: #005B8F; -fx-text-fill: #FFFFFF;" text="Ajouter ensemble de taches" />
@@ -41,15 +41,15 @@
                         <Insets top="35.0" />
                     </padding>
                 </VBox>
-                <Label style="-fx-text-fill: #005B8F;" text="Taches">
+                <Label prefWidth="102.0" style="-fx-text-fill: #005B8F;" text="Taches">
                     <font>
-                        <Font size="34.0" />
+                        <Font name="System Bold" size="25.0" />
                     </font>
                 </Label>
-                <ScrollPane pannable="true" prefHeight="480.0" prefWidth="343.0">
+                <ScrollPane pannable="true" prefHeight="403.0" prefWidth="343.0">
                     <content>
 
-                        <ListView fx:id="listTache" fixedCellSize="50.0" prefHeight="367.0" prefWidth="340.0" />
+                        <ListView fx:id="listTache" fixedCellSize="50.0" prefHeight="399.0" prefWidth="418.0" />
 
                     </content>
                 </ScrollPane>
@@ -87,7 +87,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#logout" text="Deconnexion" />
+                        <Button mnemonicParsing="false" text="Deconnexion" />
                     </children>
                 </HBox>
             </children>
@@ -99,7 +99,7 @@
     <center>
         <VBox alignment="CENTER" prefHeight="700.0" prefWidth="686.0" spacing="34.0" BorderPane.alignment="CENTER">
             <children>
-                <HBox prefHeight="88.0" prefWidth="624.0" spacing="27.0">
+                <HBox prefHeight="88.0" prefWidth="415.0" spacing="27.0">
                     <children>
 
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#unschedueledButton" style="-fx-text-fill: #005B8F; -fx-background-color: TRANSPARENT; -fx-border-color: #005B8F;" text="Unschedueled" />

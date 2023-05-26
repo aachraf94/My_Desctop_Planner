@@ -64,6 +64,21 @@ public class SeConnecterController {
             {
                 System.out.println("Connection valide");
                 utilisateurCourant = myDesktopPlanner.findUser(userPseudo,userMdp);
+
+                //changer the stage
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
+                scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Couldn't load FXML file");
+                }
+
+                Button button = (Button) event.getSource();
+                stage = (Stage) button.getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
             }
             else
             {

@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
     public static MyDesktopPlanner myDesktopPlanner;
     public static Utilisateur utilisateurCourant;
     private static Stage stage;
-    public static final String DIRECTORY_PATH = "src/main/resources/com/example/my_desktop_planner";
+    public static final String DIRECTORY_PATH = "src/main/resources/com/example/my_desktop_planner/datafile";
     public static final String FILE_NAME = "myDesktopPlanner.dat";
     public static final Path FILE_PATH = Paths.get(DIRECTORY_PATH, FILE_NAME);
 
