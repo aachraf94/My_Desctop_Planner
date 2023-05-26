@@ -36,10 +36,18 @@ import java.util.ResourceBundle;
 import static com.example.my_desktop_planner.HelloApplication.utilisateurCourant;
 
 public class CalendarController implements Initializable {
+    /************* To DO list *************/
+    // régler unsch page
+    // modifier la liste des taches après chaque modification dans la date
+    // ajouter projet
+    // badge
+    //
 
     /************ agenda stuff ***********/
     ZonedDateTime dateFocus;
     ZonedDateTime today;
+    @FXML
+    Label date;
     private StackPane selectedDayRectangle;
     private LocalDate selected_day ;
     @FXML
@@ -73,13 +81,14 @@ public class CalendarController implements Initializable {
         year.setText(String.valueOf(dateFocus.getYear())); // Initialize the year variable
         month.setText(String.valueOf(dateFocus.getMonth())); // Initialize the month variable
         drawCalendar();
+        selected_day = LocalDate.now();
+        date.setText(selected_day.toString());
 
         // set taches and viewlist
         taches = new ArrayList<>(utilisateurCourant.getPlanning().getTachePlannifies(LocalDate.now()));
         listTache.getItems().addAll(taches);
     }
-
-
+    /***************** Calendar *****************************************************/
     @FXML
     void backOneMonth(ActionEvent event) {
         dateFocus = dateFocus.minusMonths(1);
@@ -154,26 +163,31 @@ public class CalendarController implements Initializable {
                 calendar.getChildren().add(stackPane);
             }
         }
+
     }
 
-    // a revoir pour update les taches
+    // Checked and updated
     private void handleDayClick(StackPane clickedDayRectangle) {
         if (selectedDayRectangle != null) {
-            Rectangle rec=(Rectangle)selectedDayRectangle.getChildren().get(0);
-            rec.setFill(Color.WHITE);//
+            Rectangle rec = (Rectangle) selectedDayRectangle.getChildren().get(0);
+            rec.setFill(Color.WHITE);
         }
 
         if (selectedDayRectangle == clickedDayRectangle) {
             selectedDayRectangle = null;
         } else {
-            Rectangle rec1=(Rectangle)clickedDayRectangle.getChildren().get(0);
+            Rectangle rec1 = (Rectangle) clickedDayRectangle.getChildren().get(0);
             rec1.setFill(Color.web("dfdfdf"));
             selectedDayRectangle = clickedDayRectangle;
-        }
 
+            // Update selected_day with the clicked day
+            int currentDate = Integer.parseInt(((Text) clickedDayRectangle.getChildren().get(1)).getText());
+            selected_day = LocalDate.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate);
+            date.setText(selected_day.toString());
+        }
     }
 
-
+    /************************************************************************************/
     //checked and updated
     @FXML
     void ajouterTacheButton(ActionEvent event) {
@@ -216,7 +230,6 @@ public class CalendarController implements Initializable {
 
 
     private void updateDayTasks(LocalDate date) {
-
         taches.clear();
         taches.addAll(utilisateurCourant.planning.getTachePlannifies(selected_day));
         listTache.getItems().clear();
