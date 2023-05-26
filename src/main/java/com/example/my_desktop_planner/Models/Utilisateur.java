@@ -17,14 +17,10 @@ public class Utilisateur implements Serializable {
         this.mdp = mdp;
         this.planning = new Planning();
     }
-
     public Utilisateur(String pseudo)
     {
         this.pseudo=pseudo;
     }
-
-
-
     /*********************** Fin Constrictors ******************************/
 
 //    public boolean seConnecter(String pseudo, String mdp) {
@@ -71,25 +67,6 @@ public class Utilisateur implements Serializable {
         //System.out.println("taches : "+taches);
     }
 
-    public ArrayList<Tache> getTasks(LocalDate date) {
-        ArrayList<Tache> tasks = new ArrayList<Tache>();
-        for (Tache tache : planning.getTachePlannifies()) {
-            if (date.getDayOfYear() == tache.getDateDebut().getDayOfYear() && date.getYear() == tache.getDateDebut().getYear() && date.getMonth() == tache.getDateDebut().getMonth()) {
-                tasks.add(tache);
-            }
-
-        }
-        return tasks;
-    }
-
-    public void ajouterCreneauLibre(CreneauLibre creneauLibre) {
-        if (this.planning == null) {
-            this.planning = new Planning();
-        } else {
-            this.planning.ajouterCreneauLibre(creneauLibre);
-        }
-
-    }
 
     public void planifierAuto(ArrayList<Tache> tachesUnschedueled) {
         ArrayList<Tache> tachesHigh = new ArrayList<Tache>();
@@ -111,7 +88,6 @@ public class Utilisateur implements Serializable {
 
     /********* Setters et Getters ********************/
 
-
     public String getPseudo() {
         return pseudo;
     }
@@ -131,8 +107,6 @@ public class Utilisateur implements Serializable {
     public Planning getPlanning() {
         return planning;
     }
-
-
     /************ Fin getters and setters ********************/
 
 }
