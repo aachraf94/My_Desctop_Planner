@@ -105,7 +105,12 @@ public class AjouterEnsTache implements Initializable {
         if (validateInput()) {
             // Récupérer les valeurs des éléments de l'interface utilisateur
             String nomTache = NomTache.getText();
+
+
+
             int dureeValue = Integer.parseInt(Duree.getText());
+
+
             LocalDate dateLimValue = dateLim.getValue();
             LocalDate dateDebutValue = dateDebut.getValue();
             LocalDate dateFinValue = dateFin.getValue();
@@ -113,7 +118,22 @@ public class AjouterEnsTache implements Initializable {
             Color colorValue = color.getValue();
             boolean isDecomposable = decomposable.isSelected();
             String periodiciteValue = periodicite.getText();
-            int periodiciteInt = Integer.parseInt(periodiciteValue);
+
+
+            int periodiciteInt = 0;
+            if (!decomposable.isSelected() && !periodicite.getText().isEmpty()) {
+                try {
+                    periodiciteInt = Integer.parseInt(periodicite.getText());
+                    if (periodiciteInt <= 0) {
+                        erreur.setText(erreur.getText() + "La périodicité doit être un entier positif.\n");
+                        System.out.println("lzm positif");
+                    }
+                } catch (NumberFormatException e) {
+                    erreur.setText(erreur.getText() + "La périodicité doit être un entier.\n");
+                    System.out.println("entier");
+                }
+            }
+
             boolean isBloquee = bloquee.isSelected();
             Priorite priorite = prioriteChoiceBox.getValue();
 

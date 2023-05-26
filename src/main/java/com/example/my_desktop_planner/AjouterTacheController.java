@@ -111,14 +111,38 @@ public class AjouterTacheController implements Initializable {
     public void handleAjouterButtonAction(ActionEvent event) {
         if (validateInput()) {
             String nomTache = NomTache.getText();
-            int dureeHeur = Integer.parseInt(Duree.getText());
+            int dureeHeur = 0;
+            try {
+                dureeHeur = Integer.parseInt(Duree.getText());
+                if (dureeHeur <= 0) {
+                    erreur.setText(erreur.getText() + "La durée doit être un entier positif.\n");
+                }
+            } catch (NumberFormatException e) {
+                erreur.setText(erreur.getText() + "La durée doit être un entier.\n");
+            }
+
             Duration duree = Duration.ofMinutes(dureeHeur);
             LocalDate dateDebutValue = dateDebut.getValue();
             LocalDate dateFinValue = dateFin.getValue();
             LocalDate dateLimValue = dateLim.getValue();
+
+            int periodiciteValue =0;
+            if (!decomposable.isSelected() && !periodicite.getText().isEmpty()) {
+                try {
+                    periodiciteValue = Integer.parseInt(periodicite.getText());
+                    if (periodiciteValue <= 0) {
+                        erreur.setText(erreur.getText() + "La périodicité doit être un entier positif.\n");
+                        System.out.println("lzm positif");
+                    }
+                } catch (NumberFormatException e) {
+                    erreur.setText(erreur.getText() + "La périodicité doit être un entier.\n");
+                    System.out.println("entier");
+                }
+            }
+
             Color colorValue = color.getValue();
             boolean isDecomposable = decomposable.isSelected();
-            int periodiciteValue = Integer.parseInt(periodicite.getText());
+
             boolean isAjouterProjet = ajouterProjet.isSelected();
             String nomProjetValue = nomProjet.getText();
             boolean isBloquee = bloquee.isSelected();
@@ -137,6 +161,7 @@ public class AjouterTacheController implements Initializable {
                 }
             } else {
                 TacheSimple tacheSimple = new TacheSimple(nomTache, duree, priorite, dateLimValue, dateDebutValue, dateFinValue, categorie, colorValue, true, Etat.NOT_REALIZED, isBloquee, false, periodiciteValue);
+                utilisateurCourant.getPlanning().getTacheUnscheduleds().add(tacheSimple);
                 if (isAjouterProjet) {
                     ArrayList<Tache> taches = new ArrayList<>();
                     taches.add(tacheSimple);
