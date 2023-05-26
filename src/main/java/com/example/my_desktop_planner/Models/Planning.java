@@ -14,6 +14,7 @@ public class Planning implements Serializable {
     private ArrayList<CreneauOccupe> creneauOccupes;
     private ArrayList<Tache> tachePlannifies;
     private ArrayList<Tache> tacheUnscheduleds;
+    private ArrayList<Projet> projets;
 
     /********* Le constructeur **********/
     public Planning()
@@ -23,6 +24,7 @@ public class Planning implements Serializable {
         creneauOccupes = new ArrayList<CreneauOccupe>();
         tachePlannifies = new ArrayList<Tache>();
         tacheUnscheduleds = new ArrayList<Tache>();
+        projets = new ArrayList<Projet>();
     }
 
 
@@ -114,5 +116,12 @@ public class Planning implements Serializable {
         this.tacheUnscheduleds.addAll(tacheUnscheduleds);
     }
 
+    public ArrayList<Projet> getProjets() {
+        return projets;
+    }
 
+    public void setProjets(ArrayList<Projet> projets) {
+        this.projets.clear();
+        this.projets.addAll(projets);
+    }
 }

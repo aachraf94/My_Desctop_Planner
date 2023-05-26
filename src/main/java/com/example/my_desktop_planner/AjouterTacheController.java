@@ -110,10 +110,9 @@ public class AjouterTacheController implements Initializable {
     @FXML
     public void handleAjouterButtonAction(ActionEvent event) {
         if (validateInput()) {
-            // Get the values from the UI elements
             String nomTache = NomTache.getText();
-            int dureeheur = Integer.parseInt(Duree.getText());
-            Duration duree = Duration.ofMinutes(dureeheur);
+            int dureeHeur = Integer.parseInt(Duree.getText());
+            Duration duree = Duration.ofMinutes(dureeHeur);
             LocalDate dateDebutValue = dateDebut.getValue();
             LocalDate dateFinValue = dateFin.getValue();
             LocalDate dateLimValue = dateLim.getValue();
@@ -126,32 +125,31 @@ public class AjouterTacheController implements Initializable {
             Categorie categorie = categorieChoiceBox.getValue();
             Priorite priorite = prioriteChoiceBox.getValue();
 
-            if (isDecomposable)
-            {
-                TacheDecompo tacheDecompo = new TacheDecompo(nomTache,duree,priorite,dateLimValue,dateDebutValue,dateFinValue,categorie,colorValue,true, Etat.NOT_REALIZED,isBloquee,true,0);
+            if (isDecomposable) {
+                TacheDecompo tacheDecompo = new TacheDecompo(nomTache, duree, priorite, dateLimValue, dateDebutValue, dateFinValue, categorie, colorValue, true, Etat.NOT_REALIZED, isBloquee, true, 0);
                 utilisateurCourant.getPlanning().getTacheUnscheduleds().add(tacheDecompo);
-                if (isAjouterProjet)
-                {
-                    ArrayList<Tache> taches = new ArrayList<Tache>();
+                if (isAjouterProjet) {
+                    ArrayList<Tache> taches = new ArrayList<>();
                     taches.add(tacheDecompo);
-                    Projet projet = new Projet(nomProjetValue,"",taches);
+                    Projet projet = new Projet(nomProjetValue, "", taches);
+                    // Add the project to the user's list of projects
+                    utilisateurCourant.getPlanning().getProjets().add(projet);
                 }
-
-            }
-            else
-            {
-                TacheSimple tacheSimple = new TacheSimple(nomTache,duree,priorite,dateLimValue,dateDebutValue,dateFinValue,categorie,colorValue,true, Etat.NOT_REALIZED,isBloquee,false,periodiciteValue);
-                if (isAjouterProjet)
-                {
-                    ArrayList<Tache> taches = new ArrayList<Tache>();
+            } else {
+                TacheSimple tacheSimple = new TacheSimple(nomTache, duree, priorite, dateLimValue, dateDebutValue, dateFinValue, categorie, colorValue, true, Etat.NOT_REALIZED, isBloquee, false, periodiciteValue);
+                if (isAjouterProjet) {
+                    ArrayList<Tache> taches = new ArrayList<>();
                     taches.add(tacheSimple);
-                    Projet projet = new Projet(nomProjetValue,"",taches);
+                    Projet projet = new Projet(nomProjetValue, "", taches);
+                    // Add the project to the user's list of projects
+                    utilisateurCourant.getPlanning().getProjets().add(projet);
                 }
             }
             clearFields();
             closeWindow();
         }
     }
+
 
     private boolean validateInput() {
         erreur.setText("");
@@ -160,27 +158,30 @@ public class AjouterTacheController implements Initializable {
             erreur.setText("Veuillez remplir tous les champs obligatoires.");
         }
 
-        if (dateDebut.getValue().isBefore(LocalDate.now()) || dateFin.getValue().isBefore(LocalDate.now()) || dateLim.getValue().isBefore(LocalDate.now())) {
-            erreur.setText("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
+        if (dateDebut.getValue() != null && dateFin.getValue() != null && dateLim.getValue() != null) {
+            LocalDate currentDate = LocalDate.now();
+            if (dateDebut.getValue().isBefore(currentDate) || dateFin.getValue().isBefore(currentDate) || dateLim.getValue().isBefore(currentDate)) {
+                erreur.setText(erreur.getText() + "\nVeuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
+            }
         }
 
         try {
             int dureeValue = Integer.parseInt(Duree.getText());
             if (dureeValue <= 0) {
-                erreur.setText(erreur.getText() + "Durée doit être un entier positif.\n");
+                erreur.setText(erreur.getText() + "La durée doit être un entier positif.\n");
             }
         } catch (NumberFormatException e) {
-            erreur.setText(erreur.getText() + "Durée doit être un entier.\n");
+            erreur.setText(erreur.getText() + "La durée doit être un entier.\n");
         }
 
         if (!decomposable.isSelected() && !periodicite.getText().isEmpty()) {
             try {
-                int piodicite = Integer.parseInt(periodicite.getText());
-                if (piodicite <= 0) {
-                    erreur.setText(erreur.getText() + "priodicite doit être un entier positif.\n");
+                int periodiciteValue = Integer.parseInt(periodicite.getText());
+                if (periodiciteValue <= 0) {
+                    erreur.setText(erreur.getText() + "La périodicité doit être un entier positif.\n");
                 }
             } catch (NumberFormatException e) {
-                erreur.setText(erreur.getText() + "priodicite doit être un entier.\n");
+                erreur.setText(erreur.getText() + "La périodicité doit être un entier.\n");
             }
         }
 
@@ -191,6 +192,7 @@ public class AjouterTacheController implements Initializable {
 
         return true; // Validation successful
     }
+
 
 
 
