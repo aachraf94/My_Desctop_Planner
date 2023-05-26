@@ -10,51 +10,72 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 
 public class HelloApplication extends Application {
 
     public static MyDesktopPlanner myDesktopPlanner;
-    public static Utilisateur utilisateur;
+    public static Utilisateur utilisateurCourant;
     private static Stage stage;
 
-    public static void main(String[] args) {
-        launch();
-    }
 
     @Override
     public void start(Stage stage) throws IOException {
+
+        HelloApplication.stage = stage;
 
 
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AjouterEnsTache.fxml"));
+        Scene scene = null;
+        try
+        {
+            scene = new Scene(fxmlLoader.load());
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+            System.out.println("Couldn't load FXML file");
+        }
 
-        Scene scene = new Scene(fxmlLoader.load());
+        ObjectInputStream in;
+        try {
+            in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("myDesktopPlanner.dat"))));
+            try {
+                myDesktopPlanner = (MyDesktopPlanner) in.readObject();
+                in.close();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        catch (FileNotFoundException e) {
+            myDesktopPlanner = new MyDesktopPlanner();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         stage.setTitle("My Desktop Planner");
         stage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));
         stage.setScene(scene);
         stage.show();
 
-        stage.setOnCloseRequest(e -> {
-            e.consume();
-            logout(stage);
-        });
     }
 
-    public void logout(Stage stage) {
-        MyDesktopPlanner desktopPlanner = MyDesktopPlanner.getInstance();
-        desktopPlanner.loadUsersFromFile();
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Logout");
-        alert.setHeaderText("Are you sure you want to logout?");
-        alert.setContentText("All unsaved changes will be lost");
-        if (alert.showAndWait().get() == ButtonType.OK) {
-            System.out.println("logout successful");
-            desktopPlanner.saveUsersToFile();
-            stage.close();
-        }
+    @Override
+    public void stop()
+    {
+        myDesktopPlanner.sauvegarder();
     }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+    public static Stage getStage() {return stage;}
+
+
+
 }
 

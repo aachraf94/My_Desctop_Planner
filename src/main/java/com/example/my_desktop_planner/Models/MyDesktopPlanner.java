@@ -1,34 +1,28 @@
 package com.example.my_desktop_planner.Models;
 
+import com.example.my_desktop_planner.HelloApplication;
+
 import java.io.*;
 import java.util.HashMap;
+
+import static com.example.my_desktop_planner.HelloApplication.utilisateurCourant;
 
 public class MyDesktopPlanner implements Serializable {
     private static MyDesktopPlanner instance;
     private HashMap<Utilisateur, String> utilisateurs;
 
-    private MyDesktopPlanner() {
-        //on doit charger le fichier li fih les pseudo et les mdp et creer le hashMap
+    public MyDesktopPlanner() {
         this.utilisateurs = new HashMap<Utilisateur, String>();
-        //parcourir le fichier
-        //entregistrer les info de utilisateur + mdp
     }
 
-    public static MyDesktopPlanner getInstance() { // pour assurer qu'il ya une seul instance de cette class
-        if (instance == null) {
-            // If the instance is null, create a new instance
-            instance = new MyDesktopPlanner();
-        }
-        return instance;
-    }
 
     public HashMap<Utilisateur, String> getUtilisateurs() {
         return utilisateurs;
     }
 
-    public void setUtilisateurs(HashMap<Utilisateur, String> utilisateurs) {
-        this.utilisateurs = utilisateurs;
-    }
+
+
+
 
 
     //on va faire Method registre
@@ -72,24 +66,61 @@ public class MyDesktopPlanner implements Serializable {
         }
     }
 
-    public Utilisateur findUser(String pseudo, String mdp) {
-        this.loadUsersFromFile();
-        MyDesktopPlanner planner = MyDesktopPlanner.getInstance();
-        HashMap<Utilisateur, String> utilisateurs = planner.getUtilisateurs();
 
-        for (Utilisateur user : utilisateurs.keySet()) {
-            if (user.getPseudo().equals(pseudo) && user.getMdp().equals(mdp)) {
-                return user;
+//    cheked and updated
+    public boolean isExist (String pseudo)
+    {
+        Utilisateur utilisateurRecherche = new Utilisateur(pseudo);
+        if (utilisateurs.containsKey(utilisateurRecherche)) {
+            System.out.println("isExist found user");
+            return true;
+        } else {
+            System.out.println("Function findUser can't find the user!");
+            return false;
+        }
+    }
+
+
+//    checked and updated
+    public Utilisateur findUser(String pseudo, String mdp) {
+        Utilisateur utilisateurRecherche = new Utilisateur(pseudo);
+
+        if (utilisateurs.containsKey(utilisateurRecherche)) {
+            for (Utilisateur user : utilisateurs.keySet()) {
+                if (user.getPseudo().equals(pseudo) && user.getMdp().equals(mdp)) {
+                    return user;
+                }
             }
+        } else {
+            System.out.println("Function findUser can't find the user!");
+        }
+        return null;
+    }
+
+
+//    checked and updated
+    public void sauvegarder(){
+        //vérifier si on a fait "seConnercter"
+        if (utilisateurCourant != null)
+        {
+            utilisateurs.remove(utilisateurCourant);
+            utilisateurs.put(utilisateurCourant,utilisateurCourant.getMdp());
+            System.out.println("utilisateurCourant est bien sauvegarder");
         }
 
-        return null; // User not found
-    }
-    public void sauvgrader (Utilisateur user){
-        loadUsersFromFile();
-        removeUser(user);
-        addUser(user,user.getMdp());
-        saveUsersToFile();
+
+//    checked and updated
+        //sauvgarder myDesktopPlanner dans le fichier
+        ObjectOutputStream out;
+        try {
+            out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File("myDesktopPlanner.dat"))));
+            out.writeObject(this);
+            //
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

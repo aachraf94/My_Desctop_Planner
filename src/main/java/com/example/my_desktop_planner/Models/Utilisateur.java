@@ -5,31 +5,42 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Utilisateur implements Serializable {
-    private static final long serialVersionUID = 1L;
+
     public Planning planning;
     private String pseudo;
     private String mdp;
 
+    /*********************** Constrictors ******************************/
+
     public Utilisateur(String pseudo, String mdp) {
         this.pseudo = pseudo;
         this.mdp = mdp;
+        this.planning = new Planning();
+    }
+
+    public Utilisateur(String pseudo)
+    {
+        this.pseudo=pseudo;
     }
 
 
-    public boolean seConnecter(String pseudo, String mdp) {
 
-        if (this.pseudo.equals(pseudo) && this.mdp.equals(mdp)) {
-            System.out.println("Connexion réussie.");
-            return true;
-        } else {
-            System.out.println("Pseudo ou mot de passe incorrect.");
-            return false;
-        }
-    }
+    /*********************** Fin Constrictors ******************************/
 
-    public Boolean seDeconnecter() {
-        return true;
-    }
+//    public boolean seConnecter(String pseudo, String mdp) {
+//
+//        if (this.pseudo.equals(pseudo) && this.mdp.equals(mdp)) {
+//            System.out.println("Connexion réussie.");
+//            return true;
+//        } else {
+//            System.out.println("Pseudo ou mot de passe incorrect.");
+//            return false;
+//        }
+//    }
+
+//    public Boolean seDeconnecter() {
+//        return true;
+//    }
 //    public void ajouterCreneauLibre(LocalDateTime heureDebut, LocalDateTime heureFin , Duration duree) {
 //        Creneau c = new Creneau(heureDebut, heureFin);
 ////        planning.ajouterCreneauLibre(c);
@@ -41,29 +52,7 @@ public class Utilisateur implements Serializable {
 //
 //    }
 
-    public String getPseudo() {
-        return pseudo;
-    }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
-    }
-
-    public String getMdp() {
-        return mdp;
-    }
-
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
-    }
-
-    public Planning getPlanning() {
-        return planning;
-    }
-
-    public void setPlanning(Planning planning) {
-        this.planning = new Planning(planning);
-    }
 
     @Override
     public int hashCode() {
@@ -122,5 +111,28 @@ public class Utilisateur implements Serializable {
 
     /********* Setters et Getters ********************/
 
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    public String getMdp() {
+        return mdp;
+    }
+
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
+
+    public Planning getPlanning() {
+        return planning;
+    }
+
+
+    /************ Fin getters and setters ********************/
 
 }

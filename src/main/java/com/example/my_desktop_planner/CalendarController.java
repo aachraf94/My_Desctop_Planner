@@ -33,28 +33,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static com.example.my_desktop_planner.HelloApplication.utilisateurCourant;
+
 public class CalendarController implements Initializable {
 
-    public static Utilisateur utilisateur_courant;
+    /************ agenda stuff ***********/
     ZonedDateTime dateFocus;
     ZonedDateTime today;
     private StackPane selectedDayRectangle;
     private LocalDate selected_day ;
     @FXML
     private Text year;
-
-    @FXML
-    private ListView<TacheSimple> tacheSimpleListView;
-    private List<Tache> taches;
-
     @FXML
     private Text month;
-
     @FXML
     private FlowPane calendar;
-
+    /**************************************/
+    private List<Tache> taches;
     @FXML
     private ListView<Tache> listTache;
+
+    /**************************************/
     @FXML
     private Label id = new Label();
     @FXML
@@ -62,9 +61,11 @@ public class CalendarController implements Initializable {
     @FXML
     private BorderPane borderPane;
     private Stage stage;
-    private String motDePasse;
 
 
+    /****************** Methods *********************************************/
+
+    //checked and updated
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dateFocus = ZonedDateTime.now();
@@ -73,11 +74,11 @@ public class CalendarController implements Initializable {
         month.setText(String.valueOf(dateFocus.getMonth())); // Initialize the month variable
         drawCalendar();
 
-        taches = new ArrayList<>(utilisateur_courant.getPlanning().getTachePlannifies());
-
+        // set taches and viewlist
+        taches = new ArrayList<>(utilisateurCourant.getPlanning().getTachePlannifies(LocalDate.now()));
         listTache.getItems().addAll(taches);
-
     }
+
 
     @FXML
     void backOneMonth(ActionEvent event) {
@@ -139,7 +140,6 @@ public class CalendarController implements Initializable {
 
                         stackPane.setOnMouseClicked(event -> {handleDayClick(stackPane);
                             selected_day = (ZonedDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate,0,0,0,0,dateFocus.getZone())).toLocalDate();
-                            updateDayTasks(selected_day);
                         });
 
 
@@ -156,6 +156,7 @@ public class CalendarController implements Initializable {
         }
     }
 
+    // a revoir pour update les taches
     private void handleDayClick(StackPane clickedDayRectangle) {
         if (selectedDayRectangle != null) {
             Rectangle rec=(Rectangle)selectedDayRectangle.getChildren().get(0);
@@ -172,17 +173,8 @@ public class CalendarController implements Initializable {
 
     }
 
-    public void receive_data(String data){
-        System.out.println(data);}
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur_courant;
-    }
-
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur_courant = utilisateur;
-    }
-
+    //checked and updated
     @FXML
     void ajouterTacheButton(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AjouterTache.fxml"));
@@ -202,6 +194,7 @@ public class CalendarController implements Initializable {
     }
 
 
+    //checked and updated
     @FXML
     void ajouterEnsTacheButton(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AjouterEnsTache.fxml"));
@@ -220,38 +213,16 @@ public class CalendarController implements Initializable {
         newStage.show();
 
     }
+
+
     private void updateDayTasks(LocalDate date) {
-        listTache.getItems().clear();
-        ArrayList<Tache> tasks = new ArrayList<Tache>();
-        Tache tache1 = TacheSimple.generateRandomTask();
-        Tache tache2 = TacheSimple.generateRandomTask();
-        Tache tache3 = TacheSimple.generateRandomTask();
-        utilisateur_courant.getTasks(date);
-        listTache.getItems().clear();
-        listTache.getItems().add(TacheSimple.generateRandomTask());
-        listTache.getItems().add(TacheSimple.generateRandomTask());
-        listTache.getItems().add(TacheSimple.generateRandomTask());
 
-    }
-    void displayname(){
-        System.out.println(utilisateur_courant);
+        taches.clear();
+        taches.addAll(utilisateurCourant.planning.getTachePlannifies(selected_day));
+        listTache.getItems().clear();
+        listTache.getItems().addAll(taches);
     }
 
-
-    public void logout(ActionEvent event) {
-        MyDesktopPlanner desktopPlanner = MyDesktopPlanner.getInstance();
-        desktopPlanner.loadUsersFromFile();
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Logout");
-        alert.setHeaderText("Are you sure you want to logout?");
-        alert.setContentText("All unsaved changes will be lost");
-        if (alert.showAndWait().get() == ButtonType.OK) {
-            stage = (Stage) borderPane.getScene().getWindow();
-            System.out.println("logout successful");
-            desktopPlanner.sauvgrader(this.utilisateur_courant);
-            stage.close();
-        }}
 
     @FXML
     void unschedueledButton(ActionEvent event) {
@@ -265,7 +236,7 @@ public class CalendarController implements Initializable {
         }
 
         Stage newStage = new Stage();
-        newStage.setTitle("Ajouter ensemble de Tâches");
+        newStage.setTitle("Unschedueld Tâches");
         newStage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));
         newStage.setScene(scene);
         newStage.show();

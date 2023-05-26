@@ -22,9 +22,6 @@ import java.util.HashMap;
 
 
 public class InscriptionController {
-    MyDesktopPlanner desktopPlanner = MyDesktopPlanner.getInstance();
-
-
 
     @FXML
     private Label erreurText;
@@ -35,9 +32,7 @@ public class InscriptionController {
 
 
 
-
-
-
+    //    checked and updated
     @FXML
     void seConnecterButton(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SeConnecter.fxml"));
@@ -57,64 +52,51 @@ public class InscriptionController {
         stage.setScene(scene);
         stage.show();
     }
+
+    //checked and updated
     @FXML
     void inscriptionButton(ActionEvent event) {
-//        if (desktopPlanner.getUtilisateurs().containsValue(motDePasse.getText())) {
-//            inscriptionInvalide();
-//        } else {
 
-            desktopPlanner.loadUsersFromFile();
-            Utilisateur utilisateur = new Utilisateur(pseudo.getText(), motDePasse.getText());
-            utilisateur.afficher();
-            if (desktopPlanner.getUtilisateurs() == null) {
-                desktopPlanner.setUtilisateurs(new HashMap<>());
-                desktopPlanner.addUser(utilisateur , utilisateur.getMdp());
-                CalendarController.utilisateur_courant = utilisateur;
-                desktopPlanner.saveUsersToFile();
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NvPlanning.fxml"));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = null;
-                try {
-                    scene = new Scene(fxmlLoader.load());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("Couldn't load FXML file");
-                }
-                stage.setScene(scene);
+        String userPseudo = pseudo.getText();
+        String userMotDePasse = motDePasse.getText();
 
-            }else {
-
-            if (!desktopPlanner.getUtilisateurs().containsKey(utilisateur)){
-                desktopPlanner.addUser(utilisateur, motDePasse.toString());
-                System.out.println("Utilisateur ajouté");
-                desktopPlanner.saveUsersToFile();
-                CalendarController.utilisateur_courant = utilisateur;
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NvPlanning.fxml"));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = null;
-                try {
-                    scene = new Scene(fxmlLoader.load());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("Couldn't load FXML file");
-                }
-                stage.setScene(scene);
-            }else {
-                System.out.println("Utilisateur non ajouté");
-                inscriptionInvalide();}
+        if (HelloApplication.myDesktopPlanner.isExist(userPseudo))
+        {
+            System.out.println("Pseudo existe deja!");
+            inscriptionInvalide();
+        }
+        else
+        {
+            HelloApplication.utilisateurCourant = new Utilisateur(userPseudo,userMotDePasse);
+            HelloApplication.myDesktopPlanner.addUser(HelloApplication.utilisateurCourant,userMotDePasse);
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NvPlanning.fxml"));
+            Scene scene = null;
+            try
+            {
+                scene = new Scene(fxmlLoader.load());
             }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+                System.out.println("Couldn't load NvPlanning.FXML file");
+            }
+
+            Button button = (Button)event.getSource();
+            Stage stage = (Stage)button.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
+
+
     }
 
+    //checked and updated
     @FXML
     void inscriptionInvalide()
     {
         erreurText.setText("Pseudo déja existe!");
     }
 
-    public void receive_data(String data){
-        System.out.println(data);}
-    public void send_data(String data){
-        System.out.println(data);}
 
 }
 

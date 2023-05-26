@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 public class NvPlanningController implements Initializable {
 
-    private ArrayList<CreneauLibre> creneauLibres = new ArrayList<CreneauLibre>();
+    private ArrayList<CreneauLibre> creneauLibres ;
     @FXML
     private TextField nomPlanning;
     @FXML
@@ -54,25 +54,27 @@ public class NvPlanningController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         duree.getItems().addAll(dureeMin);
-
+        creneauLibres = new ArrayList<CreneauLibre>();
         tousLesJours.selectedProperty().addListener((observable, oldValue, newValue) -> {// Hide or show the periodicite TextField based on the CheckBox state
             creneauDatePicker.setVisible(!newValue);
         });
     }
 
+    //checked and updated
     @FXML
     private void ajouterCreneau() {
         CreneauLibre creneauLibre = null;
         if (validateInputAjouterCreneau()) {
 
             if (!tousLesJours.isSelected()) {
+
                 LocalDate selectedDate = creneauDatePicker.getValue();
                 LocalTime timeDebut = LocalTime.parse(creneauHeureDebut.getText());
                 LocalTime timeFin = LocalTime.parse(creneauHeureFin.getText());
 
                 creneauLibre = new CreneauLibre(LocalDateTime.of(selectedDate, timeDebut), LocalDateTime.of(selectedDate, timeFin));
                 creneauLibres.add(creneauLibre);
-                CalendarController.utilisateur_courant.ajouterCreneauLibre(creneauLibre);
+                creneauLibreListView.getItems().add(creneauLibre);
             } else {
                 LocalDate date1 = dateDebut.getValue();
                 LocalDate date2 = dateFin.getValue();
@@ -83,7 +85,6 @@ public class NvPlanningController implements Initializable {
                 for (LocalDate date = date1; !date.isAfter(date2); date = date.plusDays(1)) {
                     creneauLibre = new CreneauLibre(LocalDateTime.of(date, timeDebut), LocalDateTime.of(date, timeFin));
                     creneauLibres.add(creneauLibre);
-                    CalendarController.utilisateur_courant.ajouterCreneauLibre(creneauLibre);
                     creneauLibreListView.getItems().add(creneauLibre);
                 }
             }
@@ -92,16 +93,30 @@ public class NvPlanningController implements Initializable {
 
     }
 
+
+    //checked and updated
     @FXML
     private void ajouterPlanning(ActionEvent event) {
-        System.out.println("\n\t"+CalendarController.utilisateur_courant);
+        System.out.println("\n\t"+HelloApplication.utilisateurCourant);
         if (validateInputAjouterPlanning()) {
+
+            //Récupérer les données
             String nom = nomPlanning.getText();
+
             LocalDate debut = dateDebut.getValue();
             LocalDate fin = dateFin.getValue();
-            Planning planning = new Planning(nom, debut, fin, parseDuree(duree.getValue()), creneauLibres);
-            CalendarController.utilisateur_courant.setPlanning(planning);
+            Duration dure = parseDuree(duree.getValue());
 
+            //update planning de utilisateur courant
+            HelloApplication.utilisateurCourant.planning.setNom(nom);
+            HelloApplication.utilisateurCourant.planning.setDateDebut(debut);
+            HelloApplication.utilisateurCourant.planning.setDateFin(fin);
+            HelloApplication.utilisateurCourant.planning.setDureeMinCreneau(dure);
+
+            //set les creneaux libres
+            HelloApplication.utilisateurCourant.planning.setCreneauLibres(creneauLibres);
+
+            //changer fxml
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Calendar.fxml"));
             Scene scene = null;
             try {
@@ -118,6 +133,8 @@ public class NvPlanningController implements Initializable {
         }
     }
 
+
+    //Checked and upated
     private boolean validateInputAjouterPlanning() {
         ErreurLabel.setText("");
 
@@ -128,8 +145,11 @@ public class NvPlanningController implements Initializable {
         if (nom.isEmpty() || debut == null || fin == null || duree.getValue() == null) {
             ErreurLabel.setText("Veuillez remplir tous les champs obligatoires.");
             return false;
-        } else if (fin.isBefore(LocalDate.now())) {
+        } else if (fin.isBefore(LocalDate.now()) || debut.isBefore(LocalDate.now()) ) {
             ErreurLabel.setText("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.");
+            return false;
+        } else if (creneauLibres.size() <= 0 ) {
+            ErreurLabel.setText("Veuillez au moins 1 Créneau libre");
             return false;
         }
 
@@ -138,6 +158,7 @@ public class NvPlanningController implements Initializable {
     }
 
 
+    //Checked and upated
     private boolean validateInputAjouterCreneau() {
         ErreurLabel.setText("");
 
@@ -150,14 +171,16 @@ public class NvPlanningController implements Initializable {
             return false;
         }
 
-        try {
-            LocalTime timeDebut = LocalTime.parse(heureDebut);
-            LocalTime timeFin = LocalTime.parse(heureFin);
-
-            // Perform further validation if needed
-
-        } catch (DateTimeParseException e) {
+        if (!isValidTime(heureDebut) || !isValidTime(heureFin)) {
             ErreurLabel.setText("Veuillez entrer des heures valides au format HH:mm.");
+            return false;
+        }
+
+        LocalTime timeDebut = LocalTime.parse(heureDebut);
+        LocalTime timeFin = LocalTime.parse(heureFin);
+
+        if (timeDebut.isAfter(timeFin)) {
+            ErreurLabel.setText("Veuillez entrer une heure de début après l'heure de fin !");
             return false;
         }
 
@@ -168,24 +191,36 @@ public class NvPlanningController implements Initializable {
             if (debut == null || fin == null) {
                 ErreurLabel.setText("Veuillez remplir toutes les dates de début et de fin.");
                 return false;
-            } else if (fin.isBefore(LocalDate.now()) || debut.isBefore(LocalDate.now())) {
+            }
+
+            if (fin.isBefore(LocalDate.now()) || debut.isBefore(LocalDate.now())) {
                 ErreurLabel.setText("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.");
                 return false;
             }
-
-            ErreurLabel.setText("");
-            return true;
         } else {
             LocalDate currentDate = LocalDate.now();
             if (selectedDate.isBefore(currentDate)) {
                 ErreurLabel.setText("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.");
                 return false;
             }
+        }
+
+        return true;
+    }
+
+    //checked and updated
+    private boolean isValidTime(String time) {
+        try {
+            LocalTime.parse(time);
             return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
     }
 
 
+
+    //Checked and upated
     private Duration parseDuree(String dureeString) {
         switch (dureeString) {
             case "15MIN":
