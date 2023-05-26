@@ -92,7 +92,7 @@ public class Planning implements Serializable {
         ArrayList<Tache> tachesJJMM = new ArrayList<Tache>();
 
         for (Tache tache: this.tachePlannifies ) {
-            if (tache.getDateDebut().toLocalDate().equals(j))
+            if (tache.getDateDebut().equals(j))
             {
                 tachesJJMM.add(tache);
             }

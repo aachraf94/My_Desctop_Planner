@@ -10,10 +10,6 @@ public class Creneau implements Decomposable<Creneau>, Serializable {
     protected LocalDateTime hFin;
     protected Duration duree;
 
-    // private Duration dureeMin = Duration.ofMinutes(30);
-    //    la durée maximale d’un créneau
-
-
     public Creneau(LocalDateTime hDebut, LocalDateTime hFin) {
         this.hDebut = hDebut;
         this.hFin = hFin;

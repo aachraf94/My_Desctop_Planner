@@ -1,7 +1,6 @@
 package com.example.my_desktop_planner;
 
-import com.example.my_desktop_planner.Models.Categorie;
-import com.example.my_desktop_planner.Models.Priorite;
+import com.example.my_desktop_planner.Models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,8 +9,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static com.example.my_desktop_planner.HelloApplication.utilisateurCourant;
 
 public class AjouterTacheController implements Initializable {
 
@@ -50,8 +53,6 @@ public class AjouterTacheController implements Initializable {
     @FXML
     private CheckBox AutoPlanification;
     @FXML
-    private TextField tempdPlanification;
-    @FXML
     private Button AjouterButton;
 
 
@@ -70,9 +71,6 @@ public class AjouterTacheController implements Initializable {
             nomProjet.setVisible(newValue);
         });
 
-        AutoPlanification.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            tempdPlanification.setVisible(!newValue);
-        });
 
     }
 
@@ -114,117 +112,75 @@ public class AjouterTacheController implements Initializable {
         if (validateInput()) {
             // Get the values from the UI elements
             String nomTache = NomTache.getText();
-            String duree = Duree.getText();
+            int dureeheur = Integer.parseInt(Duree.getText());
+            Duration duree = Duration.ofMinutes(dureeheur);
             LocalDate dateDebutValue = dateDebut.getValue();
             LocalDate dateFinValue = dateFin.getValue();
             LocalDate dateLimValue = dateLim.getValue();
             Color colorValue = color.getValue();
             boolean isDecomposable = decomposable.isSelected();
-            String periodiciteValue = periodicite.getText();
+            int periodiciteValue = Integer.parseInt(periodicite.getText());
             boolean isAjouterProjet = ajouterProjet.isSelected();
             String nomProjetValue = nomProjet.getText();
             boolean isBloquee = bloquee.isSelected();
             Categorie categorie = categorieChoiceBox.getValue();
             Priorite priorite = prioriteChoiceBox.getValue();
 
-            // Perform the necessary operations with the values (e.g., save to a database, update model, etc.)
+            if (isDecomposable)
+            {
+                TacheDecompo tacheDecompo = new TacheDecompo(nomTache,duree,priorite,dateLimValue,dateDebutValue,dateFinValue,categorie,colorValue,true, Etat.NOT_REALIZED,isBloquee,true,0);
+                utilisateurCourant.getPlanning().getTacheUnscheduleds().add(tacheDecompo);
+                if (isAjouterProjet)
+                {
+                    ArrayList<Tache> taches = new ArrayList<Tache>();
+                    taches.add(tacheDecompo);
+                    Projet projet = new Projet(nomProjetValue,"",taches);
+                }
 
-            // Clear the fields and close the window
+            }
+            else
+            {
+                TacheSimple tacheSimple = new TacheSimple(nomTache,duree,priorite,dateLimValue,dateDebutValue,dateFinValue,categorie,colorValue,true, Etat.NOT_REALIZED,isBloquee,false,periodiciteValue);
+                if (isAjouterProjet)
+                {
+                    ArrayList<Tache> taches = new ArrayList<Tache>();
+                    taches.add(tacheSimple);
+                    Projet projet = new Projet(nomProjetValue,"",taches);
+                }
+            }
             clearFields();
             closeWindow();
         }
     }
 
     private boolean validateInput() {
-        StringBuilder errorMessage = new StringBuilder();
-        int errorCount = 0;
+        erreur.setText("");
 
-        // Validate the 'NomTache' field
-        if (NomTache.getText().isEmpty()) {
-            errorMessage.append("Nom de tâche est requis.\n");
-            errorCount++;
+        if (NomTache.getText().isEmpty() || prioriteChoiceBox.getValue() == null || categorieChoiceBox.getValue() == null || dateDebut.getValue() == null || dateFin.getValue() == null || (!decomposable.isSelected() && periodicite.getText().isEmpty()) || (ajouterProjet.isSelected() && nomProjet.getText().isEmpty()) || Duree.getText().isEmpty() || dateLim.getValue() == null) {
+            erreur.setText("Veuillez remplir tous les champs obligatoires.");
         }
 
-        // Validate the 'prioriteChoiceBox' field
-        if (prioriteChoiceBox.getValue() == null) {
-            errorMessage.append("Priorité est requise.\n");
-            errorCount++;
+        if (dateDebut.getValue().isBefore(LocalDate.now()) || dateFin.getValue().isBefore(LocalDate.now()) || dateLim.getValue().isBefore(LocalDate.now())) {
+            erreur.setText("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
         }
 
-        // Validate the 'categorieChoiceBox' field
-        if (categorieChoiceBox.getValue() == null) {
-            errorMessage.append("Catégorie est requise.\n");
-            errorCount++;
-        }
-
-        // Validate the 'dateDebut' field
-        if (dateDebut.getValue() == null) {
-            errorMessage.append("Date de début est requise.\n");
-            errorCount++;
-        } else if (dateDebut.getValue().isBefore(LocalDate.now())) {
-            errorMessage.append("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
-            errorCount++;
-        }
-
-        // Validate the 'dateFin' field
-        if (dateFin.getValue() == null) {
-            errorMessage.append("Date de fin est requise.\n");
-            errorCount++;
-        } else if (dateFin.getValue().isBefore(LocalDate.now())) {
-            errorMessage.append("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
-            errorCount++;
-        }
-
-        // Validate the 'Duree' field
-        if (Duree.getText().isEmpty()) {
-            errorMessage.append("Durée est requise.\n");
-            errorCount++;
-        } else {
-            try {
-                int dureeValue = Integer.parseInt(Duree.getText());
-                if (dureeValue <= 0) {
-                    errorMessage.append("Durée doit être un entier positif.\n");
-                    errorCount++;
-                }
-            } catch (NumberFormatException e) {
-                errorMessage.append("Durée doit être un entier.\n");
-                errorCount++;
+        try {
+            int dureeValue = Integer.parseInt(Duree.getText());
+            if (dureeValue <= 0) {
+                erreur.setText(erreur.getText() + "Durée doit être un entier positif.\n");
             }
-        }
-
-        // Validate the 'dateLim' field
-        if (dateLim.getValue() == null) {
-            errorMessage.append("Date limite est requise.\n");
-            errorCount++;
-        } else if (dateLim.getValue().isBefore(LocalDate.now())) {
-            errorMessage.append("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
-            errorCount++;
-        }
-
-        // Validate the 'periodicite' field if 'decomposable' is selected
-        if (!decomposable.isSelected() && periodicite.getText().isEmpty()) {
-            errorMessage.append("Périodicité est requise si la tâche est non décomposable.\n");
-            errorCount++;
-        }
-
-        // Validate the 'nomProjet' field if 'ajouterProjet' is selected
-        if (ajouterProjet.isSelected() && nomProjet.getText().isEmpty()) {
-            errorMessage.append("Nom du projet est requis si la tâche doit être ajoutée à un projet.\n");
-            errorCount++;
+        } catch (NumberFormatException e) {
+            erreur.setText(erreur.getText() + "Durée doit être un entier.\n");
         }
 
         // Display the error message if there are any validation errors
-        if (errorMessage.length() > 0) {
-            erreur.setText(errorMessage.toString());
-//            double minHeight = super.stage.getMinHeight();
-//            double newHeight = minHeight + (errorCount * 20);
-//            super.stage.setMinHeight(newHeight);
-
+        if (erreur.getText().length() > 0) {
             return false; // Validation failed
         }
 
-        return true;
+        return true; // Validation successful
     }
+
 
 
 }

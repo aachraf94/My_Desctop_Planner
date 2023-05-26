@@ -6,36 +6,38 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class TacheDecompo implements Decomposable<TacheDecompo>, Serializable {
-
-
+public class TacheDecompo extends Tache implements Decomposable , Serializable {
+    /******* attribut ***********/
     private int nbSousTache;
-    private LinkedList<TacheSimple> sousTache;
-
-    //constructeur
-    //add tache
-    //
-    public TacheDecompo(String nom, Duration dure, Priorite priorite, LocalDate dateLim, java.time.LocalDateTime dateDebut, LocalDateTime dateFin, String categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable) {
-        //super(nom , dure , priorite , dateLim , dateDebut , dateFin , categorie , color , unscheduled , etat , bloque , decomposable);
+    private ArrayList<TacheSimple> sousTache;
+    /********** Constructeur ********************/
+    public TacheDecompo(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDate dateDebut, LocalDate dateFin, Categorie categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable, int nbSousTache, ArrayList<TacheSimple> sousTache) {
+        super(nom, dure, priorite, dateLim, dateDebut, dateFin, categorie, color, unscheduled, etat, bloque, decomposable);
         this.nbSousTache = nbSousTache;
-        this.sousTache = sousTache;
+        this.sousTache = new ArrayList<>(sousTache);
+    }
+    public TacheDecompo(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDate dateDebut, LocalDate dateFin, Categorie categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable, int nbSousTache) {
+        super(nom, dure, priorite, dateLim, dateDebut, dateFin, categorie, color, unscheduled, etat, bloque, decomposable);
+        this.nbSousTache = nbSousTache;
     }
 
-    public TacheDecompo(TacheDecompo tacheDecompo) {
-        this.nbSousTache = tacheDecompo.getNbSousTache();
-        this.sousTache.addAll(tacheDecompo.getSousTache());
+    /*********************************************/
 
-
-//        destinationList.addAll(sourceList);
+    @Override
+    public Object decompose(Object obj) {
+        return null;
     }
 
     @Override
-    public TacheDecompo decompose(TacheDecompo obj) {
-        return null;// a revoir
+    public String toString() {
+        return super.toString();
     }
 
+
+    /************** Getters and Setters ********************/
     public int getNbSousTache() {
         return nbSousTache;
     }
@@ -44,17 +46,13 @@ public class TacheDecompo implements Decomposable<TacheDecompo>, Serializable {
         this.nbSousTache = nbSousTache;
     }
 
-    public LinkedList<TacheSimple> getSousTache() {
+    public ArrayList<TacheSimple> getSousTache() {
         return sousTache;
     }
 
-    public void setSousTache(LinkedList<TacheSimple> sousTache) {
-        this.sousTache = sousTache;
+    public void setSousTache(ArrayList<TacheSimple> sousTache) {
+        this.sousTache = new ArrayList<TacheSimple>(sousTache);
     }
 
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

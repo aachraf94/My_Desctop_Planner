@@ -12,9 +12,9 @@ abstract public class Tache implements Serializable, Comparable<Tache> {
     private Duration dure;
     private Priorite priorite;
     private LocalDate dateLim;
-    private LocalDateTime dateDebut;
-    private LocalDateTime dateFin;
-    private String categorie;
+    private LocalDate dateDebut;
+    private LocalDate dateFin;
+    private Categorie categorie;
     private Color color;
     private boolean unscheduled;
     private Etat etat;
@@ -27,7 +27,7 @@ abstract public class Tache implements Serializable, Comparable<Tache> {
     //re-planifier (string dureeSupp, String nvDeadline)          les deux
 
 
-    public Tache(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDateTime dateDebut, LocalDateTime dateFin, String categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable) { // a revoir les arguments de ce constructeur
+    public Tache(String nom, Duration dure, Priorite priorite, LocalDate dateLim, LocalDate dateDebut, LocalDate dateFin, Categorie categorie, Color color, boolean unscheduled, Etat etat, boolean bloque, boolean decomposable) {
         this.nom = nom;
         this.dure = dure;
         this.priorite = priorite;
@@ -74,27 +74,27 @@ abstract public class Tache implements Serializable, Comparable<Tache> {
         this.dateLim = dateLim;
     }
 
-    public LocalDateTime getDateDebut() {
+    public LocalDate getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(LocalDateTime dateDebut) {
+    public void setDateDebut(LocalDate dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public LocalDateTime getDateFin() {
+    public LocalDate getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(LocalDateTime dateFin) {
+    public void setDateFin(LocalDate dateFin) {
         this.dateFin = dateFin;
     }
 
-    public String getCategorie() {
+    public Categorie getCategorie() {
         return categorie;
     }
 
-    public void setCategorie(String categorie) {
+    public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
 
