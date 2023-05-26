@@ -1,14 +1,5 @@
 package com.example.my_desktop_planner;
-
-
-import com.example.my_desktop_planner.Models.*;
-
-import com.example.my_desktop_planner.Models.MyDesktopPlanner;
-import com.example.my_desktop_planner.Models.Planning;
 import com.example.my_desktop_planner.Models.Tache;
-import com.example.my_desktop_planner.Models.TacheSimple;
-import com.example.my_desktop_planner.Models.Utilisateur;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +15,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -32,7 +22,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import static com.example.my_desktop_planner.HelloApplication.myDesktopPlanner;
 import static com.example.my_desktop_planner.HelloApplication.utilisateurCourant;
 
 public class CalendarController implements Initializable {
@@ -63,9 +53,7 @@ public class CalendarController implements Initializable {
 
     /**************************************/
     @FXML
-    private Label id = new Label();
-    @FXML
-    private Button LogOutButton ;
+    private Label name;
     @FXML
     private BorderPane borderPane;
     private Stage stage;
@@ -83,10 +71,13 @@ public class CalendarController implements Initializable {
         drawCalendar();
         selected_day = LocalDate.now();
         date.setText(selected_day.toString());
+        name.setText(utilisateurCourant.getPseudo());
 
         // set taches and viewlist
         taches = new ArrayList<>(utilisateurCourant.getPlanning().getTachePlannifies(LocalDate.now()));
         listTache.getItems().addAll(taches);
+
+
     }
     /***************** Calendar *****************************************************/
     @FXML
@@ -185,6 +176,10 @@ public class CalendarController implements Initializable {
             selected_day = LocalDate.of(dateFocus.getYear(), dateFocus.getMonthValue(), currentDate);
             date.setText(selected_day.toString());
         }
+        taches.clear();
+        taches.addAll(utilisateurCourant.getPlanning().getTachePlannifies(selected_day));
+        listTache.getItems().clear();
+        listTache.getItems().addAll(taches);
     }
 
     /************************************************************************************/
@@ -255,6 +250,30 @@ public class CalendarController implements Initializable {
         newStage.show();
 
     }
+
+
+
+    @FXML
+    void deconnercterButton(ActionEvent event) {
+        myDesktopPlanner.getUtilisateurs().remove(utilisateurCourant);
+        myDesktopPlanner.getUtilisateurs().put(utilisateurCourant,utilisateurCourant.getMdp());
+        utilisateurCourant = null;
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SeConnecter.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Couldn't load FXML file");
+        }
+
+        Stage currentStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        currentStage.setScene(scene);
+        System.out.println("deconnection valide");
+        currentStage.show();
+    }
+
 
 
 

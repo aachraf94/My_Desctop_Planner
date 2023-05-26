@@ -68,7 +68,8 @@ public class InscriptionController {
         else
         {
             HelloApplication.utilisateurCourant = new Utilisateur(userPseudo,userMotDePasse);
-            HelloApplication.myDesktopPlanner.addUser(HelloApplication.utilisateurCourant,userMotDePasse);
+            HelloApplication.myDesktopPlanner.getUtilisateurs().put(HelloApplication.utilisateurCourant,userMotDePasse);
+            System.out.println("ajouter user : "+userPseudo+"  mdp : "+userMotDePasse);
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NvPlanning.fxml"));
             Scene scene = null;
             try

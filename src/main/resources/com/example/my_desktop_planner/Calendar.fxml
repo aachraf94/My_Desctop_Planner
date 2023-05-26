@@ -76,9 +76,9 @@
                                         <Font size="19.0" />
                                     </font>
                                 </Label>
-                        <Label fx:id="name" layoutX="52.0" layoutY="21.0" text="..." textFill="WHITE">
+                        <Label fx:id="name" layoutX="52.0" layoutY="21.0" text="Name" textFill="WHITE">
                            <font>
-                              <Font size="19.0" />
+                              <Font name="System Bold" size="19.0" />
                            </font>
                         </Label>
                             </children>
@@ -87,7 +87,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Button mnemonicParsing="false" text="Deconnexion" />
+                        <Button mnemonicParsing="false" onAction="#deconnercterButton" text="Deconnexion" />
                     </children>
                 </HBox>
             </children>
