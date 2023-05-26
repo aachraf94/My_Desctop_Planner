@@ -4,12 +4,11 @@ import com.example.my_desktop_planner.Models.Tache;
 import com.example.my_desktop_planner.Models.Utilisateur;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -26,11 +25,14 @@ public class UnschedueledController implements Initializable {
     @FXML
     TextField hDebut;
     @FXML
-    TextField hFin;
+    TextField  hFin;
     @FXML
-    private Label tacheSelectione;
+    private Label tacheSelected;
+    private Tache tache ;
     @FXML
     private Label erreurLabel;
+    @FXML
+    private Button annulerlButton;
 
 
     /*********** Initialize ******************/
@@ -39,6 +41,8 @@ public class UnschedueledController implements Initializable {
         taches = new ArrayList<Tache>(utilisateurCourant.getPlanning().getTacheUnscheduleds());
         tacheListView.getItems().clear();
         tacheListView.getItems().addAll(taches);
+        erreurLabel.setText("");
+
     }
 
     /********* Methods **********************/
@@ -51,23 +55,31 @@ public class UnschedueledController implements Initializable {
     }
 
     @FXML
-    private void annulerButton() {
-    }
-
-    @FXML
     private void autoPlanifierToutButton() {
     }
+    //a revoir
     @FXML
     private void tacheListViewItemSelected() {
         // Handle the event when a task is selected in the ListView
-        Tache selectedTache = tacheListView.getSelectionModel().getSelectedItem();
-        if (selectedTache != null) {
-            tacheSelectione.setText(selectedTache.getNom());
+        tache = tacheListView.getSelectionModel().getSelectedItem();
+        if (tache != null) {
+            tacheSelected.setText(tache.getNom());
         } else {
-            tacheSelectione.setText("");
+            tacheSelected.setText("");
         }
     }
 
+    @FXML
+    public void handleCancelButtonAction(ActionEvent event) {
+        // Reset the UI elements or close the window without saving any changes
+        clearFields();
+        closeWindow();
+    }
+    private void closeWindow() {
+        // Close the window or navigate to another view
+        Stage stage = (Stage) annulerlButton.getScene().getWindow();
+        stage.close();
+    }
 
     private boolean isValidTime(String time) {
         try {
@@ -76,6 +88,14 @@ public class UnschedueledController implements Initializable {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    private void clearFields() {
+        tache = null;
+        datePicker.setValue(null);
+        hDebut.clear();
+        hFin.clear();
+        erreurLabel.setText("");
     }
 
 }

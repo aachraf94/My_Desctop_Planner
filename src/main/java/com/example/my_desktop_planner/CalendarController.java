@@ -244,11 +244,10 @@ public class CalendarController implements Initializable {
         }
 
         Stage newStage = new Stage();
-        newStage.setTitle("Unschedueld Tâches");
+        newStage.setTitle("Ajouter ensemble de Tâches");
         newStage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));
         newStage.setScene(scene);
         newStage.show();
-
     }
 
 
