@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -34,19 +33,19 @@
                 <Text fill="#005b8f" layoutX="622.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Priorité" AnchorPane.topAnchor="84.05078125" />
                 <Text fill="#005b8f" layoutX="623.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Catégorie" AnchorPane.topAnchor="225.6302089691162" />
                 <TextField fx:id="periodicite" layoutX="622.0" layoutY="267.0" prefHeight="26.0" prefWidth="152.0" promptText="La periodicité" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="267.0" />
-                <CheckBox fx:id="bloquee" layoutX="455.0" layoutY="348.0" mnemonicParsing="false" text="bloquée" AnchorPane.leftAnchor="455.0" />
-                <Button fx:id="AjouterButton" layoutX="620.0" layoutY="497.0" mnemonicParsing="false" onAction="#handleAjouterButtonAction" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #005b8f;" text="Ajouter" textFill="WHITE" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="20.0" />
-                <Button fx:id="annulerlButton" layoutX="442.0" layoutY="497.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" prefHeight="30.0" prefWidth="160.0" text="Annuler" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="442.0" />
-                <Line endX="204.79998779296875" endY="6.103515625E-5" layoutX="579.0" layoutY="395.0" startX="-151.20001220703125" startY="3.0517578125E-5" style="-fx-opacity: 0.2;" AnchorPane.leftAnchor="427.09288024902344" AnchorPane.rightAnchor="15.492904663085938" AnchorPane.topAnchor="394.2929237484932" />
+                <CheckBox fx:id="bloquee" layoutX="627.0" layoutY="311.0" mnemonicParsing="false" text="bloquée" AnchorPane.leftAnchor="627.0" />
+                <Button fx:id="AjouterButton" layoutX="526.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleAjouterTacheButtonAction" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #005b8f;" text="Ajouter" textFill="WHITE" AnchorPane.bottomAnchor="163.0" AnchorPane.rightAnchor="114.0" />
+                <Button fx:id="annulerlButton" layoutX="428.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" prefHeight="30.0" prefWidth="70.0" text="Annuler" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="428.0" />
+                <Line endX="204.79998779296875" endY="6.103515625E-5" layoutX="580.0" layoutY="348.0" startX="-151.20001220703125" startY="3.0517578125E-5" style="-fx-opacity: 0.2;" AnchorPane.leftAnchor="428.09288024902344" AnchorPane.rightAnchor="14.492904663085938" AnchorPane.topAnchor="347.2929237484932" />
                 <Label fx:id="erreur" layoutX="435.0" layoutY="402.0" style="-fx-alignment: center;" textFill="RED" AnchorPane.topAnchor="402.0" />
                 <CheckBox fx:id="AutoPlanification" layoutX="454.0" layoutY="311.0" mnemonicParsing="false" text="Auto-Planification" AnchorPane.topAnchor="311.0" />
-                <TextField fx:id="tempdPlanification" layoutX="623.0" layoutY="309.0" prefHeight="26.0" prefWidth="150.0" promptText="Temps de planification" AnchorPane.rightAnchor="26.600000000000023" AnchorPane.topAnchor="309.0" />
-                <Spinner editable="true" layoutX="624.0" layoutY="349.0" />
                 <Text fill="#005b8f" layoutX="532.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter une tâche">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
+            <Button layoutX="517.0" layoutY="498.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #005b8f;" text="Ajouter les tâches" />
+            <Button layoutX="662.0" layoutY="498.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #005b8f;" text="Auto-Planifier tout" />
             </children>
         </AnchorPane>
     </right>

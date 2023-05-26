@@ -16,6 +16,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static com.example.my_desktop_planner.HelloApplication.utilisateurCourant;
+
 public class AjouterEnsTache implements Initializable {
     @FXML
     private TextField NomTache;
@@ -47,33 +49,34 @@ public class AjouterEnsTache implements Initializable {
     @FXML
     private CheckBox AutoPlanification;
     @FXML
-    private TextField tempdPlanification;
-    @FXML
     private Button AjouterButton;
+    /*****************************  View list  ****************/
     @FXML
-    private ListView<String> listViewTache;
-    private ArrayList<String> arrayListViewTache = new ArrayList<String>();
-
-
+    private ListView<Tache> listViewTache;
+    private ArrayList<Tache> arrayListViewTache = new ArrayList<Tache>();
+    /************************************************************************/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        categorieChoiceBox.getItems().addAll(Categorie.STUDIES, Categorie.WORK, Categorie.HOBBY, Categorie.SPORT, Categorie.HEALTH, Categorie.OTHER);
-        prioriteChoiceBox.getItems().addAll(Priorite.LOW, Priorite.MEDIUM, Priorite.HIGHT);
+        // Ajouter les options de choix pour la ChoiceBox Categorie
+        categorieChoiceBox.getItems().addAll(Categorie.values());
 
-        listViewTache.getItems().addAll(arrayListViewTache);
+        // Ajouter les options de choix pour la ChoiceBox Priorite
+        prioriteChoiceBox.getItems().addAll(Priorite.values());
 
-        decomposable.selectedProperty().addListener((observable, oldValue, newValue) -> {// Hide or show the periodicite TextField based on the CheckBox state
+        // Ajouter un écouteur de changement d'état pour la CheckBox decomposable
+        decomposable.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            // Afficher ou masquer le champ de texte periodicite en fonction de l'état de la CheckBox
             periodicite.setVisible(!newValue);
         });
-
-        AutoPlanification.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            tempdPlanification.setVisible(!newValue);
-        });
-
-
-
-
+        // Ajouter un écouteur de changement d'état pour la ListView listViewTache
+        arrayListViewTache = new ArrayList<Tache>();
+        listViewTache.getItems().addAll(arrayListViewTache);
     }
+
+/**********************************************************************************************************/
+
+
+
 
 
     @FXML
@@ -107,44 +110,53 @@ public class AjouterEnsTache implements Initializable {
 
 
     @FXML
-    public void handleAjouterButtonAction(ActionEvent event) {
+    public void handleAjouterTacheButtonAction(ActionEvent event) {
         if (validateInput()) {
-            // Get the values from the UI elements
+            // Récupérer les valeurs des éléments de l'interface utilisateur
             String nomTache = NomTache.getText();
-            Duration duration = Duration.ofHours(1);
+            int dureeValue = Integer.parseInt(Duree.getText());
             LocalDate dateLimValue = dateLim.getValue();
             LocalDate dateDebutValue = dateDebut.getValue();
-
-            LocalTime timeDebut = LocalTime.parse("08:00");
-            LocalTime timeFin = LocalTime.parse("10:00");
-
-
             LocalDate dateFinValue = dateFin.getValue();
-
             Categorie categorie = categorieChoiceBox.getValue();
             Color colorValue = color.getValue();
             boolean isDecomposable = decomposable.isSelected();
             boolean isUnscheduled = AutoPlanification.isSelected();
             String periodiciteValue = periodicite.getText();
+            int periodiciteInt = Integer.parseInt(periodiciteValue);
             boolean isBloquee = bloquee.isSelected();
             Priorite priorite = prioriteChoiceBox.getValue();
+
             if (isDecomposable) {
-                TacheDecompo tacheDecompo = new TacheDecompo(nomTache, duration ,priorite,dateLimValue,LocalDateTime.of(dateDebutValue, timeDebut),LocalDateTime.of(dateDebutValue, timeFin),"Woro" ,colorValue,isUnscheduled, Etat.NOT_REALIZED,isBloquee,true);
-                arrayListViewTache.add(tacheDecompo.toString());
-                listViewTache.getItems().add(tacheDecompo.toString());
+                // Créer une instance de TacheDecompo avec les valeurs saisies
+                TacheDecompo tacheDecompo = new TacheDecompo(
+                        nomTache, Duration.ofHours(dureeValue), priorite,
+                        dateLimValue, dateDebutValue, dateFinValue,categorie,
+                        colorValue, true, Etat.NOT_REALIZED, isBloquee, true,0
+                );
+
+                // Ajouter la représentation de la tâche à l'ArrayList et à la ListView
+                arrayListViewTache.add(tacheDecompo);
+                listViewTache.getItems().add(tacheDecompo);
+            } else {
+                TacheSimple tacheSimple = new TacheSimple(
+                        nomTache, Duration.ofHours(dureeValue), priorite,
+                        dateLimValue,dateDebutValue, dateDebutValue, categorie,
+                        colorValue, true, Etat.NOT_REALIZED, isBloquee, false, periodiciteInt
+                );
+                // Ajouter la représentation de la tâche à l'ArrayList et à la ListView
+                arrayListViewTache.add(tacheSimple);
+                listViewTache.getItems().add(tacheSimple);
             }
-            else
-            {
-                TacheSimple tacheSimple = new TacheSimple(nomTache, duration ,priorite,dateLimValue,LocalDateTime.of(dateDebutValue, timeDebut),LocalDateTime.of(dateDebutValue, timeFin), Categorie.WORK ,colorValue,isUnscheduled, Etat.NOT_REALIZED,isBloquee,true,1,Etat.NOT_REALIZED);
-                arrayListViewTache.add(tacheSimple.toString());
-                listViewTache.getItems().add(tacheSimple.toString());
-            }
-
-
-           // clearFields();
-
+            clearFields();
         }
     }
+
+    @FXML
+    public void handleAjouterToutButton(ActionEvent event) {
+        utilisateurCourant.getPlanning().getTacheUnscheduleds().addAll(arrayListViewTache);
+    }
+
 
     private boolean validateInput() {
         StringBuilder errorMessage = new StringBuilder();
