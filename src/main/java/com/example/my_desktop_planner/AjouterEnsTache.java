@@ -37,7 +37,6 @@ public class AjouterEnsTache implements Initializable {
     private TextField periodicite;
     @FXML
     private CheckBox bloquee;
-
     @FXML
     private Label erreur;
     @FXML
@@ -53,7 +52,7 @@ public class AjouterEnsTache implements Initializable {
     /*****************************  View list  ****************/
     @FXML
     private ListView<Tache> listViewTache;
-    private ArrayList<Tache> arrayListViewTache = new ArrayList<Tache>();
+    private ArrayList<Tache> arrayListViewTache ;
     /************************************************************************/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,18 +73,13 @@ public class AjouterEnsTache implements Initializable {
     }
 
 /**********************************************************************************************************/
-
-
-
-
-
     @FXML
     public void handleCancelButtonAction(ActionEvent event) {
         // Reset the UI elements or close the window without saving any changes
+        listViewTache.getItems().clear();
         clearFields();
         closeWindow();
     }
-
     private void clearFields() {
         // Clear the values of all the UI elements
         NomTache.clear();
@@ -101,14 +95,11 @@ public class AjouterEnsTache implements Initializable {
         categorieChoiceBox.getSelectionModel().clearSelection();
         prioriteChoiceBox.getSelectionModel().clearSelection();
     }
-
     private void closeWindow() {
         // Close the window or navigate to another view
         Stage stage = (Stage) annulerlButton.getScene().getWindow();
         stage.close();
     }
-
-
     @FXML
     public void handleAjouterTacheButtonAction(ActionEvent event) {
         if (validateInput()) {
@@ -121,7 +112,6 @@ public class AjouterEnsTache implements Initializable {
             Categorie categorie = categorieChoiceBox.getValue();
             Color colorValue = color.getValue();
             boolean isDecomposable = decomposable.isSelected();
-            boolean isUnscheduled = AutoPlanification.isSelected();
             String periodiciteValue = periodicite.getText();
             int periodiciteInt = Integer.parseInt(periodiciteValue);
             boolean isBloquee = bloquee.isSelected();
@@ -155,98 +145,84 @@ public class AjouterEnsTache implements Initializable {
     @FXML
     public void handleAjouterToutButton(ActionEvent event) {
         utilisateurCourant.getPlanning().getTacheUnscheduleds().addAll(arrayListViewTache);
+        arrayListViewTache.clear();
+        listViewTache.getItems().clear();
+        clearFields();
+        closeWindow();
     }
-
 
     private boolean validateInput() {
         StringBuilder errorMessage = new StringBuilder();
-        int errorCount = 0;
 
         // Validate the 'NomTache' field
         if (NomTache.getText().isEmpty()) {
             errorMessage.append("Nom de tâche est requis.\n");
-            errorCount++;
         }
 
         // Validate the 'prioriteChoiceBox' field
         if (prioriteChoiceBox.getValue() == null) {
             errorMessage.append("Priorité est requise.\n");
-            errorCount++;
         }
 
         // Validate the 'categorieChoiceBox' field
         if (categorieChoiceBox.getValue() == null) {
             errorMessage.append("Catégorie est requise.\n");
-            errorCount++;
         }
 
         // Validate the 'dateDebut' field
-        if (dateDebut.getValue() == null) {
-            errorMessage.append("Date de début est requise.\n");
-            errorCount++;
-        } else if (dateDebut.getValue().isBefore(LocalDate.now())) {
-            errorMessage.append("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
-            errorCount++;
+        LocalDate dateDebutValue = dateDebut.getValue();
+        if (dateDebutValue == null || dateDebutValue.isBefore(LocalDate.now())) {
+            errorMessage.append("Veuillez sélectionner une date de début valide.\n");
         }
 
         // Validate the 'dateFin' field
-        if (dateFin.getValue() == null) {
-            errorMessage.append("Date de fin est requise.\n");
-            errorCount++;
-        } else if (dateFin.getValue().isBefore(LocalDate.now())) {
-            errorMessage.append("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
-            errorCount++;
+        LocalDate dateFinValue = dateFin.getValue();
+        if (dateFinValue == null || dateFinValue.isBefore(LocalDate.now())) {
+            errorMessage.append("Veuillez sélectionner une date de fin valide.\n");
         }
 
         // Validate the 'Duree' field
-        if (Duree.getText().isEmpty()) {
+        String dureeText = Duree.getText();
+        if (dureeText.isEmpty()) {
             errorMessage.append("Durée est requise.\n");
-            errorCount++;
         } else {
             try {
-                int dureeValue = Integer.parseInt(Duree.getText());
+                int dureeValue = Integer.parseInt(dureeText);
                 if (dureeValue <= 0) {
                     errorMessage.append("Durée doit être un entier positif.\n");
-                    errorCount++;
                 }
             } catch (NumberFormatException e) {
                 errorMessage.append("Durée doit être un entier.\n");
-                errorCount++;
             }
         }
 
         // Validate the 'dateLim' field
-        if (dateLim.getValue() == null) {
-            errorMessage.append("Date limite est requise.\n");
-            errorCount++;
-        } else if (dateLim.getValue().isBefore(LocalDate.now())) {
-            errorMessage.append("Veuillez sélectionner une date à partir d'aujourd'hui ou les jours suivants.\n");
-            errorCount++;
+        LocalDate dateLimValue = dateLim.getValue();
+        if (dateLimValue == null || dateLimValue.isBefore(LocalDate.now())) {
+            errorMessage.append("Veuillez sélectionner une date limite valide.\n");
         }
 
         // Validate the 'periodicite' field if 'decomposable' is selected
         if (!decomposable.isSelected() && periodicite.getText().isEmpty()) {
             errorMessage.append("Périodicité est requise si la tâche est non décomposable.\n");
-            errorCount++;
+        } else if (!periodicite.getText().isEmpty()) {
+            try {
+                int periodiciteValue = Integer.parseInt(periodicite.getText());
+                if (periodiciteValue <= 0) {
+                    errorMessage.append("Périodicité doit être un entier positif.\n");
+                }
+            } catch (NumberFormatException e) {
+                errorMessage.append("Périodicité doit être un entier.\n");
+            }
         }
 
         // Display the error message if there are any validation errors
         if (errorMessage.length() > 0) {
             erreur.setText(errorMessage.toString());
-//            double minHeight = super.stage.getMinHeight();
-//            double newHeight = minHeight + (errorCount * 20);
-//            super.stage.setMinHeight(newHeight);
-
             return false; // Validation failed
         }
 
         return true;
     }
-
-
-
-
-
-
 
 }

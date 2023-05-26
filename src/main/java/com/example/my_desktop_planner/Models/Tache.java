@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 abstract public class Tache implements Serializable, Comparable<Tache> {
     private String nom;
@@ -15,7 +15,7 @@ abstract public class Tache implements Serializable, Comparable<Tache> {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private Categorie categorie;
-    private Color color;
+    private SerializableColor color;
     private boolean unscheduled;
     private Etat etat;
     private boolean bloque;
@@ -35,7 +35,7 @@ abstract public class Tache implements Serializable, Comparable<Tache> {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.categorie = categorie;
-        this.color = color;
+        this.color = new SerializableColor(color) ;
         this.unscheduled = unscheduled;
         this.etat = etat;
         this.bloque = bloque;
@@ -99,11 +99,11 @@ abstract public class Tache implements Serializable, Comparable<Tache> {
     }
 
     public Color getColor() {
-        return color;
+        return color.getFXColor();
     }
 
     public void setColor(Color color) {
-        this.color = color;
+        this.color = new SerializableColor(color);
     }
 
     public boolean isUnscheduled() {

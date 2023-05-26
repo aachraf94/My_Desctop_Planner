@@ -44,8 +44,12 @@
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
-            <Button layoutX="517.0" layoutY="498.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #005b8f;" text="Ajouter les tâches" />
-            <Button layoutX="662.0" layoutY="498.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #005b8f;" text="Auto-Planifier tout" />
+            <Button layoutX="658.0" layoutY="499.0" mnemonicParsing="false" onAction="#handleAjouterToutButton" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #005b8f;" text="Ajouter les tâches" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="513.0" layoutY="499.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #005b8f;" text="Auto-Planifier tout" textFill="WHITE" />
             </children>
         </AnchorPane>
     </right>

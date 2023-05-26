@@ -173,6 +173,17 @@ public class AjouterTacheController implements Initializable {
             erreur.setText(erreur.getText() + "Durée doit être un entier.\n");
         }
 
+        if (!decomposable.isSelected() && !periodicite.getText().isEmpty()) {
+            try {
+                int piodicite = Integer.parseInt(periodicite.getText());
+                if (piodicite <= 0) {
+                    erreur.setText(erreur.getText() + "priodicite doit être un entier positif.\n");
+                }
+            } catch (NumberFormatException e) {
+                erreur.setText(erreur.getText() + "priodicite doit être un entier.\n");
+            }
+        }
+
         // Display the error message if there are any validation errors
         if (erreur.getText().length() > 0) {
             return false; // Validation failed
