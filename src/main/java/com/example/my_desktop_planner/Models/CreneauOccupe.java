@@ -13,4 +13,8 @@ public class CreneauOccupe extends Creneau implements Serializable {
     }
 
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

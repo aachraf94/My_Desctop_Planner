@@ -82,4 +82,5 @@ public class Utilisateur implements Serializable {
     }
     /************ Fin getters and setters ********************/
 
+
 }

@@ -3,6 +3,7 @@ package com.example.my_desktop_planner.Models;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Planning implements Serializable {
@@ -123,5 +124,40 @@ public class Planning implements Serializable {
     public void setProjets(ArrayList<Projet> projets) {
         this.projets.clear();
         this.projets.addAll(projets);
+    }
+
+    public boolean planifier(CreneauLibre creneauLibre, Tache tache) {
+        if (tache instanceof TacheSimple) {
+            if (creneauLibre.getDuree().toHours() == tache.getDure().toHours())
+            {
+                CreneauOccupe creneauOccupe = new CreneauOccupe(creneauLibre.gethDebut(),creneauLibre.gethFin(),(TacheSimple) tache);
+                this.creneauLibres.remove(creneauLibre);
+                this.tacheUnscheduleds.remove(tache);
+                this.tachePlannifies.add(tache);
+                this.creneauOccupes.add(creneauOccupe);
+                return true;
+            } else if (creneauLibre.getDuree().toHours() > tache.getDure().toHours()) {
+                //se décompose function
+
+                LocalDateTime nvHourDebut = creneauLibre.gethDebut().plusHours(tache.getDure().toHours());
+                CreneauLibre creneauLibre1 = new CreneauLibre(nvHourDebut,creneauLibre.gethFin());
+
+                this.creneauLibres.remove(creneauLibre);
+                this.creneauLibres.add(creneauLibre1);
+
+                CreneauOccupe creneauOccupe = new CreneauOccupe(creneauLibre.gethDebut(),nvHourDebut,(TacheSimple) tache);
+                this.creneauLibres.remove(creneauLibre);
+                this.tacheUnscheduleds.remove(tache);
+                this.tachePlannifies.add(tache);
+                this.creneauOccupes.add(creneauOccupe);
+                return true;
+            }
+
+            return false;
+        } else if (tache instanceof TacheDecompo) {
+            // Code for TacheDecompo
+            return true;
+        }
+        return false;
     }
 }

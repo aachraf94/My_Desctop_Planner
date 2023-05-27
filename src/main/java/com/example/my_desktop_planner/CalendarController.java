@@ -198,7 +198,8 @@ public class CalendarController implements Initializable {
         newStage.setTitle("Ajouter Tâche");
         newStage.getIcons().add(new Image(String.valueOf(HelloApplication.class.getResource("images/icon2.png"))));
         newStage.setScene(scene);
-        newStage.show();
+        newStage.showAndWait();
+//        updateListView();
 
     }
 
@@ -271,6 +272,17 @@ public class CalendarController implements Initializable {
         currentStage.setScene(scene);
         System.out.println("deconnection valide");
         currentStage.show();
+    }
+
+
+
+    public void updateListView()
+    {
+        // set taches and viewlist
+        taches.clear();
+        taches.addAll(utilisateurCourant.getPlanning().getTachePlannifies(LocalDate.now()));
+        listTache.getItems().clear();
+        listTache.getItems().addAll(taches);
     }
 
 

@@ -29,10 +29,36 @@ public class Creneau implements Decomposable<Creneau>, Serializable {
 
     @Override
     public String toString() {
-        return "\nCreneau{" +
-                "\nhDebut=" + hDebut +
-                "\n, hFin=" + hFin +
-                "\n, duree=" + duree +
+        return "nhDebut=" + hDebut +
+                "    hFin=" + hFin +
+                "    duree=" + duree +
                 '}';
+    }
+
+
+
+    /**************** getters and setters *********/
+    public LocalDateTime gethDebut() {
+        return hDebut;
+    }
+
+    public void sethDebut(LocalDateTime hDebut) {
+        this.hDebut = hDebut;
+    }
+
+    public LocalDateTime gethFin() {
+        return hFin;
+    }
+
+    public void sethFin(LocalDateTime hFin) {
+        this.hFin = hFin;
+    }
+
+    public Duration getDuree() {
+        return duree;
+    }
+
+    public void setDuree(Duration duree) {
+        this.duree = duree;
     }
 }

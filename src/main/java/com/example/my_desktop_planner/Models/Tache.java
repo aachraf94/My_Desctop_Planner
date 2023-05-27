@@ -139,19 +139,16 @@ abstract public class Tache implements Serializable, Comparable<Tache> {
     }
 
     @Override
-    public String toString() {
-        return "" + nom +
-                "" + priorite +
-                ", dateDebut=" + dateDebut +
-                ", dateFin=" + dateFin +
-                ", categorie=" + categorie +
-                ", etat=" + etat +
-                '}';
-    }
-
-    @Override
     public int compareTo(Tache autreTache) {
         return this.dateDebut.compareTo(autreTache.dateDebut);
 
     }
+
+    @Override
+    public String toString() {
+        return (getNom()+"  "+ getEtat()+"  "+getPriorite()+ "  "+"date debut:"+getDateDebut()+"  date fin:"+dateFin);
+    }
+
+
+
 }

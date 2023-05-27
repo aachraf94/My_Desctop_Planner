@@ -12,10 +12,6 @@ public class CreneauLibre extends Creneau implements Serializable {
 
     @Override
     public String toString() {
-        return ("Creneau{" +
-            "\nhDebut=" + hDebut +
-                    "\n, hFin=" + hFin +
-                    "\n, duree=" + duree +
-                    '}');
+        return super.toString();
     }
 }
